@@ -5,6 +5,7 @@ body{
 /*Menu
 ----------
 */
+
 nav.bg-opacidade{
 	background: rgba(138,254,184,0.2);
 }
@@ -18,4 +19,18 @@ nav.bg-opacidade{
 }
 .navbar-light .navbar-nav .nav-link:hover{
 	color: white;
+}
+/*Rodape
+-----------
+*/
+footer{
+	background: black;
+}
+footer ul {
+	list-style: none;
+}
+
+footer ul li {
+	float: right;
+	margin: 0 5px;
 }
