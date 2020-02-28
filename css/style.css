@@ -1,0 +1,21 @@
+body{
+	background: url(),
+	linear-gradient(50deg, #46F353, #46B4F3);
+}
+/*Menu
+----------
+*/
+nav.bg-opacidade{
+	background: rgba(138,254,184,0.2);
+}
+.divisor{
+	width: 1px;
+	background: gray;
+	margin: 10px 12px;
+}
+.navbar-light .navbar-nav .nav-link{
+	color: #515B55;
+}
+.navbar-light .navbar-nav .nav-link:hover{
+	color: white;
+}
