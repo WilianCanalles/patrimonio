@@ -14,9 +14,9 @@ nav.bg-opacidade{
 	background: gray;
 	margin: 10px 12px;
 }
-.navbar-light .navbar-nav .nav-link{
-	color: rgba(20, 110, 125, 0.8);
-	font-weight: bold;
+.navbar-light .navbar-nav .nav-link {
+	color: rgba(20, 110, 125, 0.6)!important;
+	font-weight: bold!important;
 }
 .navbar-light .navbar-nav .nav-link:hover{
 	color: white;
@@ -28,7 +28,7 @@ nav.bg-opacidade{
 -----------
 */
 h4, span, i{
-	color: honeydew;
+	color: honeydew!important;
 }
 div.container.foot{
 	padding: 25px 0px;
@@ -47,8 +47,8 @@ footer ul li {
 	align-self: center;
 }
 div.col-md-12.justificar{
-	text-align: center;
-	font-weight: bold;
+	text-align: center ;
+	font-weight: bold ;
 }
 ul.navbar-nav a{
 	color: #929292;
