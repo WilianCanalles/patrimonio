@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 </head>
+
 <body>
 <header class="sticky-top">
     <nav class="navbar navbar-expand-md navbar-light bg-opacidade">
       <div class="container">
         <a href="index.html" class="navbar-brand">
-          <img src="https://source.unsplash.com/random/50x50">
+          <img src="img/Phoenix-Patrimonial-black.png" width="75">
           <span class="">Nosso Patrimonio</span>
         </a>
 

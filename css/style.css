@@ -1,12 +1,13 @@
 body{
 	background: url(),
-	linear-gradient(50deg, #46F353, #46B4F3);
+	linear-gradient(50deg, #5f4ae5, #1d0b45);
 }
 /*Menu
 ----------
 */
+
 nav.bg-opacidade{
-	background: rgba(138,254,184,0.2);
+	background: rgba(0, 0, 0, 0.8)
 }
 .divisor{
 	width: 1px;
@@ -14,8 +15,41 @@ nav.bg-opacidade{
 	margin: 10px 12px;
 }
 .navbar-light .navbar-nav .nav-link{
-	color: #515B55;
+	color: rgba(20, 110, 125, 0.8);
+	font-weight: bold;
 }
 .navbar-light .navbar-nav .nav-link:hover{
 	color: white;
+}
+.navbar-light .navbar-brand{
+	color: #0062cc;
+}
+/*Rodape
+-----------
+*/
+h4, span, i{
+	color: honeydew;
+}
+div.container.foot{
+	padding: 25px 0px;
+}
+footer{
+	background: #232627;
+}
+footer ul {
+	list-style: none;
+}
+footer ul li {
+	float: right;
+	margin: 0 5px;
+}
+.alinhamento{
+	align-self: center;
+}
+div.col-md-12.justificar{
+	text-align: center;
+	font-weight: bold;
+}
+ul.navbar-nav a{
+	color: #929292;
 }
