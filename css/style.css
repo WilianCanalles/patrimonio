@@ -1,6 +1,16 @@
 body{
-	background: url(),
-	linear-gradient(50deg, #5f4ae5, #1d0b45);
+
+	background: 
+	linear-gradient(to right top, #d61717, #de3e17, #e6581a,
+	#ed6f21, #f3842a, #f7952d, #faa632, #fcb63a, #fbc73e,
+	#f8d945, #f3ea50, #edfb5f) no-repeat;
+}
+/*Sobre
+----------
+*/
+div.col-md-6.justificar{
+	text-align: center ;
+	font-weight: bold ;
 }
 /*Menu
 ----------
@@ -19,7 +29,7 @@ nav.bg-opacidade{
 	font-weight: bold!important;
 }
 .navbar-light .navbar-nav .nav-link:hover{
-	color: white;
+	color: white!important;
 }
 .navbar-light .navbar-brand{
 	color: #0062cc;
