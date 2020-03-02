@@ -39,7 +39,7 @@
               <a href="" class="nav-link">Inscrever-se</a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link">Entrar</a>
+              <a href="sign-in.php" class="nav-link">Entrar</a>
             </li>
           </ul>
         </div>
