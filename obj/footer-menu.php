@@ -37,7 +37,7 @@
                 </div>
                 <!-- Fim logo jogo -->
                 <!-- Links -->
-
+                <div class="col-md-3 alinhamento">
     <footer>
         <div class="container foot">
             <div class="row">
@@ -51,11 +51,11 @@
                 <div class="col-md-3">
                     <h4>company</h4>
                     <ul class="navbar-nav">
-                        <li><a href="">Sobre</a></li>
+                        <li><a href="sobre.php">Sobre</a></li>
                     </ul>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-3 alinhamento">
                     <h4>links uteis</h4>
                     <ul class="navbar-nav">
                         <li><a href="">Ajuda</a></li>
@@ -64,6 +64,9 @@
 
                 <!-- Fim do link -->
                 <!-- Redes Sociais -->
+                <div class="col-md-3 alinhamento ">
+                    <ul class="d-inline-block mQ-es-s"><!-- mQ-es-s -->
+                        <li>                           <!-- Media Query Extra Small and Small -->
                 <div class="col-md-3 alinhamento">
 
                 <div class="col-md-3 teste">
