@@ -33,26 +33,34 @@ nav.bg-opacidade, .bg-opc{
 	font-weight: bold!important;
 }
 .navbar-light .navbar-nav .nav-link:hover{
+
 	color: white!important;
 }
 .navbar-light .navbar-brand{
 	color: #0062cc;
+
 }
 /*Rodape
 -----------
 */
+
 h4, span, i{
-	color: honeydew!important;
+	color: honeydew !important;
 }
 div.container.foot, .sign-space{
 	padding: 25px 0px;
 }
 footer{
 	background: #232627;
+=======
+footer{
+	background: black;
+
 }
 footer ul {
 	list-style: none;
 }
+
 footer ul li {
 	float: right;
 	margin: 0 5px;
@@ -71,8 +79,6 @@ ul.navbar-nav a{
 	color: #929292;
 }
 
-
-
 /*Sign
 ----------
 */
@@ -82,7 +88,7 @@ div.container.align-sign, div.row.align-sign, .align-sobre {
 .bg-opc-sign{
 	padding: 15px;
 	background: rgba(0, 0, 0, 0.2);
-}
+
 
 /*Media-Query*/
 /*Extra small devices (portrait phones, less than 576px)*/
@@ -117,3 +123,5 @@ div.container.align-sign, div.row.align-sign, .align-sobre {
 
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {  }
+
+
