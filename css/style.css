@@ -1,3 +1,7 @@
+html, body, #home {
+	height: 100%;
+	overflow-x: hidden;
+}
 body{
 
 	background: 
@@ -16,7 +20,7 @@ div.col-md-6.justificar{
 ----------
 */
 
-nav.bg-opacidade{
+nav.bg-opacidade, .bg-opc{
 	background: rgba(0, 0, 0, 0.8)
 }
 .divisor{
@@ -40,7 +44,7 @@ nav.bg-opacidade{
 h4, span, i{
 	color: honeydew!important;
 }
-div.container.foot{
+div.container.foot, .sign-space{
 	padding: 25px 0px;
 }
 footer{
@@ -52,14 +56,64 @@ footer ul {
 footer ul li {
 	float: right;
 	margin: 0 5px;
+
 }
 .alinhamento{
 	align-self: center;
+
 }
-div.col-md-12.justificar{
+
+div.col-md-12.justificar, .btn-middle{/* btn-middle da classe Entrar*/
 	text-align: center ;
 	font-weight: bold ;
 }
 ul.navbar-nav a{
 	color: #929292;
 }
+
+
+
+/*Sign
+----------
+*/
+div.container.align-sign, div.row.align-sign, .align-sobre {
+	height: 100%!important;
+}
+.bg-opc-sign{
+	padding: 15px;
+	background: rgba(0, 0, 0, 0.2);
+}
+
+/*Media-Query*/
+/*Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) { 
+.alinhamento{
+	align-self: center;
+	text-align: center;
+	margin-top: 20px;
+}
+.mQ-es-s{
+	padding: 0px;
+}
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) and (max-width: 767.98px) { 
+.alinhamento{
+	align-self: center;
+	text-align: center;
+	margin-top: 20px;
+}
+.mQ-es-s{
+	padding: 0px;
+}
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) and (max-width: 991.98px) {  }
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) and (max-width: 1199.98px) {  }
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {  }
