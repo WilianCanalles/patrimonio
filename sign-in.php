@@ -32,32 +32,33 @@
     <link rel="icon" href="img/Phoenix-Patrimonial.png">
 </head>
 
-<body style="overflow-y: hidden;">
+<body>
     <!-- barra de menu -->
     <?php include 'obj/navbar_menu.php' ?>
+    
+
     <!-- fim barra de menu -->
-    <div class="container centralizar-entrar">
-        <div class="row justify-content-center centralizar-entrar">
+    <div class="container align-sign">
+        <div class="row align-sign">
             <!-- Form entrar -->
-            <form class="largura">
+            <div style="align-self: center" class="container">
+            <form class="col-md-6 bg-opc-sign" style="margin: auto;">
                 <!-- Label e input entrar -->
-                <div class="input-group sign-space">
+                <div class="form-group">
                     <!-- Label -->
-                    <div class="input-group-prepend">
-                        <label class="input-group-text">E-mail</label>
-                    </div>
+                    <label for="email">E-mail para login</label>
                     <!-- Fim label-->
                     <!-- Input-->
-                    <input type="email" id="inputEmail" class="form-control" placeholder="E-mail" required="" autofocus="">
+                    <input class="form-control" type="email" id="inputEmail" placeholder="E-mail" required="" autofocus="">
                     <!-- Fim input-->
                 </div>
                 <!-- Fim label e input entrar -->
                 <!-- Label e input senha -->
-                <div class="input-group sign-space">
+                <div class="form-group">
                     <!-- Label -->
-                    <div class="input-group-prepend">
-                        <label class="input-group-text">Senha</label>
-                    </div>
+
+                    <label for="email">Senha</label>
+
                     <!-- Fim label-->
                     <!-- Input-->
                     <input type="password" id="inputSenha" class="form-control" placeholder="Senha" required="" autofocus="">
@@ -71,10 +72,17 @@
                     </a>
                 </div>
                 <!-- Fim botão -->
-            </form>
+            </form></div>
+                
             <!-- Fim form entrar -->
         </div>
     </div>
+
+  <!-- Rodape -->
+
+    <?php include 'obj/footer-menu.php'?>
+
+  <!-- Fim rodape -->
 </body>
 
 </html>
