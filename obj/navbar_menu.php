@@ -13,7 +13,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-opacidade">
       <div class="container">
         <!-- Logo -->
-        <a href="index.html" class="navbar-brand">
+        <a href="index.php" class="navbar-brand">
           <img src="img/Phoenix-Patrimonial.png" width="75">
           <span class="">Nosso Patrimonio</span>
         </a>
@@ -39,7 +39,7 @@
               <a href="" class="nav-link">Inscrever-se</a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link">Entrar</a>
+              <a href="sign-in.php" class="nav-link">Entrar</a>
             </li>
           </ul>
         </div>
