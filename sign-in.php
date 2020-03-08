@@ -35,54 +35,55 @@
 <body>
     <!-- barra de menu -->
     <?php include 'obj/navbar_menu.php' ?>
-    
+
 
     <!-- fim barra de menu -->
     <div class="container align-sign">
         <div class="row align-sign">
             <!-- Form entrar -->
             <div style="align-self: center" class="container">
-            <form class="col-md-6 bg-opc-sign" style="margin: auto;">
-                <!-- Label e input entrar -->
-                <div class="form-group">
-                    <!-- Label -->
-                    <label for="email">E-mail para login</label>
-                    <!-- Fim label-->
-                    <!-- Input-->
-                    <input class="form-control" type="email" id="inputEmail" placeholder="E-mail" required="" autofocus="">
-                    <!-- Fim input-->
-                </div>
-                <!-- Fim label e input entrar -->
-                <!-- Label e input senha -->
-                <div class="form-group">
-                    <!-- Label -->
+                <form method="post" action="conn-db/conexao.php" class="col-md-6 bg-opc-sign" style="margin: auto;">
+                    <!-- Label e input entrar -->
+                    <div class="form-group">
+                        <!-- Label -->
+                        <label for="inputEmail">E-mail para login</label>
+                        <!-- Fim label-->
+                        <!-- Input-->
+                        <input class="form-control" name="email" type="email" id="inputEmail" placeholder="E-mail" required="" autofocus="">
+                        <!-- Fim input-->
+                    </div>
+                    <!-- Fim label e input entrar -->
+                    <!-- Label e input senha -->
+                    <div class="form-group">
+                        <!-- Label -->
 
-                    <label for="email">Senha</label>
+                        <label for="inputSenha">Senha</label>
 
-                    <!-- Fim label-->
-                    <!-- Input-->
-                    <input type="password" id="inputSenha" class="form-control" placeholder="Senha" required="" autofocus="">
-                    <!-- Fim input-->
-                </div>
-                <!-- Fim label e input senha -->
-                <!-- Botão -->
-                <div class="btn-middle sign-space">
-                    <a href="" class="btn btn-lg btn-info">
+                        <!-- Fim label-->
+                        <!-- Input-->
+                        <input class="form-control" name="senha" type="password" id="inputSenha"  placeholder="Senha" required="" autofocus="">
+                        <!-- Fim input-->
+                    </div>
+                    <!-- Fim label e input senha -->
+                    <!-- Botão -->
+                    <div class="btn-middle">
+                    <button class="btn btn-lg btn-info">
                         Entrar
-                    </a>
-                </div>
-                <!-- Fim botão -->
-            </form></div>
-                
+                    </button>
+                    </div>
+                    <!-- Fim botão -->
+                </form>
+            </div>
+
             <!-- Fim form entrar -->
         </div>
     </div>
 
-  <!-- Rodape -->
+    <!-- Rodape -->
 
-    <?php include 'obj/footer-menu.php'?>
+    <?php include 'obj/footer-menu.php' ?>
 
-  <!-- Fim rodape -->
+    <!-- Fim rodape -->
 </body>
 
 </html>
