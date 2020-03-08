@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 
 <head>
   <!-- Meta tags Obrigatórias -->
@@ -7,9 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" type="text/css" href="obj/footer.css"/>
 
+
   
   <!-- Estilo customizado -->
   <link rel="stylesheet" type="text/css" href="css/style.css">
+
+=======
 
   <!-- JavaScript (Opcional) -->
   <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
@@ -68,6 +71,11 @@
   <?php include 'obj/navbar_menu.php' ?>
   <!-- fim barra de menu -->
 
+
+  <!--Informacoes do site-->
+
+
+
   <!--Informacoes do site-->
 
   <!-- Primeira informacao -->
@@ -118,6 +126,7 @@
             </p>
 
           </div>
+
         </div>
         <!-- Fim do Container texto-->
 
@@ -140,6 +149,30 @@
           </div>
         </div>
         <!-- Fim do Container texto-->
+
+        </div>
+        <!-- Fim do Container texto-->
+
+      </div>
+  </section>
+  <!-- Fim da primeira informacao-->
+  <!-- Segunda informacao -->
+  <section>
+    <div class="container">
+      <div class="row" style="border-bottom: 1px solid black; padding: 30px 0px 50px 0px">
+        <!-- Container texto -->
+        <div class="col-md-6 align-self-center">
+
+          <div>
+            <h1 class="display-4">Facilidade ao controlar seus patrimonios.</h1>
+            <p>
+              Essa aplicacao foi desenvolvida com ideia de auxiliar e facilitar o cadastro dos patrimonios e manter seus controles.
+            </p>
+
+          </div>
+        </div>
+        <!-- Fim do Container texto-->
+
         <!-- Container imagens -->
         <div class="col-md-6">
           <div id="carousel-info2" class="carousel" data-ride="carousel">
