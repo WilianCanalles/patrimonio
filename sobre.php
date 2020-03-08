@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
   <!-- Meta tags Obrigatórias -->
   <meta charset="utf-8">
@@ -34,7 +34,7 @@
 <!-- barra de menu -->
   <?php include 'obj/navbar_menu.php' ?>
   <!-- fim barra de menu -->
-  <section>
+  <section class="align-sobre"><!--remover Align assim que colocar mais topicos-->
     <div class="container">
       <div class="row justify-content-center">
           <div class="col-md-6 justificar">
