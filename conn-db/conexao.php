@@ -12,18 +12,18 @@ print_r($_POST);
 
 function conectar()
 {
-	/*
+	///*
 	$host = 'localhost';
 	$dbname = 'patrimonix';
 	$user = 'root';
 	$pass = '';
-	*/
-	///*
+	//*/
+	/*
 	$host = 'localhost';
 	$dbname = 'id9571112_patrimonix';
 	$user = 'id9571112_admpatrimonix';
 	$pass = 'p@tr1m0n1x';
-	//*/
+	*/
 	try {
 
 		$conexao = new PDO(
@@ -53,6 +53,7 @@ function conectar()
 $teste = conectar();
 print_r($teste);
 if(!empty($teste)) {
+	$_SESSION["sessiontime"] = time() + 60;
 	$_SESSION['usuario'] = ucfirst($teste['usuario']);
 	header('Location:../aplicacao/app_init.php');
 	exit();

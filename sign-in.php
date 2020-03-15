@@ -76,22 +76,39 @@ session_start();
                         </button>
                     </div>
                     <!-- Fim botão -->
-                </form>
-            </div>
 
-            <!-- Fim form entrar -->
-            <!-- Mensagem de erro -->
+                    <!-- Mensagem de Fim de sessao -->
+            <?php
+            if (isset($_SESSION['no_sessiontime'])) :
+            ?>
+                <div class="bg-warning" style="text-align: center; margin-top: 10px; padding:15px 0px">
+                    <span  style="font-weight: bold">Warning: Sessão expirada, faça login novamente.</span>
+                </div>
+            <?php
+            endif;
+            unset($_SESSION['no_sessiontime']);
+            ?>
+            <!-- Fim Mensagem de Fim de sessao -->
+
+
+                        <!-- Mensagem de erro -->
             <?php
             if (isset($_SESSION['login_wrong'])) :
             ?>
-                <div class="notification is-danger">
-                    <p>ERRO: Usuário ou senha inválidos.</p>
+                <div class="bg-danger" style="text-align: center; margin-top: 10px; padding:15px 0px">
+                    <span  style="font-weight: bold">ERRO: Usuário ou senha inválidos.</span>
                 </div>
             <?php
             endif;
             unset($_SESSION['login_wrong']);
             ?>
             <!-- Fim Mensagem erro -->
+                </form>
+                
+            </div>
+
+            <!-- Fim form entrar -->
+            
         </div>
     </div>
 
