@@ -1,38 +1,40 @@
 <?php
-echo '<pre>';
+session_start();
+
 print_r($_POST);
-echo '</pre>';
-class Conexao {
-
-	private $host = 'localhost';
-	private $dbname = 'patrimonix';
-	private $user = 'root';
-	private $pass = '';
-
-	public function conectar() {
-		try {
-
-			$conexao = new PDO(
-				"mysql:host=$this->host;dbname=$this->dbname",
-				"$this->user",
-				"$this->pass"				
-			);
-            $query = "select * from $this->dbname where email = :usuario OR usuario = :usuario AND senha = :senha";
-
-            $stmt = $conexao->prepare($query);
-
-            $stmt->bindValue(':usuario', $_POST['usuario']);
-            $stmt->bindValue(':senha', $_POST['senha']);
-
-            $stmt->execute();
-            
-			return $conexao;
 
 
-		} catch (PDOException $e) {
-			echo '<p>'.$e->getMessage().'</p>';
-		}
+
+function conectar()
+{
+	$host = 'localhost';
+	$dbname = 'patrimonix';
+	$user = 'root';
+	$pass = '';
+	try {
+
+		$conexao = new PDO(
+			"mysql:host=$host;dbname=$dbname",
+			"$user",
+			"$pass"
+		);
+		
+		$query = "select * from tb_user where (email = :email and senha = :senha) or (usuario = :email and senha = :senha) ";
+
+		$stmt = $conexao->prepare($query);
+
+		$stmt->bindValue(':email', $_POST['email']);
+		$stmt->bindValue(':senha', $_POST['senha']);
+
+		$stmt->execute();
+
+		$user = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+		return $user;
+
+	} catch (PDOException $e) {
+		echo '<p>' . $e->getMessage() . '</p>';
 	}
 }
 
-?>
+print_r( conectar());

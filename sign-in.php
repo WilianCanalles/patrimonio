@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -49,7 +53,7 @@
                         <label for="inputEmail">E-mail para login</label>
                         <!-- Fim label-->
                         <!-- Input-->
-                        <input class="form-control" name="email" type="email" id="inputEmail" placeholder="E-mail" required="" autofocus="">
+                        <input class="form-control" name="email" type="text" id="inputEmail" placeholder="E-mail" required="" autofocus="">
                         <!-- Fim input-->
                     </div>
                     <!-- Fim label e input entrar -->
@@ -61,21 +65,27 @@
 
                         <!-- Fim label-->
                         <!-- Input-->
-                        <input class="form-control" name="senha" type="password" id="inputSenha"  placeholder="Senha" required="" autofocus="">
+                        <input class="form-control" name="senha" type="password" id="inputSenha" placeholder="Senha" required="" autofocus="">
                         <!-- Fim input-->
                     </div>
                     <!-- Fim label e input senha -->
                     <!-- Botão -->
                     <div class="btn-middle">
-                    <button class="btn btn-lg btn-info">
-                        Entrar
-                    </button>
+                        <button class="btn btn-lg btn-info">
+                            Entrar
+                        </button>
                     </div>
                     <!-- Fim botão -->
                 </form>
             </div>
 
             <!-- Fim form entrar -->
+            <? if (isset($_SESSION['login_wrong'])) : ?>
+                <div class="notification is-danger">
+                    <p>ERRO: Usuário ou Senha inválidos.</p>
+                </div>
+            <? endif;
+            unset($_SESSION['login_wrong']); ?>
         </div>
     </div>
 
