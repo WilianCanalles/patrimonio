@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<? require_once "../vendor/autoload.php"?>
 <html>
 
 <head>
