@@ -80,12 +80,18 @@ session_start();
             </div>
 
             <!-- Fim form entrar -->
-            <? if (isset($_SESSION['login_wrong'])) : ?>
+            <!-- Mensagem de erro -->
+            <?php
+            if (isset($_SESSION['login_wrong'])) :
+            ?>
                 <div class="notification is-danger">
-                    <p>ERRO: Usuário ou Senha inválidos.</p>
+                    <p>ERRO: Usuário ou senha inválidos.</p>
                 </div>
-            <? endif;
-            unset($_SESSION['login_wrong']); ?>
+            <?php
+            endif;
+            unset($_SESSION['login_wrong']);
+            ?>
+            <!-- Fim Mensagem erro -->
         </div>
     </div>
 
