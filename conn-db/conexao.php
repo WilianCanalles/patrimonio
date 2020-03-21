@@ -53,7 +53,7 @@ function conectar()
 $teste = conectar();
 print_r($teste);
 if(!empty($teste)) {
-	$_SESSION["sessiontime"] = time() + 60;
+	$_SESSION["sessiontime"] = time() + 60;/* 900s = 15m */
 	$_SESSION['usuario'] = ucfirst($teste['usuario']);
 	header('Location:../aplicacao/app_init.php');
 	exit();
@@ -62,3 +62,5 @@ if(!empty($teste)) {
 	header('Location: ../sign-in.php');
 	exit();
 }
+
+?>
