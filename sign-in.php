@@ -46,7 +46,7 @@ session_start();
         <div class="row align-sign">
             <!-- Form entrar -->
             <div style="align-self: center" class="container">
-                <form method="post" action="conn-db/conexao.php" class="col-md-6 bg-opc-sign" style="margin: auto;">
+                <form method="post" action="conn-db/conn_login.php" class="col-md-6 bg-opc-sign" style="margin: auto;">
                     <!-- Label e input entrar -->
                     <div class="form-group">
                         <!-- Label -->
@@ -96,13 +96,18 @@ session_start();
             if (isset($_SESSION['login_wrong'])) :
             ?>
                 <div class="bg-danger" style="text-align: center; margin-top: 10px; padding:15px 0px">
-                    <span  style="font-weight: bold">ERRO: Usuário ou senha inválidos.</span>
+                    <span  style="font-weight: bold">ERROR: Usuário ou senha inválidos.</span>
                 </div>
             <?php
             endif;
             unset($_SESSION['login_wrong']);
             ?>
             <!-- Fim Mensagem erro -->
+            <!-- Inicio da conexao -->
+            <?php
+            $_SESSION['conn_login'] = true;
+            ?>
+            <!-- Fim do inicio da conexao -->
                 </form>
                 
             </div>

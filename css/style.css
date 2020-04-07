@@ -22,7 +22,7 @@ div.col-md-6.justificar{
 ----------
 */
 
-nav.bg-opacidade, .bg-opc{
+.bg-opacidade, .bg-opc {
 	background: rgba(0, 0, 0, 0.8)
 }
 .divisor{
@@ -86,7 +86,7 @@ div.container.align-sign, div.row.align-sign, .align-sobre {
 	background: rgba(0, 0, 0, 0.2);
 }
 
-/*TESTE PAG INICIAL
+/*Pag inicial da ferramenta
 ---------
 */
 #sidebar-wrapper {
@@ -109,11 +109,34 @@ div.container.align-sign, div.row.align-sign, .align-sobre {
 
 #page-content-wrapper {
   min-width: 100vw;
+/*  align-self: center;*/
 }
 
 #wrapper.toggled #sidebar-wrapper {
   margin-left: 0;
 }
+
+.color-text-list a, .color-text{
+	border-bottom: 1px solid rgba(255,255,255,.5);
+	color: honeydew;
+}
+
+.list-group-item{
+	background-color: #fff0;
+}
+
+.align-instrucao{
+	justify-content: center;
+	text-align: justify;
+}
+
+/*Menu List Dropdown*/
+
+#page-content-wrapper > div > section > div > div > div > button{
+	color: black;
+    background-color: brown;
+}
+.glyphicon-ok:before{content:"\e013"}
 /*Media-Query*/
 /*Extra small devices (portrait phones, less than 576px)*/
 @media (max-width: 575.98px) { 
