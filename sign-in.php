@@ -71,9 +71,9 @@ session_start();
                     <!-- Fim label e input senha -->
                     <!-- Botão -->
                     <div class="btn-middle">
-                        <button class="btn btn-lg btn-info">
-                            Entrar
-                        </button>
+                        <input class="btn btn-lg btn-info" type="submit" value="Entrar"></input>
+                            
+                        
                     </div>
                     <!-- Fim botão -->
 

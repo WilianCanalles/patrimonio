@@ -1,178 +1,229 @@
-html, body, #home {
-	height: 100%;
-	overflow-x: hidden;
+html,
+body,
+#home {
+    height: 100%;
+    overflow-x: hidden;
 }
-body{
 
-	background: url("../img/people9.png"),
-	linear-gradient(to right top,
-	#ff0000, #ff3100, #ff4800, #ff5900, 
-	#ff6800, #ff7900, #ff8a00, #ff9900,
-	#ffaf00, #ffc600, #ffdd00, #fff400) no-repeat;
-	background-size: cover;
+body {
+    background: url("../img/people9.png"), linear-gradient(to right top, #ff0000, #ff3100, #ff4800, #ff5900, #ff6800, #ff7900, #ff8a00, #ff9900, #ffaf00, #ffc600, #ffdd00, #fff400) no-repeat;
+    background-size: cover;
 }
+
+
 /*Sobre
 ----------
 */
-div.col-md-6.justificar{
-	text-align: center ;
-	font-weight: bold ;
+
+div.col-md-6.justificar {
+    text-align: center;
+    font-weight: bold;
 }
+
+
 /*Menu
 ----------
 */
 
-.bg-opacidade, .bg-opc {
-	background: rgba(0, 0, 0, 0.8)
+.bg-opacidade,
+.bg-opc {
+    background: rgba(0, 0, 0, 0.8)
 }
-.divisor{
-	width: 1px;
-	background: gray;
-	margin: 10px 12px;
+
+.divisor {
+    width: 1px;
+    background: gray;
+    margin: 10px 12px;
 }
+
 .navbar-light .navbar-nav .nav-link {
-	color: rgba(20, 110, 125, 0.6)!important;
-	font-weight: bold!important;
+    color: rgba(20, 110, 125, 0.6)!important;
+    font-weight: bold!important;
 }
-.navbar-light .navbar-nav .nav-link:hover{
-	color: white!important;
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: white!important;
 }
-.navbar-light .navbar-brand{
-	color: #0062cc;
+
+.navbar-light .navbar-brand {
+    color: #0062cc;
 }
+
+
 /*Rodape
 -----------
 */
-h4, span, i{
-	color: honeydew!important;
+
+h4,
+span,
+i {
+    color: honeydew!important;
 }
-div.container.foot{
-	padding: 25px 0px;
+
+div.container.foot {
+    padding: 25px 0px;
 }
-footer{
-	background: #232627;
+
+footer {
+    background: #232627;
 }
+
 footer ul {
-	list-style: none;
+    list-style: none;
 }
+
 footer ul li {
-	float: right;
-	margin: 0 5px;
-
-}
-.alinhamento{
-	align-self: center;
-
+    float: right;
+    margin: 0 5px;
 }
 
-div.col-md-12.justificar, .btn-middle{/* btn-middle da classe Entrar*/
-	text-align: center ;
-	font-weight: bold ;
-}
-ul.navbar-nav a{
-	color: #929292;
+.alinhamento {
+    align-self: center;
 }
 
+div.col-md-12.justificar,
+.btn-middle {
+    /* btn-middle da classe Entrar*/
+    text-align: center;
+    font-weight: bold;
+}
+
+ul.navbar-nav a {
+    color: #929292;
+}
 
 
 /*Sign
 ----------
 */
-div.container.align-sign, div.row.align-sign, .align-sobre {
-	height: 100%!important;
+
+div.container.align-sign,
+div.row.align-sign,
+.align-sobre {
+    height: 100%!important;
 }
-.bg-opc-sign{
-	padding: 15px;
-	background: rgba(0, 0, 0, 0.2);
+
+.bg-opc-sign {
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
 }
+
 
 /*Pag inicial da ferramenta
 ---------
 */
+
 #sidebar-wrapper {
-  min-height: 100vh;
-  margin-left: -15rem;
-  -webkit-transition: margin .25s ease-out;
-  -moz-transition: margin .25s ease-out;
-  -o-transition: margin .25s ease-out;
-  transition: margin .25s ease-out;
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
 }
 
 #sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
-  font-size: 1.2rem;
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
 }
 
 #sidebar-wrapper .list-group {
-  width: 15rem;
+    width: 15rem;
 }
 
 #page-content-wrapper {
-  min-width: 100vw;
-/*  align-self: center;*/
+    min-width: 100vw;
+    /*  align-self: center;*/
 }
 
 #wrapper.toggled #sidebar-wrapper {
-  margin-left: 0;
+    margin-left: 0;
 }
 
-.color-text-list a, .color-text{
-	border-bottom: 1px solid rgba(255,255,255,.5);
-	color: honeydew;
+.color-text-list a,
+.color-text {
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+    color: honeydew;
 }
 
-.list-group-item{
-	background-color: #fff0;
+.list-group-item {
+    background-color: #fff0;
 }
 
-.align-instrucao{
-	justify-content: center;
-	text-align: justify;
+.align-instrucao {
+    justify-content: center;
+    text-align: justify;
 }
+
 
 /*Menu List Dropdown*/
 
-#page-content-wrapper > div > section > div > div > div > button{
-	color: black;
-    background-color: brown;
-}
-.glyphicon-ok:before{content:"\e013"}
-/*Media-Query*/
-/*Extra small devices (portrait phones, less than 576px)*/
-@media (max-width: 575.98px) { 
-.alinhamento{
-	align-self: center;
-	text-align: center;
-	margin-top: 20px;
-}
-.mQ-es-s{
-	padding: 0px;
-}
-}
-
-/*Small devices (landscape phones, 576px and up)*/
-@media (min-width: 576px) and (max-width: 767.98px) { 
-.alinhamento{
-	align-self: center;
-	text-align: center;
-	margin-top: 20px;
-}
-.mQ-es-s{
-	padding: 0px;
-}
-}
-
-/*Medium devices (tablets, 768px and up)*/
-@media (min-width: 768px) and (max-width: 991.98px) {  }
-
-  #page-content-wrapper {
+#page-content-wrapper {
     min-width: 0;
     width: 100%;
-  }
+}
+
+#page-content-wrapper>div>section>div>div>div>button {
+    color: #000000;
+    background-color: brown;
+}
+
+.glyphicon-ok:before {
+    content: "\e013"
+}
+
+
+/*Media-Query*/
+
+
+/*Extra small devices (portrait phones, less than 576px)*/
+
+@media (max-width: 575.98px) {
+    .alinhamento {
+        align-self: center;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .mQ-es-s {
+        padding: 0px;
+    }
+    .padding_ex_sm {
+        padding: 0px;
+    }
+}
+
+
+/*Small devices (landscape phones, 576px and up)*/
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .alinhamento {
+        align-self: center;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .mQ-es-s {
+        padding: 0px;
+    }
+    .padding_ex_sm {
+        padding: 0px;
+    }
+}
+
+
+/*Medium devices (tablets, 768px and up)*/
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .padding_ex_sm {
+        padding: 0px;
+    }
+}
 
 
 /*Large devices (desktops, 992px and up)*/
-@media (min-width: 992px) and (max-width: 1199.98px) {  }
+
+@media (min-width: 992px) and (max-width: 1199.98px) {}
+
 
 /*Extra large devices (large desktops, 1200px and up)*/
-@media (min-width: 1200px) {  }
+
+@media (min-width: 1200px) {}
