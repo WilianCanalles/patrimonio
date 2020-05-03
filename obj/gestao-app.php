@@ -42,3 +42,59 @@
 </body>
 
 </html>
+<!--
+
+<script>
+		
+		$(document).ready(function() {
+
+			$("#check_disable").click(function() {
+				if ($(this).is(":checked")) {
+					$('#tex_div').hide();
+					$("#periferico_S").attr("readonly", true); //Desabilitar campo 
+
+				} else {
+					$('#tex_div').show();
+					$("#periferico_S").attr("readonly", false); //habilitar campo 
+				}
+			})
+
+		})
+    </script>
+    
+    --php--
+
+    <div class="col-md-6 ">
+						<input type="checkbox" id="check_disable">sadasda</input>
+						<div class="row form-group" style="margin:auto; border: 1px solid black">
+
+	--><!-- Input --><!--
+							<input class="col-10 form-control" name="periferico" type="text" id="periferico_S" placeholder="Periférico">
+							--><!-- Fim Input --><!--
+							<div class="col-2 mt-2 d-flex justify-content-between padding_ex_sm">
+
+								<i class="fas fa-check-square fa-lg text-success" onclick=""></i>
+
+							</div>
+
+							<?php
+/*
+							include '../conn-db/conn_db.php'; //separar o campo componentes em array
+							foreach ($result as $line) { ?>
+								<div id="tex_div">
+									<?php
+									echo "<pre>"; //separar dados do campo onde tem |
+									print_r(explode('|', ($line[0])));
+									echo "</pre>";
+									?>
+									<i class="fas fa-trash-alt fa-lg text-danger"></i>
+								</div>
+
+							<?php } */?>
+
+
+						</div>
+
+					</div>
+
+-->
