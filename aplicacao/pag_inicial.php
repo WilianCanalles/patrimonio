@@ -58,9 +58,10 @@ if (isset($_SESSION["sessiontime"])) {
 			<div class="list-group list-group-flush color-text-list">
 				<a href="pag_inicial.php?menu=0" class="list-group-item list-group-item-action">Instruções</a>
 				<a href="pag_inicial.php?menu=1" class="list-group-item list-group-item-action">Listar Aparelhos</a>
-				<a href="pag_inicial.php?menu=2" class="list-group-item list-group-item-action">Gestao de Aparelhos</a>
-				<a href="pag_inicial.php?menu=3" class="list-group-item list-group-item-action">Cadastro de Itens</a>
-				<a href="pag_inicial.php?menu=4" class="list-group-item list-group-item-action">Alterar Senha</a>
+				<a href="pag_inicial.php?menu=2" class="list-group-item list-group-item-action">Gestao de Periférico</a>
+				<a href="pag_inicial.php?menu=3" class="list-group-item list-group-item-action ">Cadastro de Itens</a>
+				<a href="pag_inicial.php?menu=4" class="list-group-item list-group-item-action">Cadastro de Equipamento</a>
+				<a href="pag_inicial.php?menu=5" class="list-group-item list-group-item-action">Alterar Senha</a>
 				<a href="logout.php" class="list-group-item list-group-item-action">Sair</a>
 			</div>
 		</div>
@@ -98,10 +99,15 @@ if (isset($_SESSION["sessiontime"])) {
 			<?php
 			} elseif (isset($_GET['menu']) && $_GET['menu'] == 3) { ?>
 				<div>
-					<?php include '../obj/cadastro.php'; ?>
+					<?php include '../obj/add-itens.php'; ?>
 				</div>
 			<?php
 			} elseif (isset($_GET['menu']) && $_GET['menu'] == 4) { ?>
+				<div>
+					<?php include '../obj/add-equip.php'; ?>
+				</div>
+			<?php
+			} elseif (isset($_GET['menu']) && $_GET['menu'] == 5) { ?>
 				<div>
 					<?php include '../obj/trocar-senha.php'; ?>
 				</div>
