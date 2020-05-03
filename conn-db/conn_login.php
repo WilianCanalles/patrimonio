@@ -38,9 +38,9 @@ function conectar()
         echo '<p>' . $e->getMessage() . '</p>';
     }
 }
-$teste = conectar();
-print_r($teste);
-$_SESSION['usuario'] = ucfirst($teste['usuario']);
+$usuario = conectar();
+print_r($usuario);
+$_SESSION['usuario'] = ucfirst($usuario['usuario']);
 header('Location:../aplicacao/pag_inicial.php?menu=0');
 exit();
 /*--if (!empty($teste)) {
