@@ -53,7 +53,7 @@
 							</div>
 							<div class="col-md-4 form-group align-self-end">
 								<!-- Botao -->
-								<input class="btn " type="submit" value="Cadastrar Empresa" onclick="cadastro('empresa')"></input>
+								<input class="btn" type="submit" value="Cadastrar Empresa"></input>
 								<!-- Fim Botao -->
 
 							</div>
@@ -282,26 +282,6 @@
 			success: function(msg) {
 				$("#dados").html(msg);
 			}
-		});
-	}
-
-	function cadastro(tabela_pesq1) {
-
-		$.ajax({
-			//Configurações
-			
-			type: 'POST', //Método que está sendo utilizado.
-			dataType: 'html', //É o tipo de dado que a página vai retornar.
-			url: '../conn-db/conn_gravar_db.php', //Indica a página que está sendo solicitada.
-			//função que vai ser executada assim que a requisição for enviada
-			beforeSend: function() {
-				
-			},
-			data: {
-				tabela1: tabela_pesq1
-			}, //Dados para consulta
-			//função que será executada quando a solicitação for finalizada.
-			
 		});
 	}
 </script>

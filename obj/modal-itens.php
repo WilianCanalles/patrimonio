@@ -2,7 +2,7 @@
 include '../conn-db/conn_db.php';
 $exe_tabela = $_POST['tabela'];
 if ($exe_tabela == 'empresa') {
-    $recebe_lista_itens = $result_tb_empresa;
+    $recebe_lista_itens = $result_tb_subEmp;
 } elseif ($exe_tabela == 'compra') {
     $recebe_lista_itens = $result_tb_loc_aquisicao;
 } elseif ($exe_tabela == 'fabricante') {

@@ -13,6 +13,8 @@ if (isset($_POST['tabela']) && $_POST['tabela'] == 'fabricante') {
     $_SESSION['conn_envio_tipo'] = true;
 } elseif (isset($_POST['tabela']) && $_POST['tabela'] == 'cadastrar') {
     $_SESSION['conn_envio_equip'] = true;
+} elseif (isset($_POST['tabela']) && $_POST['tabela'] == 'emp_principal') {
+    $_SESSION['conn_envio_emp_principal'] = true;
 }
 
 $equipamento = $_POST['equipamento'];
@@ -20,9 +22,10 @@ $modelo = $_POST['modelo'];
 $fabricante = $_POST['fabricante'];
 $empresa = $_POST['empresa'];
 $aquisicao = $_POST['aquisicao'];
+$emp_principal = $_SESSION['emp_principal'];
 
 if (isset($_SESSION['conn_envio_equip'])) {
-    if (!(($equipamento == '----')||($modelo == '----')||($fabricante == '----')||($empresa == '----')||($aquisicao == '----'))) {
+    if (!(($equipamento == '----') || ($modelo == '----') || ($fabricante == '----') || ($empresa == '----') || ($aquisicao == '----'))) {
         include_once 'conexao.php';
         try {
             $conexao = new PDO(
@@ -40,7 +43,7 @@ if (isset($_SESSION['conn_envio_equip'])) {
             $data = $_POST['data'];
             $info = $_POST['info'];
 
-            $query_tb_equipamento = "INSERT INTO `tb_equipamento`VALUES ('','$equipamento','$modelo','$fabricante','$serie', $empresa,'$aquisicao','$nota_fiscal','$data','$info','')";
+            $query_tb_equipamento = "INSERT INTO `tb_equipamento` (`codigo`, `tipo_equipamento`, `modelo_equipamento`, `fabricante`, `num_serie`, `empresa`, `loc_aquisicao`, `nota_fiscal`, `data_compra`, `informacoes`, `emp_Principal`) VALUES ('','$equipamento','$modelo','$fabricante','$serie', '$empresa','$aquisicao','$nota_fiscal','$data','$info','$emp_principal')";
 
             $statement = $conexao->prepare($query_tb_equipamento);
 
@@ -72,7 +75,7 @@ if (isset($_SESSION['conn_envio_equip'])) {
         );
         $empresa = $_POST['cad_empresa'];
 
-        $query_tb_empresa = "INSERT INTO `tb_empresa`VALUES ('','$empresa')";
+        $query_tb_empresa = "INSERT INTO `tb_subempresa`VALUES ('','$empresa','$emp_principal')";
 
         $statement = $conexao->prepare($query_tb_empresa);
 
@@ -101,7 +104,7 @@ if (isset($_SESSION['conn_envio_equip'])) {
         );
         $aquisicao = $_POST['cad_aquisicao'];
 
-        $query_tb_aquisicao = "INSERT INTO `tb_loc_aquisicao`VALUES ('','$aquisicao')";
+        $query_tb_aquisicao = "INSERT INTO `tb_loc_aquisicao`VALUES ('','$aquisicao','$emp_principal')";
 
         $statement = $conexao->prepare($query_tb_aquisicao);
 
@@ -130,7 +133,7 @@ if (isset($_SESSION['conn_envio_equip'])) {
         );
         $modelo = $_POST['cad_modelo'];
 
-        $query_tb_modelo = "INSERT INTO `tb_modelo_equipamento`VALUES ('','$modelo')";
+        $query_tb_modelo = "INSERT INTO `tb_modelo_equipamento`VALUES ('','$modelo','$emp_principal')";
 
         $statement = $conexao->prepare($query_tb_modelo);
 
@@ -159,7 +162,7 @@ if (isset($_SESSION['conn_envio_equip'])) {
         );
         $tipo = $_POST['cad_tipo'];
 
-        $query_tb_tipo = "INSERT INTO `tb_tipo_equipamento`VALUES ('','$tipo')";
+        $query_tb_tipo = "INSERT INTO `tb_tipo_equipamento`VALUES ('','$tipo','$emp_principal')";
 
         $statement = $conexao->prepare($query_tb_tipo);
 
@@ -188,7 +191,7 @@ if (isset($_SESSION['conn_envio_equip'])) {
         );
         $fabricante = $_POST['cad_fabricante'];
 
-        $query_tb_fabricante = "INSERT INTO `tb_fabricante` VALUES ('','$fabricante')";
+        $query_tb_fabricante = "INSERT INTO `tb_fabricante` VALUES ('','$fabricante','$emp_principal')";
 
         $statement = $conexao->prepare($query_tb_fabricante);
 

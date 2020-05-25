@@ -102,10 +102,10 @@
                             <!-- Fim label-->
                             <!-- Select-->
                             <select name="empresa" class="form-control" id="empresa">
-                                <?php if (!$result_tb_empresa) { ?>
+                                <?php if (!$result_tb_subEmp) { ?>
                                     <option>----</option>
                                 <?php } else { ?>
-                                    <?php foreach ($result_tb_empresa as $line) { ?>
+                                    <?php foreach ($result_tb_subEmp as $line) { ?>
                                         <option value="<?php echo $line[0] ?>"><?php echo $line[1] ?></option>
                                 <?php }
                                 } ?>

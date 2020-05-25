@@ -57,7 +57,7 @@ if (isset($_SESSION["sessiontime"])) {
 			<div class="sidebar-heading color-text">Menu</div>
 			<div class="list-group list-group-flush color-text-list">
 				<a href="pag_inicial.php?menu=0" class="list-group-item list-group-item-action">Instruções</a>
-				<a href="pag_inicial.php?menu=1" class="list-group-item list-group-item-action">Listar Aparelhos</a>
+				<a href="pag_inicial.php?menu=1&pagina=0" class="list-group-item list-group-item-action">Listar Aparelhos</a>
 				<a href="pag_inicial.php?menu=2" class="list-group-item list-group-item-action">Gestao de Periférico</a>
 				<a href="pag_inicial.php?menu=3" class="list-group-item list-group-item-action ">Cadastro de Itens</a>
 				<a href="pag_inicial.php?menu=4" class="list-group-item list-group-item-action">Cadastro de Equipamento</a>
