@@ -1,9 +1,47 @@
 <?php
-include '../conn-db/conn_db.php';
-//print_r($result_tb_equipamento);
+include("../conn-db/conexao.php");
+include_once("../conn-db/conn_db.php");
+// definir o numero de itens por pagina
+$itens_por_pagina = 1;
+
+// pegar a pagina atual
+$pagina = intval($_GET['pagina']);
+
+//==========================================================
+// Equipamento2 LIMIT
+$query_tb_equipamento2 = "SELECT `tb_equipamento`.`codigo`,
+    `tb_tipo_equipamento`.`tipo_equipamento`, 
+    `tb_modelo_equipamento`.`modelo_equipamento`, 
+    `tb_fabricante`.`fabricante`,
+    `num_serie`,
+    a.`empresa`,
+    `tb_loc_aquisicao`.`loc_aquisicao`,
+    `nota_fiscal`,
+    `data_compra`,
+    `informacoes`,
+    `perifericos`
+    FROM `tb_equipamento`
+    INNER JOIN `tb_subempresa` AS a ON `tb_equipamento`.`empresa` = a.`codigo`
+    INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`codigo`
+    INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`codigo`
+    INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`codigo`
+    INNER JOIN `tb_loc_aquisicao` ON `tb_equipamento`.`loc_aquisicao` = `tb_loc_aquisicao`.`codigo`
+    
+    WHERE `tb_equipamento`.`emp_Principal` = $emp_principal
+    ORDER BY `codigo` ASC
+    LIMIT $pagina, $itens_por_pagina";
+
+$statement2 = $conexao->prepare($query_tb_equipamento2);
+
+$statement2->execute();
+
+$result_tb_equipamento2 = $statement2->fetchall(PDO::FETCH_NUM);
+$num = $statement2->rowCount();
+
+$num_paginas = ceil($num_total / $itens_por_pagina);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
 
@@ -33,66 +71,77 @@ include '../conn-db/conn_db.php';
 </head>
 
 <body>
-
     <div class="container">
-        <div class="row" style="justify-content: center">
-            <div class="col-lg-8">
+        <div class="" style="justify-content: center">
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="pag_inicial.php?menu=1&pagina=0" aria-label="Previous">
+                            &laquo;
+                        </a>
+                    </li>
+                    <?php
+
+                    for ($i = 0; $i < $num_paginas; $i++) {
+                        $estilo = "";
+                        if ($pagina == (($i) * $itens_por_pagina))
+                            $estilo = "active";
+                    ?>
+                        <li class="<?php echo $estilo; ?> page-item"><a class="page-link" href="pag_inicial.php?menu=1&pagina=<?php echo ($i * $itens_por_pagina); ?>"><?php echo ($i + 1); ?></a></li>
+                    <?php } ?>
+                    <li class="page-item">
+                        <a class="page-link" href="pag_inicial.php?menu=1&pagina=<?php echo (($i - 1) * $itens_por_pagina); ?>" aria-label="Next">
+                            &raquo;
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="col-lg-12">
                 <h1>Equipamentos</h1>
-                <table id="teste" class="display table" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Tipo</th>
-                            <th>Modelo</th>
-                            <th>Fabricante</th>
-                            <th>N° Serie</th>
-                            <th>Empresa</th>
-                            <th>Fornecedor</th>
-                            <th>Nota Fiscal</th>
-                            <th>Data Compra</th>
-                            <th>Informações</th>
-                            <th>Periferico</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // print_r($produto);
+                <div class="">
+                    <div class="row">
+                        <?php if ($num > 0) {
+                            foreach ($result_tb_equipamento2 as $lista_itens) {
                         ?>
-                        <?php
-                        foreach ($result_tb_equipamento as $lista_itens) {
-                        ?>
-                            <tr>
-                                <td><?php echo $lista_itens['0']; ?></td>
-                                <td><?php echo $lista_itens['1']; ?></td>
-                                <td><?php echo $lista_itens['2']; ?></td>
-                                <td><?php echo $lista_itens['3']; ?></td>
-                                <td><?php echo $lista_itens['4']; ?></td>
-                                <td><?php echo $lista_itens['5']; ?></td>
-                                <td><?php echo $lista_itens['6']; ?></td>
-                                <td><?php echo $lista_itens['7']; ?></td>
-                                <td><?php echo $lista_itens['8']; ?></td>
-                                <td><?php echo $lista_itens['9']; ?></td>
-                                <td><?php echo $lista_itens['10']; ?></td>
-                            </tr>
-                        <?php }
-                        ?>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Código</th>
-                            <th>Tipo</th>
-                            <th>Modelo</th>
-                            <th>Fabricante</th>
-                            <th>N° Serie</th>
-                            <th>Empresa</th>
-                            <th>Fornecedor</th>
-                            <th>Nota Fiscal</th>
-                            <th>Data Compra</th>
-                            <th>Informações</th>
-                            <th>Periferico</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                                <div class="form-group col-lg-4">
+
+                                    <label class="input-group-text" for="codigo">Código</label>
+                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['0']; ?></a>
+                                    <label class="input-group-text" for="tipo">Tipo</label>
+                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['1']; ?></a>
+                                    <label class="input-group-text" for="modelo">Modelo</label>
+                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['2']; ?></a>
+                                    <label class="input-group-text" for="fabricante">Fabricante</label>
+                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['3']; ?></a>
+
+
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label class="input-group-text" for="serie">N° Serie</label>
+                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['4']; ?></a>
+                                    <label class="input-group-text" for="empresa">Empresa</label>
+                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['5']; ?></a>
+                                    <label class="input-group-text" for="fornecedor">Fornecedor</label>
+                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['6']; ?></a>
+                                    <label class="input-group-text" for="nf">Nota Fiscal</label>
+                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['7']; ?></a>
+
+
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label class="input-group-text" for="data">Data Compra</label>
+                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['8']; ?></a>
+                                    <label class="input-group-text" for="info">Informações</label>
+                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['9']; ?></a>
+                                    <label class="input-group-text" for="periferico">Periferico</label>
+                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['10']; ?></a>
+                                </div>
+                            <?php }
+                            ?>
+                    </div>
+                </div>
+
+            <?php } ?>
             </div>
         </div>
     </div>
@@ -102,37 +151,6 @@ include '../conn-db/conn_db.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <script>
-        $(document).ready(function() {
-            $('#teste').DataTable({
-                scrollY: 300,
-                "scrollX": true,
-                "language": {
-                    "lengthMenu": "Mostrando _MENU_ registros por página",
-                    "zeroRecords": "Nenhum dado encontrado",
-                    "info": "Mostrando _PAGE_ de _PAGES_",
-                    "infoEmpty": "Nenhum dado encontrado",
-                    "infoFiltered": "(Filtro de _MAX_ registros totais)",
-                    "paginate": {
-                        "first": "Primeiro",
-                        "last": "Ultimo",
-                        "next": "Proximo",
-                        "previous": "Anterior",
-                    },
-                    "search": "Busca:",
-
-                },
-                //"lengthChange": false,
-
-
-            });
-        });
-    </script>
 </body>
 
 </html>

@@ -5,6 +5,7 @@ if (!isset($_SESSION)) {
 //print_r($_SESSION);
 $emp_principal = $_SESSION['emp_principal'];
 include_once 'conexao.php';
+
 try {
     $conexao = new PDO(
         "mysql:host=$host; dbname=$dbname",
@@ -54,6 +55,9 @@ try {
     $statement->execute();
 
     $result_tb_equipamento = $statement->fetchall(PDO::FETCH_NUM);
+    $num_total = $statement->rowCount();
+
+    
     //==========================================================
     $query_tb_fabricante = "SELECT * FROM tb_fabricante WHERE `emp_Principal` = $emp_principal";
 
