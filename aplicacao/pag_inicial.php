@@ -18,6 +18,7 @@ if (isset($_SESSION["sessiontime"])) {
 	exit();
 }*/
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -52,19 +53,37 @@ if (isset($_SESSION["sessiontime"])) {
 
 		<!-- Sidebar -->
 		<div class="bg-opacidade " id="sidebar-wrapper">
-
 			<div class="sidebar-heading color-text">Seja Bem Vindo, <?php echo $_SESSION['usuario']; ?></div>
 			<div class="sidebar-heading color-text">Menu</div>
 			<div class="list-group list-group-flush color-text-list">
-				<a href="pag_inicial.php?menu=0" class="list-group-item list-group-item-action">Instruções</a>
-				<a href="pag_inicial.php?menu=1&pagina=0" class="list-group-item list-group-item-action">Listar Aparelhos</a>
-				<a href="pag_inicial.php?menu=2" class="list-group-item list-group-item-action">Gestao de Periférico</a>
-				<a href="pag_inicial.php?menu=3" class="list-group-item list-group-item-action ">Cadastro de Itens</a>
-				<a href="pag_inicial.php?menu=4" class="list-group-item list-group-item-action">Cadastro de Equipamento</a>
-				<a href="pag_inicial.php?menu=5" class="list-group-item list-group-item-action">Alterar Senha</a>
+			<?php
+	
+	for ($i = 0; $i <= 5; $i++) {
+		if ($i == 0) {
+			$nome = 'Instruções';
+		} elseif ($i == 1) {
+			$nome = 'Listar Aparelhos';
+		} elseif ($i == 2) {
+			$nome = 'Gestao de Periférico';
+		} elseif ($i == 3) {
+			$nome = 'Cadastro de Itens';
+		} elseif ($i == 4) {
+			$nome = 'Cadastro de Itens';
+		} elseif ($i == 5) {
+			$nome = 'Alterar Senha';
+		}
+		$menu = $_GET['menu'];
+		$menuselect = "";
+		if ($i == $menu) 
+			$menuselect = "active";
+			?>
+		<a href="pag_inicial.php?menu=<?php echo ($i); ?>&pagina=0" class="<?php echo $menuselect; ?> list-group-item list-group-item-action"><?php echo ($nome); ?></a>
+	<?php  }?>
 				<a href="logout.php" class="list-group-item list-group-item-action">Sair</a>
+
 			</div>
 		</div>
+
 		<!-- /#sidebar-wrapper -->
 
 		<!-- Page Content -->
