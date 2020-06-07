@@ -87,6 +87,14 @@
         font-weight: bold;
     }
     
+    .btn-middle-up {
+        /* btn-middle da classe Login*/
+        text-align: center;
+        font-weight: bold;
+        padding-top: 50px;
+        padding-bottom: 15px;
+    }
+    
     ul.navbar-nav a {
         color: #929292;
     }

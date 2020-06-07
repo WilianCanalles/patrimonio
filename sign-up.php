@@ -11,7 +11,6 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="obj/footer.css" />
 
-
     <!-- Estilo customizado -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -37,15 +36,104 @@ session_start();
 </head>
 
 <body>
-    <!-- barra de menu -->
     <?php include 'obj/navbar_menu.php' ?>
-    <section  class="align-sobre">
-    <div>
+    <div class="container align-sign">
+        <div class="row align-sign">
+            <form method="post" action="conn-db/conn_new_user.php" class="container bg-opc-sign" style="align-self: center;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <!-- Label -->
+                            <label for="inputEmail">Nome</label>
+                            <!-- Fim label-->
+                            <!-- Input-->
+                            <input class="form-control" name="nome" type="text" id="inputNome" placeholder="Nome" required autofocus="">
+                            <!-- Fim input-->
+                        </div>
 
+                        <div class="form-group">
+                            <!-- Label -->
+                            <label for="inputSenha">Sobrenome</label>
+                            <!-- Fim label-->
+                            <!-- Input-->
+                            <input class="form-control" name="sobrenome" type="text" id="inputSobrenome" placeholder="Sobrenome" required autofocus="">
+                            <!-- Fim input-->
+                        </div>
 
+                        <div class="form-group">
+                            <!-- Label -->
+                            <label for="inputSenha">Email</label>
+                            <!-- Fim label-->
+                            <!-- Input-->
+                            <input class="form-control" name="email" type="text" id="inputEmail" placeholder="Email" required autofocus="">
+                            <!-- Fim input-->
+                        </div>
+                    </div>
+                    <div class="col-md-6">
 
+                        <div class="form-group">
+                            <!-- Label -->
+                            <label for="inputSenha">Usuario</label>
+                            <!-- Fim label-->
+                            <!-- Input-->
+                            <input class="form-control" name="usuario" type="text" id="inputUsuario" placeholder="Usuario" required autofocus="">
+                            <!-- Fim input-->
+                        </div>
+
+                        <div class="form-group">
+                            <!-- Label -->
+                            <label for="inputSenha">Senha</label>
+                            <!-- Fim label-->
+                            <!-- Input-->
+                            <input class="form-control" name="senha" type="text" id="inputSenha" placeholder="Senha" required autofocus="">
+                            <!-- Fim input-->
+                        </div>
+
+                        <div class="form-group">
+                            <!-- Label -->
+                            <label for="inputSenha">Empresa</label>
+                            <!-- Fim label-->
+                            <!-- Input-->
+                            <input class="form-control" name="empresa" type="text" id="inputEmpresa" placeholder="Empresa" required autofocus="">
+                            <!-- Fim input-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-middle-up">
+                    <input class="btn btn-lg btn-primary" type="submit" value="Inscrever-se"></input>
+                </div>
+                <!-- Fim botão -->
+
+                <!-- Mensagem de Fim de sessao -->
+                <?php
+                if (isset($_SESSION['have_user'])) :
+                ?>
+                    <div class="bg-danger" style="text-align: center; margin-top: 10px; padding:15px 0px">
+                        <span style="font-weight: bold">Usuario e/ou E-mail ja possui cadastro.</br>Verifique os dados inseridos e tente novamente</span>
+                    </div>
+                <?php
+                endif;
+                unset($_SESSION['have_user']);
+                ?>
+                <!-- Fim Mensagem de Fim de sessao -->
+
+                <!-- Mensagem de Fim de sessao -->
+                <?php
+                if (isset($_SESSION['company_has_account'])) :
+                ?>
+                    <div class="bg-danger" style="text-align: center; margin-top: 10px; padding:15px 0px">
+                        <span style="font-weight: bold">Empresa ja cadastrada</br>Solicite seu usuario para o administrador da empresa</span>
+                    </div>
+                <?php
+                endif;
+                unset($_SESSION['company_has_account']);
+                ?>
+                <!-- Fim Mensagem de Fim de sessao -->
+
+            </form>
+        </div>
     </div>
-    </section>
     <!-- Rodape -->
 
     <?php include 'obj/footer-menu.php' ?>
