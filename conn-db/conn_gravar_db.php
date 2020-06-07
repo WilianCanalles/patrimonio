@@ -13,9 +13,7 @@ if (isset($_POST['tabela']) && $_POST['tabela'] == 'fabricante') {
     $_SESSION['conn_envio_tipo'] = true;
 } elseif (isset($_POST['tabela']) && $_POST['tabela'] == 'cadastrar') {
     $_SESSION['conn_envio_equip'] = true;
-} elseif (isset($_POST['tabela']) && $_POST['tabela'] == 'emp_principal') {
-    $_SESSION['conn_envio_emp_principal'] = true;
-}
+} 
 
 $equipamento = $_POST['equipamento'];
 $modelo = $_POST['modelo'];
