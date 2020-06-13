@@ -10,23 +10,26 @@ $pagina = intval($_GET['pagina']);
 //==========================================================
 // Equipamento2 LIMIT
 $query_tb_equipamento2 = "SELECT `tb_equipamento`.`codigo`,
-    `tb_tipo_equipamento`.`tipo_equipamento`, 
-    `tb_modelo_equipamento`.`modelo_equipamento`, 
-    `tb_fabricante`.`fabricante`,
-    `num_serie`,
-    a.`empresa`,
-    `tb_loc_aquisicao`.`loc_aquisicao`,
-    `nota_fiscal`,
-    `data_compra`,
-    `informacoes`,
-    `perifericos`
-    FROM `tb_equipamento`
-    INNER JOIN `tb_subempresa` AS a ON `tb_equipamento`.`empresa` = a.`codigo`
-    INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`codigo`
-    INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`codigo`
-    INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`codigo`
-    INNER JOIN `tb_loc_aquisicao` ON `tb_equipamento`.`loc_aquisicao` = `tb_loc_aquisicao`.`codigo`
-    
+`tb_tipo_equipamento`.`tipo_equipamento`, 
+`tb_modelo_equipamento`.`modelo_equipamento`, 
+`tb_fabricante`.`fabricante`,
+`num_serie`,
+a.`empresa`,
+`tb_fornecedor`.`fornecedor`,
+`nota_fiscal`,
+`data_compra`,
+`informacoes`,
+`perifericos`,
+`tb_local`.`local`,
+`situacao`
+FROM `tb_equipamento`
+INNER JOIN `tb_subempresa` AS a ON `tb_equipamento`.`empresa` = a.`codigo`
+INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`codigo`
+INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`codigo`
+INNER JOIN `tb_local` ON `tb_equipamento`.`local` = `tb_local`.`codigo`
+INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`codigo`
+INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`codigo`
+
     WHERE `tb_equipamento`.`emp_Principal` = $emp_principal
     ORDER BY `codigo` ASC
     LIMIT $pagina, $itens_por_pagina";
@@ -66,13 +69,13 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
     <!-- Custom styles for this template -->
     <link href="../css/style.css" rel="stylesheet">
     <script type="text/javascript" src="../js/js_cadastro.js"></script>
-
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
     <div class="container">
-        <div class="" style="justify-content: center">
+        <div style="justify-content: center">
             <nav>
                 <ul class="pagination">
                     <li class="page-item">
@@ -104,35 +107,34 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                             foreach ($result_tb_equipamento2 as $lista_itens) {
                         ?>
                                 <div class="form-group col-lg-4">
-
                                     <label class="input-group-text" for="codigo">Código</label>
-                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['0']; ?></a>
+                                    <a id="teste" class="input-group-text inputgroup-bg"><?php echo $lista_itens['0']; ?></a>
                                     <label class="input-group-text" for="tipo">Tipo</label>
                                     <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['1']; ?></a>
                                     <label class="input-group-text" for="modelo">Modelo</label>
                                     <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['2']; ?></a>
                                     <label class="input-group-text" for="fabricante">Fabricante</label>
                                     <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['3']; ?></a>
-
-
-                                </div>
-                                <div class="form-group col-lg-4">
                                     <label class="input-group-text" for="serie">N° Serie</label>
                                     <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['4']; ?></a>
+                                </div>
+                                <div class="form-group col-lg-4">
                                     <label class="input-group-text" for="empresa">Empresa</label>
                                     <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['5']; ?></a>
                                     <label class="input-group-text" for="fornecedor">Fornecedor</label>
                                     <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['6']; ?></a>
                                     <label class="input-group-text" for="nf">Nota Fiscal</label>
                                     <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['7']; ?></a>
-
-
+                                    <label class="input-group-text" for="local">Local</label>
+                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['11']; ?></a>
+                                    <label class="input-group-text" for="situacao">Situação</label>
+                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['12']; ?></a>
                                 </div>
                                 <div class="form-group col-lg-4">
                                     <label class="input-group-text" for="data">Data Compra</label>
                                     <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['8']; ?></a>
                                     <label class="input-group-text" for="info">Informações</label>
-                                    <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['9']; ?></a>
+                                    <a class="input-group-text inputgroup-bg" style="white-space: normal;"><?php echo $lista_itens['9']; ?></a>
                                     <label class="input-group-text" for="periferico">Periferico</label>
                                     <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['10']; ?></a>
                                 </div>
@@ -144,8 +146,64 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
             <?php } ?>
             </div>
         </div>
-    </div>
+        <!--<div style="justify-content: center;text-align: center;">
+            <svg id="barcode"></svg>
+        </div>-->
+        <div>
+            <section>
+                <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">Pesquisa Avançada</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span style="color: #6c757d !important" aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
 
+                            <div class="modal-body">
+                                <div id="dados">ESTAMOS IMPLEMENTANDO A FUNCAO</br> TEMPORARIAMENTE INDISPONIVEL</div>
+                            </div>
+                            <div class="modal-footer">
+
+                                <button class="btn btn-secondary" id="compra" onclick="buscar('compra')">Compra</button>
+                                <button class="btn btn-secondary" id="fabricante" onclick="buscar('fabricante')">Fabricante</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" id="empresa" onclick="buscar('empresa')">Empresa</button>
+                                <button class="btn btn-secondary" id="modelo" onclick="buscar('modelo')">Modelo</button>
+                                <button class="btn btn-secondary" id="tipo" onclick="buscar('tipo')">Tipo</button>
+                            </div>
+                            <div class="modal-footer">
+
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center;">
+                    <input type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable" value="Avançada &#x1f50d;"></input>
+                    <svg id="barcode"></svg>
+                </div>
+            </section>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+
+    <script src="JsBarcode.all.min.js"></script>
+    <script>
+        var teste = document.getElementById('teste').innerText;
+        // alert (teste.innerText);
+        JsBarcode("#barcode", teste, {
+            background: "#ccffff00",
+            height: 35,
+            fontSize: 15,
+            marginTop: 25,
+            //text: " " codigo sem numero
+        });
+    </script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

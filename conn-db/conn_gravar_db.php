@@ -13,17 +13,19 @@ if (isset($_POST['tabela']) && $_POST['tabela'] == 'fabricante') {
     $_SESSION['conn_envio_tipo'] = true;
 } elseif (isset($_POST['tabela']) && $_POST['tabela'] == 'cadastrar') {
     $_SESSION['conn_envio_equip'] = true;
+} elseif (isset($_POST['tabela']) && $_POST['tabela'] == 'local') {
+    $_SESSION['conn_envio_local'] = true;
 } 
 
 $equipamento = $_POST['equipamento'];
 $modelo = $_POST['modelo'];
 $fabricante = $_POST['fabricante'];
 $empresa = $_POST['empresa'];
-$aquisicao = $_POST['aquisicao'];
+$fornecedor = $_POST['fornecedor'];
 $emp_principal = $_SESSION['emp_principal'];
 
 if (isset($_SESSION['conn_envio_equip'])) {
-    if (!(($equipamento == '----') || ($modelo == '----') || ($fabricante == '----') || ($empresa == '----') || ($aquisicao == '----'))) {
+    if (!(($equipamento == '----') || ($modelo == '----') || ($fabricante == '----') || ($empresa == '----') || ($fornecedor == '----'))) {
         include_once 'conexao.php';
         try {
             $conexao = new PDO(
@@ -36,12 +38,14 @@ if (isset($_SESSION['conn_envio_equip'])) {
             $fabricante = $_POST['fabricante'];
             $serie = $_POST['serie'];
             $empresa = $_POST['empresa'];
-            $aquisicao = $_POST['aquisicao'];
+            $fornecedor = $_POST['fornecedor'];
+            $local = $_POST['local'];
+            $situacao = $_POST['situacao'];
             $nota_fiscal = $_POST['notafiscal'];
             $data = $_POST['data'];
             $info = $_POST['info'];
 
-            $query_tb_equipamento = "INSERT INTO `tb_equipamento` (`codigo`, `tipo_equipamento`, `modelo_equipamento`, `fabricante`, `num_serie`, `empresa`, `loc_aquisicao`, `nota_fiscal`, `data_compra`, `informacoes`, `emp_Principal`) VALUES ('','$equipamento','$modelo','$fabricante','$serie', '$empresa','$aquisicao','$nota_fiscal','$data','$info','$emp_principal')";
+            $query_tb_equipamento = "INSERT INTO `tb_equipamento` (`codigo`, `tipo_equipamento`, `modelo_equipamento`, `local`, `fabricante`, `num_serie`, `empresa`, `fornecedor`, `nota_fiscal`, `data_compra`, `situacao`, `informacoes`, `emp_Principal`) VALUES ('','$equipamento','$modelo','$local','$fabricante','$serie', '$empresa','$fornecedor','$nota_fiscal','$data','$situacao','$info','$emp_principal')";
 
             $statement = $conexao->prepare($query_tb_equipamento);
 
@@ -58,6 +62,7 @@ if (isset($_SESSION['conn_envio_equip'])) {
     unset($_SESSION['conn_envio_modelo']);
     unset($_SESSION['conn_envio_compra']);
     unset($_SESSION['conn_envio_empresa']);
+    unset($_SESSION['conn_envio_local']);
     header("location: ../aplicacao/pag_inicial.php?menu=4");
 } elseif (isset($_SESSION['conn_envio_empresa'])) {
     echo '<pre>';
@@ -87,6 +92,7 @@ if (isset($_SESSION['conn_envio_equip'])) {
     unset($_SESSION['conn_envio_modelo']);
     unset($_SESSION['conn_envio_compra']);
     unset($_SESSION['conn_envio_empresa']);
+    unset($_SESSION['conn_envio_local']);
     header("location: ../aplicacao/pag_inicial.php?menu=3");
 } elseif (isset($_SESSION['conn_envio_compra'])) {
     echo '<pre>';
@@ -100,11 +106,11 @@ if (isset($_SESSION['conn_envio_equip'])) {
             "$user",
             "$pass"
         );
-        $aquisicao = $_POST['cad_aquisicao'];
+        $fornecedor = $_POST['cad_fornecedor'];
 
-        $query_tb_aquisicao = "INSERT INTO `tb_loc_aquisicao`VALUES ('','$aquisicao','$emp_principal')";
+        $query_tb_fornecedor = "INSERT INTO `tb_fornecedor`VALUES ('','$fornecedor','$emp_principal')";
 
-        $statement = $conexao->prepare($query_tb_aquisicao);
+        $statement = $conexao->prepare($query_tb_fornecedor);
 
         $statement->execute();
     } catch (PDOException $e) {
@@ -116,6 +122,7 @@ if (isset($_SESSION['conn_envio_equip'])) {
     unset($_SESSION['conn_envio_modelo']);
     unset($_SESSION['conn_envio_compra']);
     unset($_SESSION['conn_envio_empresa']);
+    unset($_SESSION['conn_envio_local']);
     header("location: ../aplicacao/pag_inicial.php?menu=3");
 } elseif (isset($_SESSION['conn_envio_modelo'])) {
     echo '<pre>';
@@ -145,6 +152,7 @@ if (isset($_SESSION['conn_envio_equip'])) {
     unset($_SESSION['conn_envio_modelo']);
     unset($_SESSION['conn_envio_compra']);
     unset($_SESSION['conn_envio_empresa']);
+    unset($_SESSION['conn_envio_local']);
     header("location: ../aplicacao/pag_inicial.php?menu=3");
 } elseif (isset($_SESSION['conn_envio_tipo'])) {
     echo '<pre>';
@@ -174,6 +182,7 @@ if (isset($_SESSION['conn_envio_equip'])) {
     unset($_SESSION['conn_envio_modelo']);
     unset($_SESSION['conn_envio_compra']);
     unset($_SESSION['conn_envio_empresa']);
+    unset($_SESSION['conn_envio_local']);
     header("location: ../aplicacao/pag_inicial.php?menu=3");
 } elseif (isset($_SESSION['conn_envio_fabricante'])) {
     echo '<pre>';
@@ -203,5 +212,36 @@ if (isset($_SESSION['conn_envio_equip'])) {
     unset($_SESSION['conn_envio_modelo']);
     unset($_SESSION['conn_envio_compra']);
     unset($_SESSION['conn_envio_empresa']);
+    unset($_SESSION['conn_envio_local']);
+    header("location: ../aplicacao/pag_inicial.php?menu=3");
+} elseif (isset($_SESSION['conn_envio_local'])) {
+    echo '<pre>';
+    print_r($_POST);
+    echo '</pre>';
+    echo 'local';
+    include_once 'conexao.php';
+    try {
+        $conexao = new PDO(
+            "mysql:host=$host; dbname=$dbname",
+            "$user",
+            "$pass"
+        );
+        $local = $_POST['cad_local'];
+
+        $query_tb_local = "INSERT INTO `tb_local` VALUES ('','$local','$emp_principal')";
+
+        $statement = $conexao->prepare($query_tb_local);
+
+        $statement->execute();
+    } catch (PDOException $e) {
+        echo '<p>' . $e->getMessage() . '</p>';
+    }
+    unset($_SESSION['conn_envio_equip']);
+    unset($_SESSION['conn_envio_fabricante']);
+    unset($_SESSION['conn_envio_tipo']);
+    unset($_SESSION['conn_envio_modelo']);
+    unset($_SESSION['conn_envio_compra']);
+    unset($_SESSION['conn_envio_empresa']);
+    unset($_SESSION['conn_envio_local']);
     header("location: ../aplicacao/pag_inicial.php?menu=3");
 }

@@ -68,7 +68,7 @@ if (isset($_SESSION["sessiontime"])) {
 		} elseif ($i == 3) {
 			$nome = 'Cadastro de Itens';
 		} elseif ($i == 4) {
-			$nome = 'Cadastro de Itens';
+			$nome = 'Cadastro de Equipamento';
 		} elseif ($i == 5) {
 			$nome = 'Alterar Senha';
 		}

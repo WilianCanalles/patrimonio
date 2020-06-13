@@ -118,16 +118,53 @@
 								<?php include '../conn-db/conn_db.php'; ?>
 
 								<!-- Label -->
-								<label for="inputEmail">Cadastro de Local de Compra</label>
+								<label for="inputEmail">Cadastro de Fornecedor</label>
 								<!-- Fim Label -->
 								<!-- Input -->
 								<input type="hidden" name="tabela" value="compra">
-								<input name="cad_aquisicao" class="form-control" name="cad_aquisicao" type="text" id="inputAquisicao" placeholder="Local de Aquisicao" required>
+								<input name="cad_fornecedor" class="form-control" name="cad_fornecedor" type="text" id="inputFornecedor" placeholder="Local de Fornecedor" required>
 								<!-- Fim Input -->
 							</div>
 							<div class="col-md-4 form-group align-self-end">
 								<!-- Botao -->
-								<input class="btn " type="submit" value="Cadastrar Loc. Aquisicao"></input>
+								<input class="btn " type="submit" value="Cadastrar Fornecedor"></input>
+								<!-- Fim Botao -->
+								
+							</div>
+
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+
+		</form>
+
+
+	</section>
+	<section>
+		<form method="post" action="../conn-db/conn_gravar_db.php" class="">
+			<div class="container">
+				<div class="row" style="justify-content: center">
+					<div class="col-md-8 ">
+						<!--ocultar linha-->
+						<div class="row">
+							<div class="col-md-8 form-group">
+								<?php include '../conn-db/conn_db.php'; ?>
+
+								<!-- Label -->
+								<label for="inputEmail">Cadastro de Local</label>
+								<!-- Fim Label -->
+								<!-- Input -->
+								<input type="hidden" name="tabela" value="local">
+								<input name="cad_local" class="form-control" name="cad_local" type="text" id="inputLocal" placeholder="Local Equip." required>
+								<!-- Fim Input -->
+							</div>
+							<div class="col-md-4 form-group align-self-end">
+								<!-- Botao -->
+								<input class="btn " type="submit" value="Cadastrar Local Equip."></input>
 								<!-- Fim Botao -->
 								
 							</div>
@@ -223,7 +260,7 @@
 			<div class="modal-dialog modal-dialog-scrollable" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+						<h5 class="modal-title" id="exampleModalScrollableTitle">Lista de Dispositivos</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span style="color: #6c757d !important" aria-hidden="true">&times;</span>
 						</button>

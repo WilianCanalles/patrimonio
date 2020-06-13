@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 
     <!-- Meta tags Obrigatórias -->
@@ -112,14 +113,28 @@
                             </select>
                             <!-- Fim Select-->
                             <!-- Label -->
-                            <label for="inputEmail">Local de Aquisição</label>
+                            <label for="inputEmail">Local / Setor</label>
                             <!-- Fim label-->
                             <!-- Select-->
-                            <select name="aquisicao" class="form-control" id="aquisição">
-                                <?php if ($result_tb_loc_aquisicao == NULL) { ?>
+                            <select name="local" class="form-control" id="local">
+                                <?php if ($result_tb_local == NULL) { ?>
                                     <option>----</option>
                                 <?php } else { ?>
-                                    <?php foreach ($result_tb_loc_aquisicao as $line) { ?>
+                                    <?php foreach ($result_tb_local as $line) { ?>
+                                        <option value="<?php echo $line[0] ?>"><?php echo $line[1] ?></option>
+                                <?php }
+                                } ?>
+                            </select>
+                            <!-- Fim Select-->
+                            <!-- Label -->
+                            <label for="inputEmail">Fornecedor</label>
+                            <!-- Fim label-->
+                            <!-- Select-->
+                            <select name="fornecedor" class="form-control" id="fornecedor">
+                                <?php if ($result_tb_fornecedor == NULL) { ?>
+                                    <option>----</option>
+                                <?php } else { ?>
+                                    <?php foreach ($result_tb_fornecedor as $line) { ?>
                                         <option value="<?php echo $line[0] ?>"><?php echo $line[1] ?></option>
                                 <?php }
                                 } ?>
@@ -142,6 +157,16 @@
                                 <span id="msg_data" style="font-weight: bold"></span>
                             </div>
                             <!-- Fim Msg Erro -->
+                            <!-- Label -->
+                            <label for="inputEmail">Situação</label>
+                            <!-- Fim label-->
+                            <!-- Select-->
+                            <select name="situacao" class="form-control" id="situacao">
+                                <option value="Operacional">Operacional</option>
+                                <option value="Sem_Uso">Sem Uso</option>
+                                <option value="Sucateado">Sucateado</option>
+                            </select>
+                            <!-- Fim Select-->
                             <!-- Mensagem -->
                             <label for="informacoes">Informação</label>
                             <textarea class="form-control" id="msg_informacoes" name="info" rows="3"></textarea>
