@@ -116,6 +116,10 @@
 ---------
 */
     
+    .toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+    
     #sidebar-wrapper {
         min-height: 100vh;
         margin-left: -15rem;
@@ -137,10 +141,6 @@
     #page-content-wrapper {
         min-width: 100vw;
         /*  align-self: center;*/
-    }
-    
-    #wrapper.toggled #sidebar-wrapper {
-        margin-left: 0;
     }
     
     .color-text-list a,
@@ -369,7 +369,7 @@
     }
     /*Small devices (landscape phones, 576px and up)*/
     
-    @media (min-width: 576px) and (max-width: 767.98px) {
+    @media (min-width: 576px) and (max-width: 767.90px) {
         .alinhamento {
             align-self: center;
             text-align: center;
@@ -384,7 +384,13 @@
     }
     /*Medium devices (tablets, 768px and up)*/
     
-    @media (min-width: 768px) and (max-width: 991.98px) {
+    @media (min-width: 767.91px) {
+        #wrapper #sidebar-wrapper {
+            margin-left: 0;
+        }
+    }
+    
+    @media (min-width: 767.91px) and (max-width: 991.98px) {
         .padding_ex_sm {
             padding: 0px;
         }

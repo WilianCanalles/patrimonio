@@ -4,7 +4,7 @@ $exe_tabela = $_POST['tabela'];
 if ($exe_tabela == 'empresa') {
     $recebe_lista_itens = $result_tb_subEmp;
 } elseif ($exe_tabela == 'compra') {
-    $recebe_lista_itens = $result_tb_loc_aquisicao;
+    $recebe_lista_itens = $result_tb_fornecedor;
 } elseif ($exe_tabela == 'fabricante') {
     $recebe_lista_itens = $result_tb_fabricante;
 } elseif ($exe_tabela == 'modelo') {

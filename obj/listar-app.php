@@ -108,7 +108,7 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                         ?>
                                 <div class="form-group col-lg-4">
                                     <label class="input-group-text" for="codigo">Código</label>
-                                    <a id="teste" class="input-group-text inputgroup-bg"><?php echo $lista_itens['0']; ?></a>
+                                    <a id="codinput" class="input-group-text inputgroup-bg"><?php echo $lista_itens['0']; ?></a>
                                     <label class="input-group-text" for="tipo">Tipo</label>
                                     <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['1']; ?></a>
                                     <label class="input-group-text" for="modelo">Modelo</label>
@@ -194,7 +194,7 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
 
     <script src="JsBarcode.all.min.js"></script>
     <script>
-        var teste = document.getElementById('teste').innerText;
+        var teste = document.getElementById('codinput').innerText;
         // alert (teste.innerText);
         JsBarcode("#barcode", teste, {
             background: "#ccffff00",
