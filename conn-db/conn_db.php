@@ -35,7 +35,7 @@ try {
     `tb_fabricante`.`fabricante`,
     `num_serie`,
     a.`empresa`,
-    `tb_loc_aquisicao`.`loc_aquisicao`,
+    `tb_fornecedor`.`fornecedor`,
     `nota_fiscal`,
     `data_compra`,
     `informacoes`,
@@ -45,7 +45,7 @@ try {
     INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`codigo`
     INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`codigo`
     INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`codigo`
-    INNER JOIN `tb_loc_aquisicao` ON `tb_equipamento`.`loc_aquisicao` = `tb_loc_aquisicao`.`codigo`
+    INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`codigo`
     
     
     WHERE `tb_equipamento`.`emp_Principal` = $emp_principal";
@@ -67,13 +67,21 @@ try {
 
     $result_tb_fabricante = $statement->fetchall(PDO::FETCH_NUM);
     //==========================================================
-    $query_tb_loc_aquisicao = "SELECT * FROM tb_loc_aquisicao WHERE `emp_Principal` = $emp_principal";
+    $query_tb_fornecedor = "SELECT * FROM tb_fornecedor WHERE `emp_Principal` = $emp_principal";
 
-    $statement = $conexao->prepare($query_tb_loc_aquisicao);
+    $statement = $conexao->prepare($query_tb_fornecedor);
 
     $statement->execute();
 
-    $result_tb_loc_aquisicao = $statement->fetchall(PDO::FETCH_NUM);
+    $result_tb_fornecedor = $statement->fetchall(PDO::FETCH_NUM);
+    //==========================================================
+    $query_tb_local = "SELECT * FROM tb_local WHERE `emp_Principal` = $emp_principal";
+
+    $statement = $conexao->prepare($query_tb_local);
+
+    $statement->execute();
+
+    $result_tb_local = $statement->fetchall(PDO::FETCH_NUM);
     //==========================================================
     $query_tb_modelo_equipamento = "SELECT * FROM tb_modelo_equipamento WHERE `emp_Principal` = $emp_principal";
 
