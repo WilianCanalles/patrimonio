@@ -49,36 +49,36 @@ if (isset($_SESSION["sessiontime"])) {
 
 <body>
 
-	<div class="d-flex toggled" id="wrapper">
+	<div class="d-flex " id="wrapper">
 
 		<!-- Sidebar -->
 		<div class="bg-opacidade " id="sidebar-wrapper">
 			<div class="sidebar-heading color-text">Seja Bem Vindo, <?php echo $_SESSION['usuario']; ?></div>
 			<div class="sidebar-heading color-text">Menu</div>
 			<div class="list-group list-group-flush color-text-list">
-			<?php
-	
-	for ($i = 0; $i <= 5; $i++) {
-		if ($i == 0) {
-			$nome = 'Instruções';
-		} elseif ($i == 1) {
-			$nome = 'Listar Aparelhos';
-		} elseif ($i == 2) {
-			$nome = 'Gestao de Periférico';
-		} elseif ($i == 3) {
-			$nome = 'Cadastro de Itens';
-		} elseif ($i == 4) {
-			$nome = 'Cadastro de Equipamento';
-		} elseif ($i == 5) {
-			$nome = 'Alterar Senha';
-		}
-		$menu = $_GET['menu'];
-		$menuselect = "";
-		if ($i == $menu) 
-			$menuselect = "active";
-			?>
-		<a href="pag_inicial.php?menu=<?php echo ($i); ?>&pagina=0" class="<?php echo $menuselect; ?> list-group-item list-group-item-action"><?php echo ($nome); ?></a>
-	<?php  }?>
+				<?php
+
+				for ($i = 0; $i <= 5; $i++) {
+					if ($i == 0) {
+						$nome = 'Instruções';
+					} elseif ($i == 1) {
+						$nome = 'Listar Aparelhos';
+					} elseif ($i == 2) {
+						$nome = 'Gestao de Periférico';
+					} elseif ($i == 3) {
+						$nome = 'Cadastro de Itens';
+					} elseif ($i == 4) {
+						$nome = 'Cadastro de Equipamento';
+					} elseif ($i == 5) {
+						$nome = 'Alterar Senha';
+					}
+					$menu = $_GET['menu'];
+					$menuselect = "";
+					if ($i == $menu)
+						$menuselect = "active";
+				?>
+					<a href="pag_inicial.php?menu=<?php echo ($i); ?>&pagina=0" class="<?php echo $menuselect; ?> list-group-item list-group-item-action"><?php echo ($nome); ?></a>
+				<?php  } ?>
 				<a href="logout.php" class="list-group-item list-group-item-action">Sair</a>
 
 			</div>
@@ -90,12 +90,9 @@ if (isset($_SESSION["sessiontime"])) {
 		<div id="page-content-wrapper">
 
 			<nav class="navbar navbar-expand-md navbar-light">
-
-
 				<button class="navbar-toggler" type="button" id="menu-toggle">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-
 			</nav>
 
 			<!--HTML-->
