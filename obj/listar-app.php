@@ -70,6 +70,8 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
     <link href="../css/style.css" rel="stylesheet">
     <script type="text/javascript" src="../js/js_cadastro.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 
 </head>
 
@@ -160,20 +162,18 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                                     <span style="color: #6c757d !important" aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-
                             <div class="modal-body">
-                                <div id="dados">ESTAMOS IMPLEMENTANDO A FUNCAO</br> TEMPORARIAMENTE INDISPONIVEL</div>
+                                <div class="container">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" name="search_text" id="search_text" placeholder="Search by Customer Details" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
                             </div>
-                            <div class="modal-footer">
 
-                                <button class="btn btn-secondary" id="compra" onclick="buscar('compra')">Compra</button>
-                                <button class="btn btn-secondary" id="fabricante" onclick="buscar('fabricante')">Fabricante</button>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" id="empresa" onclick="buscar('empresa')">Empresa</button>
-                                <button class="btn btn-secondary" id="modelo" onclick="buscar('modelo')">Modelo</button>
-                                <button class="btn btn-secondary" id="tipo" onclick="buscar('tipo')">Tipo</button>
-                            </div>
+
                             <div class="modal-footer">
 
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -191,6 +191,35 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+
+            load_data();
+
+            function load_data(query) {
+                $.ajax({
+                    url: "../conn-db/conn_search.php",
+                    method: "POST",
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        $('#result').html(data);
+                    }
+                });
+            }
+            $('#search_text').keyup(function() {
+                var search = $(this).val();
+                if (search != '') {
+                    load_data(search);
+                } else {
+                    load_data();
+                }
+            });
+        });
+    </script>
 
     <script src="JsBarcode.all.min.js"></script>
     <script>

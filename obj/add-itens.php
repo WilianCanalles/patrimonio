@@ -129,7 +129,7 @@
 								<!-- Botao -->
 								<input class="btn " type="submit" value="Cadastrar Fornecedor"></input>
 								<!-- Fim Botao -->
-								
+
 							</div>
 
 						</div>
@@ -159,14 +159,14 @@
 								<!-- Fim Label -->
 								<!-- Input -->
 								<input type="hidden" name="tabela" value="local">
-								<input name="cad_local" class="form-control" name="cad_local" type="text" id="inputLocal" placeholder="Local Equip." required>
+								<input name="cad_local" class="form-control" name="cad_local" type="text" id="inputLocal" placeholder="Cadastro de Local" required>
 								<!-- Fim Input -->
 							</div>
 							<div class="col-md-4 form-group align-self-end">
 								<!-- Botao -->
-								<input class="btn " type="submit" value="Cadastrar Local Equip."></input>
+								<input class="btn " type="submit" value="Cadastrar Local"></input>
 								<!-- Fim Botao -->
-								
+
 							</div>
 
 						</div>
@@ -203,7 +203,7 @@
 								<!-- Botao -->
 								<input class="btn " type="submit" value="Cadastrar Modelo Equip."></input>
 								<!-- Fim Botao -->
-								
+
 							</div>
 
 						</div>
@@ -240,7 +240,7 @@
 								<!-- Botao -->
 								<input class="btn " type="submit" value="Cadastrar Tipo do Equip."></input>
 								<!-- Fim Botao -->
-								
+
 							</div>
 
 						</div>
@@ -270,9 +270,9 @@
 						<div id="dados"></div>
 					</div>
 					<div class="modal-footer">
-
-						<button class="btn btn-secondary" id="compra" onclick="buscar('compra')">Compra</button>
 						<button class="btn btn-secondary" id="fabricante" onclick="buscar('fabricante')">Fabricante</button>
+						<button class="btn btn-secondary" id="fornecedor" onclick="buscar('fornecedor')">Fornecedor</button>
+						<button class="btn btn-secondary" id="local" onclick="buscar('local')">Local</button>
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" id="empresa" onclick="buscar('empresa')">Empresa</button>
