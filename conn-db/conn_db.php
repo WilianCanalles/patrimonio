@@ -36,6 +36,7 @@ try {
     `num_serie`,
     a.`empresa`,
     `tb_fornecedor`.`fornecedor`,
+    `tb_local`.`local`,
     `nota_fiscal`,
     `data_compra`,
     `informacoes`,
@@ -46,7 +47,8 @@ try {
     INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`codigo`
     INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`codigo`
     INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`codigo`
-    
+    INNER JOIN `tb_local` ON `tb_equipamento`.`local` = `tb_local`.`codigo`
+    INNER JOIN `tb_empresa` AS b ON `tb_equipamento`.`emp_Principal` = b.`codigo`
     
     WHERE `tb_equipamento`.`emp_Principal` = $emp_principal";
 

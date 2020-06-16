@@ -36,15 +36,11 @@
 <body>
   <!-- Cabecalho -->
   <section>
-    <div class="container">
-      <div class="row  border-end">
-        <div class="col-md-12 " style="
-    text-align: center;">
-          <img src="img/logo.gif" alt="Logo" style=" width: 80%" >
 
-        </div>
-      </div>
-    </div>
+
+          <img src="img/logo.gif" alt="Logo" style=" width: 100%" >
+
+
   </section>
   <!-- Fim Cabecalho -->
 

@@ -21,26 +21,29 @@ try {
         `num_serie`,
         a.`empresa`,
         `tb_fornecedor`.`fornecedor`,
+        `tb_local`.`local`,
         `nota_fiscal`,
         `data_compra`,
-        `informacoes`
-    
+        `informacoes`,
+        `perifericos`
         FROM `tb_equipamento`
         INNER JOIN `tb_subempresa` AS a ON `tb_equipamento`.`empresa` = a.`codigo`
         INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`codigo`
         INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`codigo`
         INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`codigo`
         INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`codigo`
-        INNER JOIN `tb_subempresa` AS b ON `tb_equipamento`.`emp_Principal` = b.`codigo`
-        WHERE `tb_equipamento`.`codigo` LIKE '%" . $teste . "%' 
-        OR `tb_tipo_equipamento`.`tipo_equipamento` LIKE '%" . $teste . "%' 
-        OR `tb_modelo_equipamento`.`modelo_equipamento` LIKE '%" . $teste . "%' 
-        OR `tb_fabricante`.`fabricante` LIKE '%" . $teste . "%' 
-        OR `num_serie` LIKE '%" . $teste . "%' 
-        OR a.`empresa` LIKE '%" . $teste . "%'
-        OR `tb_fornecedor`.`fornecedor` LIKE '%" . $teste . "%'
-        OR `nota_fiscal` LIKE '%" . $teste . "%'
-        OR b.`empresa` LIKE '%" . $teste . "%'";
+        INNER JOIN `tb_local` ON `tb_equipamento`.`local` = `tb_local`.`codigo`
+        INNER JOIN `tb_empresa` AS b ON `tb_equipamento`.`emp_Principal` = b.`codigo`
+        WHERE (`tb_equipamento`.`codigo` LIKE '%" . $teste . "%' OR 
+        `tb_tipo_equipamento`.`tipo_equipamento` LIKE '%" . $teste . "%' OR  
+        `tb_modelo_equipamento`.`modelo_equipamento` LIKE '%" . $teste . "%' OR  
+        `tb_fabricante`.`fabricante` LIKE '%" . $teste . "%' OR 
+        a.`empresa` LIKE '%" . $teste . "%' OR
+        `num_serie` LIKE '%" . $teste . "%' OR 
+        `tb_fornecedor`.`fornecedor` LIKE '%" . $teste . "%' OR 
+        `tb_local`.`local` LIKE '%" . $teste . "%' OR 
+        `nota_fiscal` LIKE '%" . $teste . "%' OR 
+        `data_compra` LIKE '%" . $teste . "%') AND (`tb_equipamento`.`emp_Principal` = $emp_principal)";
 
         $statement = $conexao->prepare($query_tb_empresa);
 

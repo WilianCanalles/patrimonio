@@ -166,7 +166,7 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                                 <div class="container">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="text" name="search_text" id="search_text" placeholder="Search by Customer Details" class="form-control" />
+                                            <input type="text" name="search_text" id="search_text" placeholder="Search Advanced" class="form-control" />
                                         </div>
                                     </div>
                                     <div id="result"></div>
@@ -175,7 +175,7 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
 
 
                             <div class="modal-footer">
-
+                            <button type="button" class="btn btn-secondary">Scanner</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                             </div>
                         </div>
