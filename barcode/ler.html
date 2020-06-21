@@ -6,27 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> Ler Barcode </title>
+    <script src='../js/quagga.min.js'></script>
+
 </head>
 
 <body>
+    <div id="teste"></div>
 
-    <div id="resultado"></div>
-    <div id="camera"></div>
-
-    <script src="quagga.min.js"></script>
-
+    <span id="teste1"></span>
     <script>
-
         Quagga.init({
             inputStream: {
                 name: "Live",
                 type: "LiveStream",
-                target: document.querySelector('#camera')    // Or '#yourElement' (optional)
+                constraints: {
+                    width: 480,
+                    height: 200,
+                },
+                target: document.querySelector('#teste') // Or '#yourElement' (optional)
             },
             decoder: {
                 readers: ["code_128_reader"]
             }
-        }, function (err) {
+        }, function(err) {
             if (err) {
                 console.log(err);
                 return
@@ -34,14 +36,12 @@
             console.log("Initialization finished. Ready to start");
             Quagga.start();
         });
-
-        Quagga.onDetected(function (data) {
-            console.log(data.codeResult.code);
-            document.querySelector('#resultado').innerText = data.codeResult.code;
+        Quagga.onDetected(function(data) {
+            console.log(data);
+            document.querySelector('#teste1').innerHTML = data.codeResult.code;
+            Quagga.stop();
         });
-
     </script>
-
 </body>
 
 </html>
