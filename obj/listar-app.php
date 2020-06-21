@@ -175,7 +175,7 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
 
 
                             <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary">Scanner</button>
+                            <button type="button" class="btn btn-secondary" onclick="location.href = '../barcode/ler.html';">Scanner</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                             </div>
                         </div>
