@@ -351,6 +351,20 @@
         background-color: #928f8900!important;
         border: 1px solid #928f8900!important;
     }
+    /* Listar app - Scann*/
+    
+    #teste canvas.drawingBuffer {
+        width: 0;
+        height: 0;
+    }
+    
+    #teste video {
+        width: 98%;
+    }
+    
+    .ocultarvideo {
+        display: none;
+    }
     /*Media-Query*/
     /*Extra small devices (portrait phones, less than 576px)*/
     

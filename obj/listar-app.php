@@ -71,7 +71,7 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
     <script type="text/javascript" src="../js/js_cadastro.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
+    <script src='../js/quagga.min.js'></script>
 
 </head>
 
@@ -172,10 +172,21 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                                     <div id="result"></div>
                                 </div>
                             </div>
-
-
                             <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" onclick="location.href = '../barcode/ler.html';">Scanner</button>
+                                <button type="button" id="btn_on-off" class="btn btn-primary">
+                                    Scanner <span id="on-off" class="badge badge-danger">OFF</span>
+                                </button>
+                            </div>
+                            <div id="scan-video" class="modal-footer ocultarvideo">
+                                <div id="teste"></div>
+                            </div>
+                            <div class="modal-body">
+                                <div id="teste1"></div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <!-- <button type="button" class="btn btn-secondary" onclick="location.href = '../barcode/ler.html';"></button>-->
+
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                             </div>
                         </div>
@@ -192,6 +203,44 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
     </div>
     <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
 
+    <script>
+        $("#btn_on-off").click(function() {
+
+            $("#scan-video").toggleClass("ocultarvideo");
+            if ($('#on-off').hasClass('badge-success')) {
+                document.getElementById('on-off').innerText = "OFF";
+                $('#on-off').addClass('badge-danger');
+                $('#on-off').removeClass('badge-success');
+            } else if ($('#on-off').hasClass('badge-danger')) {
+                document.getElementById('on-off').innerText = "ON";
+                $('#on-off').addClass('badge-success');
+                $('#on-off').removeClass('badge-danger');
+            }
+        });
+    </script>
+
+    <script>
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                constraints: {
+
+                },
+                target: document.querySelector('#teste') // Or '#yourElement' (optional)
+            },
+            decoder: {
+                readers: ["code_128_reader"]
+            }
+        }, function(err) {
+            if (err) {
+                console.log(err);
+                return
+            }
+            console.log("Initialization finished. Ready to start");
+            Quagga.start();
+        });
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -227,7 +276,7 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
         // alert (teste.innerText);
         JsBarcode("#barcode", teste, {
             background: "#ccffff00",
-            height: 35,
+            height: 40,
             fontSize: 15,
             marginTop: 25,
             //text: " " codigo sem numero
