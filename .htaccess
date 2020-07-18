@@ -1,1 +1,15 @@
 php_flag output_buffering on
+# Redireciona de http para https
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
+</IfModule>
+# Redireciona domínio com o www para endereço com o www
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www.patrimonix.com.br [NC]
+RewriteRule ^(.*)$ https://patrimonix.com.br/$1 [L,R=301]
+</IfModule
+
+# Para mais configuracoes busque no site https://iconectado.com.br/redirecionamento-htaccess/

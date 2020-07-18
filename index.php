@@ -36,11 +36,7 @@
 <body>
   <!-- Cabecalho -->
   <section>
-
-
-          <img src="img/logo.gif" alt="Logo" style=" width: 100%" >
-
-
+    <img src="img/logo.gif" alt="Logo" style=" width: 100%">
   </section>
   <!-- Fim Cabecalho -->
 
