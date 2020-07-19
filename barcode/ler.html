@@ -13,8 +13,8 @@
 <body>
     <div id="teste"></div>
 
-    <span id="teste1"></span>
-    <button type="button" class="btn btn-secondary" onclick="location.href = '../aplicacao/pag_inicial.php?menu=1&pagina=0'">Voltar</button>
+    <div id="teste1"></div>
+
     <script>
         Quagga.init({
             inputStream: {
@@ -40,7 +40,7 @@
         Quagga.onDetected(function(data) {
             console.log(data);
             document.querySelector('#teste1').innerHTML = data.codeResult.code;
-            Quagga.stop();
+            //Quagga.stop();
         });
     </script>
 </body>

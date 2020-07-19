@@ -154,7 +154,7 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
         <div>
             <section>
                 <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div style="margin:auto;" class="modal-dialog modal-dialog-scrollable" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalScrollableTitle">Pesquisa Avançada</h5>
@@ -177,12 +177,12 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                                     Scanner <span id="on-off" class="badge badge-danger">OFF</span>
                                 </button>
                             </div>
-                            <div id="scan-video" class="modal-footer ocultarvideo">
+                            
+                            <div id="scan-video" class="modal-body  ocultarvideo">
+                                <?php
+                                    include("../barcode/ler.html");
+                                ?>
                                 <div id="teste"></div>
-                            </div>
-                            <div class="modal-body">
-                                <div id="teste1"></div>
-
                             </div>
                             <div class="modal-footer">
                                 <!-- <button type="button" class="btn btn-secondary" onclick="location.href = '../barcode/ler.html';"></button>-->
@@ -219,28 +219,6 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
         });
     </script>
 
-    <script>
-        Quagga.init({
-            inputStream: {
-                name: "Live",
-                type: "LiveStream",
-                constraints: {
-
-                },
-                target: document.querySelector('#teste') // Or '#yourElement' (optional)
-            },
-            decoder: {
-                readers: ["code_128_reader"]
-            }
-        }, function(err) {
-            if (err) {
-                console.log(err);
-                return
-            }
-            console.log("Initialization finished. Ready to start");
-            Quagga.start();
-        });
-    </script>
 
     <script>
         $(document).ready(function() {
@@ -276,7 +254,7 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
         // alert (teste.innerText);
         JsBarcode("#barcode", teste, {
             background: "#ccffff00",
-            height: 40,
+            height: 35,
             fontSize: 15,
             marginTop: 25,
             //text: " " codigo sem numero
