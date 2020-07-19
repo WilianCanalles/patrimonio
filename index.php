@@ -28,20 +28,24 @@
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <![endif]-->
-
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
   <title>Nosso Patrimonio</title>
   <link rel="icon" href="img/Phoenix-Patrimonial.png">
 </head>
 
 <body>
   <!-- Cabecalho -->
-  <section>
-    <img src="img/logo.gif" alt="Logo" style=" width: 100%">
-  </section>
+  <section id="section10" class="demo">
+  <img src="img/logo.gif" alt="Logo" style=" width: 100%">
+  <a href="#" id="section11"><span  id="section1"></span></a>
+</section>
+
   <!-- Fim Cabecalho -->
 
   <!-- barra de menu -->
+  <section class="ok">
   <?php include 'obj/navbar_menu.php' ?>
+  </section>
   <!-- fim barra de menu -->
 
 
@@ -190,5 +194,14 @@
 
   <!-- Fim rodape -->
 </body>
+
+<script>
+ $(function() {
+    $('#section10').click (function() {
+      $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
+      return false;
+    });
+  });
+</script>
 
 </html>
