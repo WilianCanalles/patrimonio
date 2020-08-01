@@ -250,6 +250,12 @@ ul.navbar-nav a {
     color: #929292;
 }
 
+.topo {
+    position: fixed;
+    bottom: 10%;
+    left: 47%;
+}
+
 
 /*Sign
 ----------
@@ -499,7 +505,7 @@ div.row.align-sign,
     background-color: brown;
 }
 
-.glyphicon-ok:before {
+.glyphicon-scl:before {
     content: "\e013"
 }
 
@@ -545,6 +551,9 @@ div.row.align-sign,
     .padding_ex_sm {
         padding: 0px;
     }
+    #section11 {
+        display: none;
+    }
 }
 
 
@@ -562,6 +571,9 @@ div.row.align-sign,
     .padding_ex_sm {
         padding: 0px;
     }
+    #section11 {
+        display: none;
+    }
 }
 
 
@@ -576,6 +588,9 @@ div.row.align-sign,
 @media (min-width: 767.91px) and (max-width: 991.98px) {
     .padding_ex_sm {
         padding: 0px;
+    }
+    #section11 {
+        display: none;
     }
 }
 
