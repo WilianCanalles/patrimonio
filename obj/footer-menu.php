@@ -85,7 +85,7 @@
                                 </a>
                             </div>
                             <div class="col-md-12 justificar">
-                                <span>Nosso Patrimonio</span>
+                                <span>PATRIMONIX</span>
                             </div>
                         </div>
                     </div>

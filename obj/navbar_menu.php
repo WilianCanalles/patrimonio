@@ -15,7 +15,7 @@
         <!-- Logo -->
         <a href="index.php" class="navbar-brand">
           <img src="img/Phoenix-Patrimonial.png" width="75">
-          <span class="">Nosso Patrimonio</span>
+          <span class="">PATRIMONIX</span>
         </a>
         <!-- Fim do logo -->
         <!-- Botao menu compactado -->

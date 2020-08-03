@@ -6,7 +6,7 @@
     <!-- Meta tags Obrigatórias -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Nosso Patrimonio</title>
+    <title>PATRIMONIX</title>
     <link rel="icon" href="../img/Phoenix-Patrimonial.png">
 
     <!-- Bootstrap core CSS -->

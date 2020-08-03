@@ -27,7 +27,7 @@ if (isset($_SESSION["sessiontime"])) {
 	<!-- Meta tags Obrigatórias -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Nosso Patrimonio</title>
+	<title>PATRIMONIX</title>
 	<link rel="icon" href="../img/Phoenix-Patrimonial.png">
 
 	<!-- Bootstrap core CSS -->
@@ -70,7 +70,7 @@ if (isset($_SESSION["sessiontime"])) {
 					} elseif ($i == 4) {
 						$nome = 'Cadastro de Equipamento';
 					} elseif ($i == 5) {
-						$nome = 'Alterar Senha';
+						$nome = 'Gestao de Usuario';
 					}
 					$menu = $_GET['menu'];
 					$menuselect = "";
@@ -125,7 +125,7 @@ if (isset($_SESSION["sessiontime"])) {
 			<?php
 			} elseif (isset($_GET['menu']) && $_GET['menu'] == 5) { ?>
 				<div>
-					<?php include '../obj/trocar-senha.php'; ?>
+					<?php include '../obj/gestao_users.php'; ?>
 				</div>
 			<?php
 			} ?>
