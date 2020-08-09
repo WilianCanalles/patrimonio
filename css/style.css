@@ -10,7 +10,7 @@ body {
     background-size: cover;
 }
 
-body::-webkit-scrollbar {
+body::-webkit-scrollbar{
     width: 0px;
 }
 
@@ -276,7 +276,11 @@ div.row.align-sign,
 /*Pag inicial da ferramenta
 ---------
 */
+.modal-dialog{
 
+    margin: auto !important;
+
+}
 .toggled #sidebar-wrapper {
     margin-left: 0;
 }
@@ -491,7 +495,6 @@ div.row.align-sign,
 .modal-header:after {
     clear: both
 }
-
 
 /*Menu List Dropdown*/
 
