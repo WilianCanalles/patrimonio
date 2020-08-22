@@ -12,18 +12,17 @@
 </head>
 
 <body>
- 
-    <div id="teste"></div>
 
-    <div id="teste1"></div>
+
+
 
     <script>
 
         $(function myteste() {
 
             $('#btn_on-off').click(function () {
-                if (document.getElementById('value').innerText == "0") {
-                    document.getElementById('value').innerText = "1";
+                if (document.getElementById('value').value == "0") {
+                    document.getElementById('value').value = "1";
                     Quagga.init({
                         inputStream: {
                             name: "Live",
@@ -49,8 +48,8 @@
 
                         Quagga.stop();
 
-                } else if (document.getElementById('value').innerText == "1") {
-                    document.getElementById('value').innerText = "0";
+                } else if (document.getElementById('value').value == "1") {
+                    document.getElementById('value').value = "0";
                                     
                     Quagga.stop();
                  
@@ -61,16 +60,6 @@
         });
 
     </script>
-    <script>
-        window.onload = function() {
-        if(document.getElementById('value').innerText == "1") {
-                document.getElementById('value').innerText = "0";
-                                
-                Quagga.stop();
-             
-            };
-}
-</script>
 </body>
 
 </html>
