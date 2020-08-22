@@ -45,7 +45,12 @@
                             console.log("Initialization finished. Ready to start");
                             Quagga.start();
                         });
+                        Quagga.onDetected(function (data) {
 
+console.log(data);
+document.querySelector('#teste1').innerHTML = data.codeResult.code;
+//Quagga.stop();
+});
                         Quagga.stop();
 
                 } else if (document.getElementById('value').value == "1") {
