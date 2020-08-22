@@ -13,7 +13,7 @@ try {
         "$pass"
     );
     if (isset($_POST["query"])) {
-        $teste = $_POST["query"];
+        $query_pesquisa = $_POST["query"];
         $query_tb_empresa = "SELECT `tb_equipamento`.`codigo`,
         `tb_tipo_equipamento`.`tipo_equipamento`, 
         `tb_modelo_equipamento`.`modelo_equipamento`, 
@@ -24,8 +24,8 @@ try {
         `tb_local`.`local`,
         `nota_fiscal`,
         `data_compra`,
-        `informacoes`,
-        `perifericos`
+        `situacao`,
+        `informacoes`
         FROM `tb_equipamento`
         INNER JOIN `tb_subempresa` AS a ON `tb_equipamento`.`empresa` = a.`codigo`
         INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`codigo`
@@ -34,16 +34,18 @@ try {
         INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`codigo`
         INNER JOIN `tb_local` ON `tb_equipamento`.`local` = `tb_local`.`codigo`
         INNER JOIN `tb_empresa` AS b ON `tb_equipamento`.`emp_Principal` = b.`codigo`
-        WHERE (`tb_equipamento`.`codigo` LIKE '%" . $teste . "%' OR 
-        `tb_tipo_equipamento`.`tipo_equipamento` LIKE '%" . $teste . "%' OR  
-        `tb_modelo_equipamento`.`modelo_equipamento` LIKE '%" . $teste . "%' OR  
-        `tb_fabricante`.`fabricante` LIKE '%" . $teste . "%' OR 
-        a.`empresa` LIKE '%" . $teste . "%' OR
-        `num_serie` LIKE '%" . $teste . "%' OR 
-        `tb_fornecedor`.`fornecedor` LIKE '%" . $teste . "%' OR 
-        `tb_local`.`local` LIKE '%" . $teste . "%' OR 
-        `nota_fiscal` LIKE '%" . $teste . "%' OR 
-        `data_compra` LIKE '%" . $teste . "%') AND (`tb_equipamento`.`emp_Principal` = $emp_principal)";
+        WHERE (`tb_equipamento`.`codigo` LIKE '%" . $query_pesquisa . "%' OR 
+        `tb_tipo_equipamento`.`tipo_equipamento` LIKE '%" . $query_pesquisa . "%' OR  
+        `tb_modelo_equipamento`.`modelo_equipamento` LIKE '%" . $query_pesquisa . "%' OR  
+        `tb_fabricante`.`fabricante` LIKE '%" . $query_pesquisa . "%' OR 
+        a.`empresa` LIKE '%" . $query_pesquisa . "%' OR
+        `num_serie` LIKE '%" . $query_pesquisa . "%' OR 
+        `tb_fornecedor`.`fornecedor` LIKE '%" . $query_pesquisa . "%' OR 
+        `tb_local`.`local` LIKE '%" . $query_pesquisa . "%' OR 
+        `nota_fiscal` LIKE '%" . $query_pesquisa . "%' OR 
+        `data_compra` LIKE '%" . $query_pesquisa . "%' OR
+        `situacao` LIKE '%" . $query_pesquisa . "%' OR
+        `informacoes` LIKE '%" . $query_pesquisa . "%') AND (`tb_equipamento`.`emp_Principal` = $emp_principal)";
 
         $statement = $conexao->prepare($query_tb_empresa);
 
@@ -60,7 +62,18 @@ try {
             <?php
             foreach ($result_tb_empresa as $lista_itens) {
             ?>
-                <p><?php echo 'Código&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[0] . '</br>Tipo&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[1] . '</br>Modelo&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[2] . '</br>Fabricante&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[3] . '</br>Nº Serie&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[4] . '</br>Empresa&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[5] . '</br>fornecedor&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[6] . '</br>Nota Fiscal&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[7] . '</br>Data&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[8] . '</br>Informações&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[9] ?>
+                <p><?php echo 'Código&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[0] . '</br>
+                Tipo&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[1] . '</br>
+                Modelo&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[2] . '</br>
+                Fabricante&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[3] . '</br>
+                Nº Serie&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[4] . '</br>
+                Empresa&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[5] . '</br>
+                Fornecedor&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[6] . '</br>
+                Local&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[7] . '</br>
+                Nota Fiscal&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[8] . '</br>
+                Data&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[9] . '</br>
+                Situação&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[10] . '</br>
+                Informações&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[11] ?>
                 </p>
                 <p><?php echo "-------------------------------------------------" ?> </p>
 
