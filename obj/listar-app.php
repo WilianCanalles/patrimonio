@@ -173,7 +173,9 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" id="btn_on-off" class="btn btn-primary">
+                                <input type="hidden" id="value" value="0">
+                          
+                                <button type="button" onclick=" myteste()" id="btn_on-off" class="btn btn-primary">
                                     Scanner <span id="on-off" class="badge badge-danger">OFF</span>
                                 </button>
                             </div>
@@ -182,7 +184,8 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                                 <?php
                                     include("../barcode/ler.html");
                                 ?>
-                                <div id="teste"></div>
+                                    <div id="teste1"></div>
+                                <div id="teste" style="text-align: center;"></div>
                             </div>
                             <div class="modal-footer">
                                 <!-- <button type="button" class="btn btn-secondary" onclick="location.href = '../barcode/ler.html';"></button>-->
