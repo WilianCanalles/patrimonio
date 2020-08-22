@@ -154,7 +154,7 @@
 							</div>
 
 							<div class="btn-middle-up">
-								<input class="btn btn-lg btn-primary" type="submit" value="Cadastrar"></input>
+								<input class="btn btn-lg btn-primary" disabled type="submit" value="Cadastrar"></input>
 							</div>
 							<!-- Fim botão -->
 
