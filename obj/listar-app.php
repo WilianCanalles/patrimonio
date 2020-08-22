@@ -173,7 +173,8 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" id="btn_on-off" class="btn btn-primary">
+                            <label id="value">0</label>
+                                <button type="button" onclick=" myteste()" id="btn_on-off" class="btn btn-primary">
                                     Scanner <span id="on-off" class="badge badge-danger">OFF</span>
                                 </button>
                             </div>

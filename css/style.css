@@ -91,7 +91,7 @@ section {
 }
 
 #section10 a {
-    padding-top: 60px;
+    padding-top: 100px;
 }
 
 #section10 a span {
@@ -182,8 +182,9 @@ div.col-md-6.justificar {
 }
 
 .navbar-light .navbar-nav .nav-link {
-    color: rgba(20, 110, 125, 0.6)!important;
+    color: rgba(229, 125, 89)!important;
     font-weight: bold!important;
+    font-size: larger!important;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {

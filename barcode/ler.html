@@ -6,43 +6,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PATRIMONIX</title>
-    <script src='../js/quagga.min.js'></script>
-
+    <script src='quagga.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
+ 
     <div id="teste"></div>
 
     <div id="teste1"></div>
 
     <script>
-        Quagga.init({
-            inputStream: {
-                name: "Live",
-                type: "LiveStream",
-                constraints: {
-                    width: 480,
-                    height: 200,
-                },
-                target: document.querySelector('#teste') // Or '#yourElement' (optional)
-            },
-            decoder: {
-                readers: ["code_128_reader"]
-            }
-        }, function(err) {
-            if (err) {
-                console.log(err);
-                return
-            }
-            console.log("Initialization finished. Ready to start");
-            Quagga.start();
+
+        $(function myteste() {
+
+            $('#btn_on-off').click(function () {
+                if (document.getElementById('value').innerText == "0") {
+                    document.getElementById('value').innerText = "1";
+                    Quagga.init({
+                        inputStream: {
+                            name: "Live",
+                            type: "LiveStream",
+                            target: document.querySelector('#teste')    // Or '#yourElement' (optional)
+                        },
+
+
+                        decoder: {
+                            readers: [
+                                'code_128_reader'
+                            ],
+                        }
+                    },
+                        function (err) {
+                            if (err) {
+                                console.log(err);
+                                return
+                            }
+                            console.log("Initialization finished. Ready to start");
+                            Quagga.start();
+                        });
+
+                        Quagga.stop();
+
+                } else if (document.getElementById('value').innerText == "1") {
+                    document.getElementById('value').innerText = "0";
+                                    
+                    Quagga.stop();
+                 
+                };
+
+            });
+        
         });
-        Quagga.onDetected(function(data) {
-            console.log(data);
-            document.querySelector('#teste1').innerHTML = data.codeResult.code;
-            //Quagga.stop();
-        });
+
     </script>
+    <script>
+        window.onload = function() {
+        if(document.getElementById('value').innerText == "1") {
+                document.getElementById('value').innerText = "0";
+                                
+                Quagga.stop();
+             
+            };
+}
+</script>
 </body>
 
 </html>
