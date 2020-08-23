@@ -73,11 +73,7 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src='../js/quagga.min.js'></script>
 
-    <!-- FontAwesome -->
 
-    <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
-    <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
-    <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
 </head>
 
 <body>
@@ -203,14 +199,14 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
 
 
                 <div style="text-align: center;">
-                    <input type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable" value="Avançada &#x1f50d;"></input>
+                    <input type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable" style="margin-bottom: 15px" value="Avançada &#x1f50d;"></input>
                 </div>
                 <div style="text-align: center;">
 
 
                 </div>
             </section>
-            <section>
+            <section style="position: absolute; left: 93.5%; bottom: 5px;">
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable-barcode" style="white-space: normal; padding: 0;border-radius: 1.25rem;">
                     <svg width="1em" style="width: auto; height: 50px; color: black;" height="1em" viewBox="0 0 16 16" class="bi bi-upc" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -296,8 +292,8 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
         // alert (teste.innerText);
         JsBarcode("#barcode", teste, {
             background: "#ccffff00",
-            width:3,
-            
+            width: 3,
+
             fontSize: 15,
             marginTop: 25,
             //text: " " codigo sem numero

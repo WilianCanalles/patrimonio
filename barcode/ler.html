@@ -48,13 +48,14 @@
                     Quagga.onDetected(function (data) {
 
                         console.log(data);
-                        document.querySelector('#search_text').value = data.codeResult.code;
+                        var teste = data.codeResult.code;
+                        document.querySelector('#search_text').value = teste;
 
                             $.ajax({
                                 url: "../conn-db/conn_search.php",
                                 method: "POST",
                                 data: {
-                                    query: data.codeResult.code
+                                    query: teste
                                 },
                                 success: function (data) {
                                     $('#result').html(data);
@@ -77,6 +78,7 @@
         });
 
     </script>
+    
 </body>
 
 </html>
