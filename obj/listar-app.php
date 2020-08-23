@@ -208,7 +208,7 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
             </section>
             <section>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable-barcode" style="white-space: normal; padding: 0;border-radius: 1.25rem; position: fixed; left: 93.5%; bottom: 5px;">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable-barcode" style="white-space: normal; padding: 0;border-radius: 1.25rem; position: fixed; right: 0.5em; bottom: 0.5em;">
                     <svg width="1em" style="width: auto; height: 50px; color: black;" height="1em" viewBox="0 0 16 16" class="bi bi-upc" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
                     </svg>
@@ -292,8 +292,8 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
         // alert (teste.innerText);
         JsBarcode("#barcode", teste, {
             background: "#ccffff00",
-            width: 3,
-
+            width: 4,
+             
             fontSize: 15,
             marginTop: 25,
             //text: " " codigo sem numero
