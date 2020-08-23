@@ -27,7 +27,7 @@
                         inputStream: {
                             name: "Live",
                             type: "LiveStream",
-                            target: document.querySelector('#teste')    // Or '#yourElement' (optional)
+                            target: document.querySelector('#video_scan')    // Or '#yourElement' (optional)
                         },
 
 
@@ -45,23 +45,35 @@
                             console.log("Initialization finished. Ready to start");
                             Quagga.start();
                         });
-                        Quagga.onDetected(function (data) {
+                    Quagga.onDetected(function (data) {
 
-console.log(data);
-document.querySelector('#teste1').innerHTML = data.codeResult.code;
-//Quagga.stop();
-});
-                        Quagga.stop();
+                        console.log(data);
+                        document.querySelector('#search_text').value = data.codeResult.code;
+
+                            $.ajax({
+                                url: "../conn-db/conn_search.php",
+                                method: "POST",
+                                data: {
+                                    query: data.codeResult.code
+                                },
+                                success: function (data) {
+                                    $('#result').html(data);
+                                }
+                            });
+                        
+                        //Quagga.stop();
+                    });
+                    Quagga.stop();
 
                 } else if (document.getElementById('value').value == "1") {
                     document.getElementById('value').value = "0";
-                                    
+
                     Quagga.stop();
-                 
+
                 };
 
             });
-        
+
         });
 
     </script>

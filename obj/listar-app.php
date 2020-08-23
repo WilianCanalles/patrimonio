@@ -73,6 +73,11 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src='../js/quagga.min.js'></script>
 
+    <!-- FontAwesome -->
+
+    <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
 </head>
 
 <body>
@@ -166,7 +171,7 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                                 <div class="container">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="text" name="search_text" id="search_text" placeholder="Search Advanced" class="form-control" />
+                                            <input type="text" name="search_text" id="search_text" placeholder="Pesquisa Avançada" class="form-control" />
                                         </div>
                                     </div>
                                     <div id="result"></div>
@@ -174,18 +179,18 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                             </div>
                             <div class="modal-footer">
                                 <input type="hidden" id="value" value="0">
-                          
-                                <button type="button" onclick=" myteste()" id="btn_on-off" class="btn btn-primary">
+
+                                <button type="button" id="btn_on-off" class="btn btn-primary">
                                     Scanner <span id="on-off" class="badge badge-danger">OFF</span>
                                 </button>
                             </div>
-                            
+
                             <div id="scan-video" class="modal-body  ocultarvideo">
                                 <?php
-                                    include("../barcode/ler.html");
+                                include("../barcode/ler.html");
                                 ?>
-                                    <div id="teste1"></div>
-                                <div id="teste" style="text-align: center;"></div>
+
+                                <div id="video_scan" style="text-align: center;"></div>
                             </div>
                             <div class="modal-footer">
                                 <!-- <button type="button" class="btn btn-secondary" onclick="location.href = '../barcode/ler.html';"></button>-->
@@ -196,12 +201,43 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                     </div>
                 </div>
 
+
                 <div style="text-align: center;">
                     <input type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable" value="Avançada &#x1f50d;"></input>
-                    <svg id="barcode"></svg>
+                </div>
+                <div style="text-align: center;">
+
+
                 </div>
             </section>
+            <section>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable-barcode" style="white-space: normal; padding: 0;border-radius: 1.25rem;">
+                    <svg width="1em" style="width: auto; height: 50px; color: black;" height="1em" viewBox="0 0 16 16" class="bi bi-upc" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+                    </svg>
+                </button>
 
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalScrollable-barcode" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">Barcode</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="align-self: center;">
+                                <svg id="barcode"></svg>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
@@ -241,12 +277,15 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                 });
             }
             $('#search_text').keyup(function() {
+
                 var search = $(this).val();
                 if (search != '') {
                     load_data(search);
                 } else {
                     load_data();
                 }
+
+
             });
         });
     </script>
@@ -257,7 +296,8 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
         // alert (teste.innerText);
         JsBarcode("#barcode", teste, {
             background: "#ccffff00",
-            height: 35,
+            width:3,
+            
             fontSize: 15,
             marginTop: 25,
             //text: " " codigo sem numero

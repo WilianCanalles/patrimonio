@@ -524,12 +524,12 @@ div.row.align-sign,
 
 /* Listar app - Scann*/
 
-#teste canvas.drawingBuffer {
+#video_scan canvas.drawingBuffer {
     width: 0;
     height: 0;
 }
 
-#teste video {
+#video_scan video {
     width: 70%;
 }
 
