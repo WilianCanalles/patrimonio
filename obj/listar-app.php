@@ -73,6 +73,18 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src='../js/quagga.min.js'></script>
 
+    <style>
+	::-webkit-scrollbar {
+		width: 2px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: #25252538;
+	}
+
+
+
+</style>
 
 </head>
 
