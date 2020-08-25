@@ -464,6 +464,11 @@ div.row.align-sign,
     overflow: scroll
 }
 
+/*Gestao usuario*/
+
+.usr_btn{
+    width: 30px;
+}
 @media (min-width:768px) {
     .modal-dialog {
         width: 600px;

@@ -62,27 +62,14 @@
 									</div>
 									<div class="modal-body">
 										<div id="userscroll" style="overflow: auto; ">
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
-											<label class="input-group-text">USUARIO 1</label>
+											<div>
+												<img src="../img/ico_user2.png" alt="icone"> 
+											</div>
+											<div>
+											<img class="usr_btn" src="../img/trash1.png" alt="lixeira">
+											<img class="usr_btn" src="../img/key.png" alt="chave">
+											<img class="usr_btn" src="../img/pen.png" alt="lapis">
+											</div>
 
 										</div>
 									</div>
