@@ -60,17 +60,62 @@
 											<span style="color: #6c757d !important" aria-hidden="true">&times;</span>
 										</button>
 									</div>
-									<div class="modal-body">
-										<div id="userscroll" style="overflow: auto; ">
-											<div>
-												<img src="../img/ico_user2.png" alt="icone"> 
+									<div class="modal-body container">
+										<div class="row" id="userscroll" style="overflow: auto; text-align: center">
+											<div class="col-sm-4">
+												<div>
+													<img src="../img/ico_user2.png" alt="icone">
+												</div>
+												<div>
+													<div>
+														<label>Nome_User</label>
+													</div>
+													<div>
+														<label>Nivel_USer</label>
+													</div>
+												</div>
+												<div>
+													<img class="usr_btn" src="../img/key.png" alt="chave">
+													<img class="usr_btn" src="../img/pen.png" alt="lapis">
+													<img class="usr_btn" src="../img/trash1.png" alt="lixeira">
+												</div>
 											</div>
-											<div>
-											<img class="usr_btn" src="../img/trash1.png" alt="lixeira">
-											<img class="usr_btn" src="../img/key.png" alt="chave">
-											<img class="usr_btn" src="../img/pen.png" alt="lapis">
+											<div class="col-sm-4">
+												<div>
+													<img src="../img/ico_user2.png" alt="icone">
+												</div>
+												<div>
+													<div>
+														<label>Nome_User</label>
+													</div>
+													<div>
+														<label>Nivel_USer</label>
+													</div>
+												</div>
+												<div>
+													<img class="usr_btn" src="../img/key.png" alt="chave">
+													<img class="usr_btn" src="../img/pen.png" alt="lapis">
+													<img class="usr_btn" src="../img/trash1.png" alt="lixeira">
+												</div>
 											</div>
-
+											<div class="col-sm-4">
+												<div>
+													<img src="../img/ico_user2.png" alt="icone">
+												</div>
+												<div>
+													<div>
+														<label>Nome_User</label>
+													</div>
+													<div>
+														<label>Nivel_USer</label>
+													</div>
+												</div>
+												<div>
+													<img class="usr_btn" src="../img/key.png" alt="chave">
+													<img class="usr_btn" src="../img/pen.png" alt="lapis">
+													<img class="usr_btn" src="../img/trash1.png" alt="lixeira">
+												</div>
+											</div>
 										</div>
 									</div>
 									<div class="modal-footer">
