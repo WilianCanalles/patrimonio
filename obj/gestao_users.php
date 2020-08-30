@@ -27,11 +27,70 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-<script>
-		function nivel($idd) {
-		alert($idd);
-	}
-</script>
+	<script>
+		function nivel(id) {
+			$(document).ready(function() {
+
+
+
+				$.ajax({
+					url: "../conn-db/conn_user_conf.php",
+					method: "POST",
+					data: {
+						verifica: 'nivel',
+						user: id
+					},
+					success: function(data) {
+						$('#result').html(data);
+					}
+				});
+
+			});
+
+		}
+
+		function editar(id) {
+			$(document).ready(function() {
+
+
+
+				$.ajax({
+					url: "../conn-db/conn_user_conf.php",
+					method: "POST",
+					data: {
+						verifica: 'editar',
+						user: id
+					},
+					success: function(data) {
+						$('#result').html(data);
+					}
+				});
+
+			});
+
+		}
+
+		function excluir(id) {
+			$(document).ready(function() {
+
+
+
+				$.ajax({
+					url: "../conn-db/conn_user_conf.php",
+					method: "POST",
+					data: {
+						verifica: 'excluir',
+						user: id
+					},
+					success: function(data) {
+						$('#result').html(data);
+					}
+				});
+
+			});
+
+		}
+	</script>
 
 </head>
 <style>
@@ -137,11 +196,12 @@
 															</div>
 														</div>
 													</div>
+													<div id="result"></div>
 													<div>
-														<?php $teste = $line[1];?>
+														<?php $teste = $line[1]; ?>
 														<img class="usr_btn" src="../img/key.png" alt="chave" onclick="nivel('<?php echo $line[4] ?>')">
-														<img class="usr_btn" src="../img/pen.png" alt="lapis">
-														<img class="usr_btn" src="../img/trash1.png" alt="lixeira">
+														<img class="usr_btn" src="../img/pen.png" alt="lapis" onclick="editar('<?php echo $line[4] ?>')">
+														<img class="usr_btn" src="../img/trash1.png" alt="lixeira" onclick="excluir('<?php echo $line[4] ?>')">
 													</div>
 												</div>
 											<?php } ?>
@@ -231,7 +291,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
-
 	$().ready(function() {
 
 		$('#msg_alert').delay(3000).fadeOut(400); // "foo" é o id do elemento que seja manipular.
