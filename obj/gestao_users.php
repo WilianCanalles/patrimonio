@@ -25,8 +25,13 @@
 	<!-- Custom styles for this template -->
 	<link href="../css/style.css" rel="stylesheet">
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-
+<script>
+		function nivel($idd) {
+		alert($idd);
+	}
+</script>
 
 </head>
 <style>
@@ -49,6 +54,46 @@
 	<section>
 		<div class="container">
 			<div class="row">
+
+				<!-- Mensagem de usuario existente -->
+				<?php
+				if (isset($_SESSION['add_user'])) :
+				?>
+					<div id="msg_alert" class="bg-success" style="text-align: center; padding:15px 0px; position: absolute; width: 100%; z-index: 100;">
+						<span style="font-weight: bold">Usuario cadastrado com Sucesso.</span>
+					</div>
+				<?php
+				endif;
+				unset($_SESSION['add_user']);
+				?>
+				<!-- Fim Mensagem de usuario existente -->
+
+				<!-- Mensagem de usuario existente -->
+				<?php
+				if (isset($_SESSION['err_add_user'])) :
+				?>
+					<div id="msg_alert" class="bg-danger" style="text-align: center; padding:15px 0px; position: absolute; width: 100%; z-index: 100;">
+						<span style="font-weight: bold">Ocorreu um erro ao criar usuario.</br>Favor entre em contato com o desenvolvedor</span>
+					</div>
+				<?php
+				endif;
+				unset($_SESSION['err_add_user']);
+				?>
+				<!-- Fim Mensagem de usuario existente -->
+
+				<!-- Mensagem de usuario existente -->
+				<?php
+				if (isset($_SESSION['have_user'])) :
+				?>
+					<div id="msg_alert" class="bg-danger" style="text-align: center; padding:15px 0px; position: absolute; width: 100%; z-index: 100;">
+						<span style="font-weight: bold">Usuario e/ou E-mail ja possui cadastro.</br>Verifique os dados inseridos e tente novamente</span>
+					</div>
+				<?php
+				endif;
+				unset($_SESSION['have_user']);
+				?>
+				<!-- Fim Mensagem de usuario existente -->
+
 				<div class="col-md-5" style="align-self: center;">
 					<section>
 						<div class="modal fade" id="exampleModalScrollable1" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -62,60 +107,45 @@
 									</div>
 									<div class="modal-body container">
 										<div class="row" id="userscroll" style="overflow: auto; text-align: center">
-											<div class="col-sm-4">
-												<div>
-													<img src="../img/ico_user2.png" alt="icone">
-												</div>
-												<div>
+											<?php include '../conn-db/conn_db.php'; ?>
+											<?php foreach ($result_tb_user_equipamento as $line) {
+												if ($line[6] == 0) {
+													$nivel = "Operador";
+												} elseif ($line[6] == 1) {
+													$nivel = "Master";
+												} ?>
+												<div class="col-sm-4" style="text-align: -webkit-center;">
 													<div>
-														<label>Nome_User</label>
+														<img src="../img/ico_user2.png" alt="icone">
 													</div>
 													<div>
-														<label>Nivel_USer</label>
-													</div>
-												</div>
-												<div>
-													<img class="usr_btn" src="../img/key.png" alt="chave">
-													<img class="usr_btn" src="../img/pen.png" alt="lapis">
-													<img class="usr_btn" src="../img/trash1.png" alt="lixeira">
-												</div>
-											</div>
-											<div class="col-sm-4">
-												<div>
-													<img src="../img/ico_user2.png" alt="icone">
-												</div>
-												<div>
-													<div>
-														<label>Nome_User</label>
-													</div>
-													<div>
-														<label>Nivel_USer</label>
-													</div>
-												</div>
-												<div>
-													<img class="usr_btn" src="../img/key.png" alt="chave">
-													<img class="usr_btn" src="../img/pen.png" alt="lapis">
-													<img class="usr_btn" src="../img/trash1.png" alt="lixeira">
-												</div>
-											</div>
-											<div class="col-sm-4">
-												<div>
-													<img src="../img/ico_user2.png" alt="icone">
-												</div>
-												<div>
-													<div>
-														<label>Nome_User</label>
+														<div class="input-group" style="display: block!important;">
+															<div>
+																<span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Nome</span>
+
+																<span class="form-control" style="color: black!important; height: auto;"><?php echo $line[1] . "\n" . $line[2] ?></span>
+															</div>
+															<div>
+																<span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Usuario</span>
+
+																<span class="form-control" style="color: black!important; height: auto;"><?php echo $line[4] ?></span>
+															</div>
+															<div>
+																<span id="<?php echo $line[4] ?>" class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Nivel</span>
+
+																<span class="form-control" style="color: black!important; height: auto;"><?php echo $nivel ?></span>
+															</div>
+														</div>
 													</div>
 													<div>
-														<label>Nivel_USer</label>
+														<?php $teste = $line[1];?>
+														<img class="usr_btn" src="../img/key.png" alt="chave" onclick="nivel('<?php echo $line[4] ?>')">
+														<img class="usr_btn" src="../img/pen.png" alt="lapis">
+														<img class="usr_btn" src="../img/trash1.png" alt="lixeira">
 													</div>
 												</div>
-												<div>
-													<img class="usr_btn" src="../img/key.png" alt="chave">
-													<img class="usr_btn" src="../img/pen.png" alt="lapis">
-													<img class="usr_btn" src="../img/trash1.png" alt="lixeira">
-												</div>
-											</div>
+											<?php } ?>
+
 										</div>
 									</div>
 									<div class="modal-footer">
@@ -139,7 +169,7 @@
 				<div class="col-md-7 ">
 					<div>
 						<label class="h2" style="font-weight: 350;">Cadastro de Usuarios</label>
-						<form method="post" action="conn-db/conn_new_user.php" style="align-self: center;">
+						<form method="post" action="../conn-db/conn_new_user.php" style="align-self: center;">
 							<div class="form-group">
 								<!-- Label -->
 								<label for="inputEmail">Nome</label>
@@ -184,25 +214,11 @@
 								<input class="form-control" name="senha" type="text" id="inputSenha" placeholder="Senha" required autofocus="">
 								<!-- Fim input-->
 							</div>
-
+							<input type="hidden" name="new_user" value="adicao">
 							<div class="btn-middle-up">
-								<input class="btn btn-lg btn-primary" disabled type="submit" value="Cadastrar"></input>
+								<input class="btn btn-lg btn-primary" type="submit" value="Cadastrar"></input>
 							</div>
 							<!-- Fim botão -->
-
-							<!-- Mensagem de Fim de sessao -->
-							<?php
-							if (isset($_SESSION['have_user'])) :
-							?>
-								<div class="bg-danger" style="text-align: center; margin-top: 10px; padding:15px 0px">
-									<span style="font-weight: bold">Usuario e/ou E-mail ja possui cadastro.</br>Verifique os dados inseridos e tente novamente</span>
-								</div>
-							<?php
-							endif;
-							unset($_SESSION['have_user']);
-							?>
-							<!-- Fim Mensagem de Fim de sessao -->
-
 						</form>
 					</div>
 				</div>
@@ -212,3 +228,13 @@
 </body>
 
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+
+	$().ready(function() {
+
+		$('#msg_alert').delay(3000).fadeOut(400); // "foo" é o id do elemento que seja manipular.
+		// O valor é representado em milisegundos.
+	});
+</script>

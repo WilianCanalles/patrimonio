@@ -59,7 +59,7 @@ try {
     $result_tb_equipamento = $statement->fetchall(PDO::FETCH_NUM);
     $num_total = $statement->rowCount();
 
-    
+
     //==========================================================
     $query_tb_fabricante = "SELECT * FROM tb_fabricante WHERE `emp_Principal` = $emp_principal";
 
@@ -100,6 +100,14 @@ try {
     $statement->execute();
 
     $result_tb_tipo_equipamento = $statement->fetchall(PDO::FETCH_NUM);
+    //==========================================================
+    $query_tb_user_equipamento = "SELECT * FROM tb_user WHERE `emp_Principal` = $emp_principal";
+
+    $statement = $conexao->prepare($query_tb_user_equipamento);
+
+    $statement->execute();
+
+    $result_tb_user_equipamento = $statement->fetchall(PDO::FETCH_NUM);
     //==========================================================
 } catch (PDOException $e) {
     echo '<p>' . $e->getMessage() . '</p>';

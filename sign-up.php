@@ -99,7 +99,7 @@ session_start();
                         </div>
                     </div>
                 </div>
-
+                <input type="hidden" name="new_user" value="novo">
                 <div class="btn-middle-up">
                     <input class="btn btn-lg btn-primary" type="submit" value="Inscrever-se"></input>
                 </div>
