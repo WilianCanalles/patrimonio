@@ -41,7 +41,8 @@
 						user: id
 					},
 					success: function(data) {
-						$('#result').html(data);
+						//$('#result').html(data);
+						location.reload();
 					}
 				});
 
@@ -62,7 +63,7 @@
 						user: id
 					},
 					success: function(data) {
-						$('#result').html(data);
+						//$('#result').html(data);
 					}
 				});
 
@@ -83,7 +84,7 @@
 						user: id
 					},
 					success: function(data) {
-						$('#result').html(data);
+						//$('#result').html(data);
 					}
 				});
 
@@ -113,7 +114,18 @@
 	<section>
 		<div class="container">
 			<div class="row">
-
+				<!-- Mensagem de usuario existente -->
+				<?php
+				if (isset($_SESSION['nivel_usr'])) :
+				?>
+					<div id="msg_alert" class="animated bg-success">
+						<span style="font-weight: bold">Nivel de usuario alterado.</span>
+					</div>
+				<?php
+				endif;
+				unset($_SESSION['nivel_usr']);
+				?>
+				<!-- Fim Mensagem de usuario existente -->
 				<!-- Mensagem de usuario existente -->
 				<?php
 				if (isset($_SESSION['add_user'])) :
@@ -196,7 +208,7 @@
 															</div>
 														</div>
 													</div>
-													<div id="result"></div>
+
 													<div>
 														<?php $teste = $line[1]; ?>
 														<img class="usr_btn" src="../img/key.png" alt="chave" onclick="nivel('<?php echo $line[4] ?>')">

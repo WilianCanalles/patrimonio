@@ -10,7 +10,7 @@ body {
     background-size: cover;
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
     width: 0px;
 }
 
@@ -277,11 +277,11 @@ div.row.align-sign,
 /*Pag inicial da ferramenta
 ---------
 */
-.modal-dialog{
 
+.modal-dialog {
     margin: auto !important;
-
 }
+
 .toggled #sidebar-wrapper {
     margin-left: 0;
 }
@@ -464,11 +464,40 @@ div.row.align-sign,
     overflow: scroll
 }
 
+
 /*Gestao usuario*/
 
-.usr_btn{
+.usr_btn {
     width: 30px;
 }
+
+
+/*Modal usuarios*/
+
+@keyframes kf_animation {
+    0% {
+        margin-top: -100px;
+    }
+    50% {
+        margin-top: 50px;
+    }
+    100% {
+        margin-top: 0px;
+    }
+}
+
+div.animated {
+    text-align: center;
+    padding: 15px 0px;
+    position: fixed;
+    width: 30%;
+    z-index: 100;
+    left: 15px;
+    top: 15px;
+    animation-name: kf_animation;
+    animation-duration: 1.5s;
+}
+
 @media (min-width:768px) {
     .modal-dialog {
         width: 600px;
@@ -501,6 +530,7 @@ div.row.align-sign,
 .modal-header:after {
     clear: both
 }
+
 
 /*Menu List Dropdown*/
 

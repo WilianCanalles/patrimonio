@@ -22,7 +22,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
     unset($_SESSION['conn_nivel_user']);
 } elseif (isset($_SESSION['conn_nivel_user'])) {
     $usuario = $_POST['user'];
-    echo $usuario;
+   // echo $usuario;
     include_once 'conexao.php';
     try {
         $conexao = new PDO(
@@ -40,7 +40,6 @@ if (isset($_SESSION['conn_excluir_user'])) {
         $result_tb_empresa = $statement->fetchall(PDO::FETCH_NUM);
 
         if(($result_tb_empresa[0][6])=='0'){
-echo 'passou';
             $query_tb_local = "UPDATE `tb_user` SET `nivel_User` = '1' WHERE `usuario`= '$usuario'";
 
             $statement = $conexao->prepare($query_tb_local);
@@ -48,8 +47,6 @@ echo 'passou';
             $statement->execute();
 
         }elseif(($result_tb_empresa[0][6])=='1'){
-
-            echo 'passou';
             $query_tb_local = "UPDATE `tb_user` SET `nivel_User` = '0' WHERE `usuario`= '$usuario'";
 
             $statement = $conexao->prepare($query_tb_local);
@@ -65,8 +62,8 @@ echo 'passou';
         echo '<p>' . $e->getMessage() . '</p>';
     }
 
-    echo 'nivel';
-    
+  //  echo 'nivel';
+  $_SESSION['nivel_usr'] = true;
     unset($_SESSION['conn_excluir_user']);
     unset($_SESSION['conn_editar_user']);
     unset($_SESSION['conn_nivel_user']);
