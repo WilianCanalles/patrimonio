@@ -25,9 +25,13 @@
 	<!-- Custom styles for this template -->
 	<link href="../css/style.css" rel="stylesheet">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 	<script>
+		function abreModal() {
+			$("#exampleModal").modal({
+				show: true
+			});
+		}
 		function nivel(id) {
 			$(document).ready(function() {
 
@@ -166,6 +170,27 @@
 				<!-- Fim Mensagem de usuario existente -->
 
 				<div class="col-md-5" style="align-self: center;">
+				<section>
+				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						...
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+				</section>
 					<section>
 						<div class="modal fade" id="exampleModalScrollable1" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -212,7 +237,7 @@
 													<div>
 														<?php $teste = $line[1]; ?>
 														<img class="usr_btn" src="../img/key.png" alt="chave" onclick="nivel('<?php echo $line[4] ?>')">
-														<img class="usr_btn" src="../img/pen.png" alt="lapis" onclick="editar('<?php echo $line[4] ?>')">
+														<img class="usr_btn" src="../img/pen.png" alt="lapis" onclick="abreModal();editar('<?php echo $line[4] ?>')">
 														<img class="usr_btn" src="../img/trash1.png" alt="lixeira" onclick="excluir('<?php echo $line[4] ?>')">
 													</div>
 												</div>
@@ -300,12 +325,3 @@
 </body>
 
 </html>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>
-	$().ready(function() {
-
-		$('#msg_alert').delay(3000).fadeOut(400); // "foo" é o id do elemento que seja manipular.
-		// O valor é representado em milisegundos.
-	});
-</script>
