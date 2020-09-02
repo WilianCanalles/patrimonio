@@ -22,16 +22,16 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+	<!-- Modal features -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 	<!-- Custom styles for this template -->
 	<link href="../css/style.css" rel="stylesheet">
 
 
 	<script>
-		function abreModal() {
-			$("#exampleModal").modal({
-				show: true
-			});
-		}
 		function nivel(id) {
 			$(document).ready(function() {
 
@@ -56,7 +56,7 @@
 
 		function editar(id) {
 			$(document).ready(function() {
-
+				document.getElementById('name_user').innerHTML = id.charAt(0).toUpperCase()+id.slice(1);
 
 
 				$.ajax({
@@ -170,27 +170,25 @@
 				<!-- Fim Mensagem de usuario existente -->
 
 				<div class="col-md-5" style="align-self: center;">
-				<section>
-				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						...
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</div>
-				</div>
-			</div>
-		</div>
-				</section>
+					<section>
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Editar Usuario<div id="name_user" style="text-align: center;"></div>
+										</h5>
+									</div>
+									<div class="modal-body">
+										...
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalScrollable1" data-dismiss="modal" data-dismiss="modal">Voltar</button>
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
 					<section>
 						<div class="modal fade" id="exampleModalScrollable1" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -235,9 +233,11 @@
 													</div>
 
 													<div>
-														<?php $teste = $line[1]; ?>
+														<?php global $teste;
+														$teste = $line[4];
+														?>
 														<img class="usr_btn" src="../img/key.png" alt="chave" onclick="nivel('<?php echo $line[4] ?>')">
-														<img class="usr_btn" src="../img/pen.png" alt="lapis" onclick="abreModal();editar('<?php echo $line[4] ?>')">
+														<img class="usr_btn" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" onclick="editar('<?php echo $line[4] ?>')">
 														<img class="usr_btn" src="../img/trash1.png" alt="lixeira" onclick="excluir('<?php echo $line[4] ?>')">
 													</div>
 												</div>

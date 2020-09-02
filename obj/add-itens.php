@@ -24,11 +24,6 @@
 	<!-- Custom styles for this template -->
 	<link href="../css/style.css" rel="stylesheet">
 	<script type="text/javascript" src="../js/js_cadastro.js"></script>
-
-
-
-
-
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
 </head>
