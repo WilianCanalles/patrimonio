@@ -16,7 +16,32 @@ if (isset($_SESSION['conn_excluir_user'])) {
     unset($_SESSION['conn_editar_user']);
     unset($_SESSION['conn_nivel_user']);
 } elseif (isset($_SESSION['conn_editar_user'])) {
-    echo 'idit';
+    $usuario = $_POST['user'];
+    // echo $usuario;
+     include_once 'conexao.php';
+     try {
+         $conexao = new PDO(
+             "mysql:host=$host; dbname=$dbname",
+             "$user",
+             "$pass"
+         );
+ 
+         $query_tb_empresa = "SELECT * FROM `tb_user` WHERE `usuario`= '$usuario'";
+ 
+         $statement = $conexao->prepare($query_tb_empresa);
+     
+         $statement->execute();
+     
+         $result_tb_empresa = $statement->fetchall(PDO::FETCH_NUM);
+ 
+     echo "<pre>";
+     print_r($result_tb_empresa[0]);
+     echo "</pre>";
+ 
+     } catch (PDOException $e) {
+         echo '<p>' . $e->getMessage() . '</p>';
+     }
+ 
     unset($_SESSION['conn_excluir_user']);
     unset($_SESSION['conn_editar_user']);
     unset($_SESSION['conn_nivel_user']);

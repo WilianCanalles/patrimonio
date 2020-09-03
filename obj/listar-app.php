@@ -277,7 +277,8 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                     url: "../conn-db/conn_search.php",
                     method: "POST",
                     data: {
-                        query: query
+                        query: query,
+                        valor: 'pesq'
                     },
                     success: function(data) {
                         $('#result').html(data);

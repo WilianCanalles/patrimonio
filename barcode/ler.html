@@ -55,7 +55,8 @@
                                 url: "../conn-db/conn_search.php",
                                 method: "POST",
                                 data: {
-                                    query: teste
+                                    query: teste,
+                                    valor: 'scan'
                                 },
                                 success: function (data) {
                                     $('#result').html(data);

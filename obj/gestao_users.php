@@ -55,10 +55,11 @@
 		}
 
 		function editar(id) {
+			
 			$(document).ready(function() {
-				document.getElementById('name_user').innerHTML = id.charAt(0).toUpperCase()+id.slice(1);
+			
 
-
+				
 				$.ajax({
 					url: "../conn-db/conn_user_conf.php",
 					method: "POST",
@@ -67,7 +68,8 @@
 						user: id
 					},
 					success: function(data) {
-						//$('#result').html(data);
+						document.getElementById("result").innerHTML= data;
+						
 					}
 				});
 
@@ -88,7 +90,7 @@
 						user: id
 					},
 					success: function(data) {
-						//$('#result').html(data);
+						$('#result').html(data);
 					}
 				});
 
@@ -179,7 +181,7 @@
 										</h5>
 									</div>
 									<div class="modal-body">
-										...
+									<div id="result"></div>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalScrollable1" data-dismiss="modal" data-dismiss="modal">Voltar</button>
