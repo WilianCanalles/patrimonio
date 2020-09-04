@@ -55,11 +55,11 @@
 		}
 
 		function editar(id) {
-			
-			$(document).ready(function() {
-			
 
-				
+			$(document).ready(function() {
+
+				document.getElementById('name_user').innerHTML = id.charAt(0).toUpperCase() + id.slice(1);
+
 				$.ajax({
 					url: "../conn-db/conn_user_conf.php",
 					method: "POST",
@@ -68,8 +68,8 @@
 						user: id
 					},
 					success: function(data) {
-						document.getElementById("result").innerHTML= data;
-						
+						document.getElementById("result").innerHTML = data;
+
 					}
 				});
 
@@ -97,6 +97,68 @@
 			});
 
 		}
+
+		function aprova(id, id_div) {
+
+			$(document).ready(function() {
+				verifica_Campo = document.getElementById(id).value;
+				
+				alert(verifica_Campo);
+				document.getElementById(id).value = '';
+				document.getElementById(id_div).classList.add("hide_Buttons");
+			})
+
+		}
+
+		function cancela(id, id_div) {
+
+			$(document).ready(function() {
+				document.getElementById(id).value = '';
+				document.getElementById(id_div).classList.add("hide_Buttons");
+			})
+
+		}
+		$(document).ready(function() {
+
+			document.addEventListener('keyup', pegaClick);
+
+
+			function pegaClick() {
+				verifica_Campo_Nome = document.getElementById("input_Nome").value;
+				verifica_Campo_Sobrenome = document.getElementById("input_Sobrenome").value;
+				verifica_Campo_Email = document.getElementById("input_Email").value;
+				verifica_Campo_Usuario = document.getElementById("input_Usuario").value;
+				verifica_Campo_Senha = document.getElementById("input_Senha").value;
+				//alert(verifica_Campo);
+				if (verifica_Campo_Nome != '') {
+					$("#hide_Buttons_Nome").removeClass("hide_Buttons");
+				} else if (verifica_Campo_Nome == '') {
+					$("#hide_Buttons_Nome").addClass("hide_Buttons");
+				}
+				if (verifica_Campo_Sobrenome != '') {
+					$("#hide_Buttons_Sobrenome").removeClass("hide_Buttons");
+				} else if (verifica_Campo_Sobrenome == '') {
+					$("#hide_Buttons_Sobrenome").addClass("hide_Buttons");
+				}
+				if (verifica_Campo_Email != '') {
+					$("#hide_Buttons_Email").removeClass("hide_Buttons");
+				} else if (verifica_Campo_Email == '') {
+					$("#hide_Buttons_Email").addClass("hide_Buttons");
+				}
+				if (verifica_Campo_Usuario != '') {
+					$("#hide_Buttons_Usuario").removeClass("hide_Buttons");
+				} else if (verifica_Campo_Usuario == '') {
+					$("#hide_Buttons_Usuario").addClass("hide_Buttons");
+				}
+				if (verifica_Campo_Senha != '') {
+					$("#hide_Buttons_Senha").removeClass("hide_Buttons");
+				} else if (verifica_Campo_Senha == '') {
+					$("#hide_Buttons_Senha").addClass("hide_Buttons");
+				}
+				//tecla = String.fromCharCode(event.keyCode);
+				//alert('passou');
+			}
+		});
 	</script>
 
 </head>
@@ -120,6 +182,18 @@
 	<section>
 		<div class="container">
 			<div class="row">
+				<!-- Mensagem de Master Unico -->
+				<?php
+				if (isset($_SESSION['master_Unico'])) :
+				?>
+					<div id="msg_alert" class="animated bg-danger">
+						<span style="font-weight: bold">Alteração Negada.</br>É necessário no minimo</br>um usuario MASTER.</span>
+					</div>
+				<?php
+				endif;
+				unset($_SESSION['master_Unico']);
+				?>
+				<!-- Fim Mensagem de Master Unico -->
 				<!-- Mensagem de usuario existente -->
 				<?php
 				if (isset($_SESSION['nivel_usr'])) :
@@ -172,25 +246,8 @@
 				<!-- Fim Mensagem de usuario existente -->
 
 				<div class="col-md-5" style="align-self: center;">
-					<section>
-						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Editar Usuario<div id="name_user" style="text-align: center;"></div>
-										</h5>
-									</div>
-									<div class="modal-body">
-									<div id="result"></div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalScrollable1" data-dismiss="modal" data-dismiss="modal">Voltar</button>
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</section>
+
+					<!-- Modal Principal -->
 					<section>
 						<div class="modal fade" id="exampleModalScrollable1" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -240,7 +297,7 @@
 														?>
 														<img class="usr_btn" src="../img/key.png" alt="chave" onclick="nivel('<?php echo $line[4] ?>')">
 														<img class="usr_btn" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" onclick="editar('<?php echo $line[4] ?>')">
-														<img class="usr_btn" src="../img/trash1.png" alt="lixeira" onclick="excluir('<?php echo $line[4] ?>')">
+														<img class="usr_btn" src="../img/trash.png" alt="lixeira" onclick="excluir('<?php echo $line[4] ?>')">
 													</div>
 												</div>
 											<?php } ?>
@@ -263,7 +320,28 @@
 							</input>
 						</div>
 					</section>
-
+					<!-- Fim Modal Principal -->
+					<!-- Modal Editar -->
+					<section>
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-scrollable" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalScrollableTitle">Editar Usuario<div id="name_user" style="text-align: center;"></div>
+										</h5>
+									</div>
+									<div class="modal-body">
+										<div id="result"></div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalScrollable1" data-dismiss="modal" data-dismiss="modal">Voltar</button>
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- Fim Modal Editar -->
 				</div>
 				<div class="col-md-7 ">
 					<div>
