@@ -9,6 +9,8 @@ if (isset($_POST['verifica']) && $_POST['verifica'] == 'excluir') {
     $_SESSION['conn_editar_user'] = true;
 } elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'nivel') {
     $_SESSION['conn_nivel_user'] = true;
+} elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'editar_user') {
+    $_SESSION['conn_edit_value'] = true;
 }
 
 if (isset($_SESSION['conn_excluir_user'])) {
@@ -16,6 +18,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
     unset($_SESSION['conn_excluir_user']);
     unset($_SESSION['conn_editar_user']);
     unset($_SESSION['conn_nivel_user']);
+    unset($_SESSION['conn_edit_value']);
 } elseif (isset($_SESSION['conn_editar_user'])) {
     $usuario = $_POST['user'];
     // echo $usuario;
@@ -58,7 +61,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
                                 <div>
                                     <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Nome
                                         <div id="hide_Buttons_Nome" class="hide_Buttons" style="margin-left: auto;">
-                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Nome', 'hide_Buttons_Nome')">
+                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Nome', 'hide_Buttons_Nome', 'nome')">
                                             <img class="usr_btn" src="../img/delete.png" alt="cancela" onclick="cancela('input_Nome', 'hide_Buttons_Nome')">
                                         </div>
                                     </span>
@@ -69,7 +72,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
                                 <div>
                                     <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Sobrenome
                                         <div id="hide_Buttons_Sobrenome" class="hide_Buttons" style="margin-left: auto;">
-                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Sobrenome', 'hide_Buttons_Sobrenome')">
+                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Sobrenome', 'hide_Buttons_Sobrenome', 'sobrenome')">
                                             <img class="usr_btn" src="../img/delete.png" alt="cancela" onclick="cancela('input_Sobrenome', 'hide_Buttons_Sobrenome')">
                                         </div>
                                     </span>
@@ -81,7 +84,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
                                 <div>
                                     <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Email
                                         <div id="hide_Buttons_Email" class="hide_Buttons" style="margin-left: auto;">
-                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Email', 'hide_Buttons_Email')">
+                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Email', 'hide_Buttons_Email', 'email')">
                                             <img class="usr_btn" src="../img/delete.png" alt="cancela" onclick="cancela('input_Email', 'hide_Buttons_Email')">
                                         </div>
                                     </span>
@@ -93,7 +96,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
                                 <div>
                                     <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Usuario
                                         <div id="hide_Buttons_Usuario" class="hide_Buttons" style="margin-left: auto;">
-                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Usuario', 'hide_Buttons_Usuario')">
+                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Usuario', 'hide_Buttons_Usuario', 'usuario')">
                                             <img class="usr_btn" src="../img/delete.png" alt="cancela" onclick="cancela('input_Usuario', 'hide_Buttons_Usuario')">
                                         </div>
                                     </span>
@@ -105,7 +108,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
                                 <div>
                                     <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Senha
                                         <div id="hide_Buttons_Senha" class="hide_Buttons" style="margin-left: auto;">
-                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Senha', 'hide_Buttons_Senha')">
+                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Senha', 'hide_Buttons_Senha', 'senha')">
                                             <img class="usr_btn" src="../img/delete.png" alt="cancela" onclick="cancela('input_Senha', 'hide_Buttons_Senha')">
                                         </div>
                                     </span>
@@ -128,6 +131,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
     unset($_SESSION['conn_excluir_user']);
     unset($_SESSION['conn_editar_user']);
     unset($_SESSION['conn_nivel_user']);
+    unset($_SESSION['conn_edit_value']);
 } elseif (isset($_SESSION['conn_nivel_user'])) {
     $usuario = $_POST['user'];
     // echo $usuario;
@@ -175,10 +179,6 @@ if (isset($_SESSION['conn_excluir_user'])) {
         } else if ($usr_nivel_cont == 1) {
             $_SESSION['master_Unico'] = true;
         }
-
-             echo "<pre>";
-    print_r($result_tb_usr_nivel[0][4]);
-    echo "</pre>";
     } catch (PDOException $e) {
         echo '<p>' . $e->getMessage() . '</p>';
     }
@@ -186,4 +186,61 @@ if (isset($_SESSION['conn_excluir_user'])) {
     unset($_SESSION['conn_excluir_user']);
     unset($_SESSION['conn_editar_user']);
     unset($_SESSION['conn_nivel_user']);
+    unset($_SESSION['conn_edit_value']);
+} elseif (isset($_SESSION['conn_edit_value'])) {
+    $novo_valor = $_POST['novo_Valor'];
+    $nome_Campo = $_POST['nome_Campo'];
+    $nome_user = $_POST['nome_user'];
+    include_once 'conexao.php';
+    try {
+        $conexao = new PDO(
+            "mysql:host=$host; dbname=$dbname",
+            "$user",
+            "$pass"
+        );
+
+        if ($nome_Campo == 'senha') {
+            $query_tb_local = "UPDATE `tb_user` SET `senha` = md5('$novo_valor') WHERE `usuario`= '$nome_user'";
+
+            $statement = $conexao->prepare($query_tb_local);
+    
+            $statement->execute();
+            $_SESSION['sucesso_alteracao'] = true;
+        } elseif ($nome_Campo == 'email') {
+            $query_tb_usr_nivel = "SELECT * FROM `tb_user` WHERE `email`= '$novo_valor'";
+
+            $statement = $conexao->prepare($query_tb_usr_nivel);
+
+            $statement->execute();
+
+            $result_tb_usr_nivel = $statement->fetchall(PDO::FETCH_NUM);
+            $usr_nivel_cont = $statement->rowCount();
+        } elseif ($nome_Campo == 'usuario') {
+            $query_tb_usr_nivel = "SELECT * FROM `tb_user` WHERE `usuario`= '$novo_valor'";
+
+            $statement = $conexao->prepare($query_tb_usr_nivel);
+
+            $statement->execute();
+
+            $result_tb_usr_nivel = $statement->fetchall(PDO::FETCH_NUM);
+            $usr_nivel_cont = $statement->rowCount();
+        }
+        if($usr_nivel_cont > 0){
+            $_SESSION['erro_alteracao'] = true;
+        }elseif($usr_nivel_cont == 0 && $nome_Campo != 'senha'){
+            $query_tb_local = "UPDATE `tb_user` SET `$nome_Campo` = '$novo_valor' WHERE `usuario`= '$nome_user'";
+
+            $statement = $conexao->prepare($query_tb_local);
+    
+            $statement->execute();
+            $_SESSION['sucesso_alteracao'] = true;
+        }
+echo $usr_nivel_cont;
+    } catch (PDOException $e) {
+        echo '<p>' . $e->getMessage() . '</p>';
+    }
+    unset($_SESSION['conn_excluir_user']);
+    unset($_SESSION['conn_editar_user']);
+    unset($_SESSION['conn_nivel_user']);
+    unset($_SESSION['conn_edit_value']);
 }

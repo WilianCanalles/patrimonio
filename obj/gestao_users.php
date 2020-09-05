@@ -98,14 +98,30 @@
 
 		}
 
-		function aprova(id, id_div) {
+		function aprova(id, id_div, campo_Alterar) {
 
 			$(document).ready(function() {
 				verifica_Campo = document.getElementById(id).value;
-				
-				alert(verifica_Campo);
+				usuario = document.getElementById('name_user').innerHTML
+				//alert(campo_Alterar);
+				//alert(verifica_Campo);
 				document.getElementById(id).value = '';
 				document.getElementById(id_div).classList.add("hide_Buttons");
+				$.ajax({
+					url: "../conn-db/conn_user_conf.php",
+					method: "POST",
+					data: {
+						verifica: 'editar_user',
+						novo_Valor: verifica_Campo,
+						nome_Campo: campo_Alterar,
+						nome_user: usuario
+					},
+
+					success: function(data) {
+						//$('#result1').html(data);
+						location.reload();
+					}
+				});
 			})
 
 		}
@@ -182,6 +198,30 @@
 	<section>
 		<div class="container">
 			<div class="row">
+				<!-- Mensagem de alteracao usuario erro -->
+				<?php
+				if (isset($_SESSION['erro_alteracao'])) :
+				?>
+					<div id="msg_alert" class="animated bg-danger">
+						<span style="font-weight: bold">Erro na alteração.</br>Email/Usuario pertence a outra conta</span>
+					</div>
+				<?php
+				endif;
+				unset($_SESSION['erro_alteracao']);
+				?>
+				<!-- Fim Mensagem de alteracao usuario erro -->
+				<!-- Mensagem de alteracao usuario -->
+				<?php
+				if (isset($_SESSION['sucesso_alteracao'])) :
+				?>
+					<div id="msg_alert" class="animated bg-success">
+						<span style="font-weight: bold">Usuario alterado.</span>
+					</div>
+				<?php
+				endif;
+				unset($_SESSION['sucesso_alteracao']);
+				?>
+				<!-- Fim Mensagem de alteracao usuario -->
 				<!-- Mensagem de Master Unico -->
 				<?php
 				if (isset($_SESSION['master_Unico'])) :
@@ -194,7 +234,7 @@
 				unset($_SESSION['master_Unico']);
 				?>
 				<!-- Fim Mensagem de Master Unico -->
-				<!-- Mensagem de usuario existente -->
+				<!-- Mensagem de nivel usuario -->
 				<?php
 				if (isset($_SESSION['nivel_usr'])) :
 				?>
@@ -205,7 +245,7 @@
 				endif;
 				unset($_SESSION['nivel_usr']);
 				?>
-				<!-- Fim Mensagem de usuario existente -->
+				<!-- Fim Mensagem de nivel usuario -->
 				<!-- Mensagem de usuario existente -->
 				<?php
 				if (isset($_SESSION['add_user'])) :
@@ -331,6 +371,7 @@
 										</h5>
 									</div>
 									<div class="modal-body">
+										<div id="result1"></div>
 										<div id="result"></div>
 									</div>
 									<div class="modal-footer">
