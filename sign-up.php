@@ -85,7 +85,7 @@ session_start();
                             <label for="inputSenha">Senha</label>
                             <!-- Fim label-->
                             <!-- Input-->
-                            <input class="form-control" name="senha" type="text" id="inputSenha" placeholder="Senha" required autofocus="">
+                            <input class="form-control" name="senha" type="text" id="inputSenha" placeholder="Senha" style=" -webkit-text-security: disc;" required autofocus="">
                             <!-- Fim input-->
                         </div>
 
@@ -104,33 +104,7 @@ session_start();
                     <input class="btn btn-lg btn-primary" type="submit" value="Inscrever-se"></input>
                 </div>
                 <!-- Fim botão -->
-
-                <!-- Mensagem de Fim de sessao -->
-                <?php
-                if (isset($_SESSION['have_user'])) :
-                ?>
-                    <div class="bg-danger" style="text-align: center; margin-top: 10px; padding:15px 0px">
-                        <span style="font-weight: bold">Usuario e/ou E-mail ja possui cadastro.</br>Verifique os dados inseridos e tente novamente</span>
-                    </div>
-                <?php
-                endif;
-                unset($_SESSION['have_user']);
-                ?>
-                <!-- Fim Mensagem de Fim de sessao -->
-
-                <!-- Mensagem de Fim de sessao -->
-                <?php
-                if (isset($_SESSION['company_has_account'])) :
-                ?>
-                    <div class="bg-danger" style="text-align: center; margin-top: 10px; padding:15px 0px">
-                        <span style="font-weight: bold">Empresa ja cadastrada</br>Solicite seu usuario para o administrador da empresa</span>
-                    </div>
-                <?php
-                endif;
-                unset($_SESSION['company_has_account']);
-                ?>
-                <!-- Fim Mensagem de Fim de sessao -->
-
+                <?php include 'obj/alert.php' ?>
             </form>
         </div>
     </div>

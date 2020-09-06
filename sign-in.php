@@ -72,48 +72,24 @@ session_start();
                     <!-- Botão -->
                     <div class="btn-middle">
                         <input class="btn btn-lg btn-info" type="submit" value="Entrar"></input>
-                            
-                        
+
+
                     </div>
                     <!-- Fim botão -->
 
-                    <!-- Mensagem de Fim de sessao -->
-            <?php
-            if (isset($_SESSION['no_sessiontime'])) :
-            ?>
-                <div class="bg-warning" style="text-align: center; margin-top: 10px; padding:15px 0px">
-                    <span  style="font-weight: bold">Warning: Sessão expirada, faça login novamente.</span>
-                </div>
-            <?php
-            endif;
-            unset($_SESSION['no_sessiontime']);
-            ?>
-            <!-- Fim Mensagem de Fim de sessao -->
+                    <?php include 'obj/alert.php' ?>
 
-
-                        <!-- Mensagem de erro -->
-            <?php
-            if (isset($_SESSION['login_wrong'])) :
-            ?>
-                <div class="bg-danger" style="text-align: center; margin-top: 10px; padding:15px 0px">
-                    <span  style="font-weight: bold">ERROR: Usuário ou senha inválidos.</span>
-                </div>
-            <?php
-            endif;
-            unset($_SESSION['login_wrong']);
-            ?>
-            <!-- Fim Mensagem erro -->
-            <!-- Inicio da conexao -->
-            <?php
-            $_SESSION['conn_login'] = true;
-            ?>
-            <!-- Fim do inicio da conexao -->
+                    <!-- Inicio da conexao -->
+                    <?php
+                    $_SESSION['conn_login'] = true;
+                    ?>
+                    <!-- Fim do inicio da conexao -->
                 </form>
-                
+
             </div>
 
             <!-- Fim form entrar -->
-            
+
         </div>
     </div>
 

@@ -77,11 +77,12 @@
 
 		}
 
+		function confirma(name) {
+			document.getElementById('name_user_cancela').innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
+		}
+
 		function excluir(id) {
 			$(document).ready(function() {
-
-
-
 				$.ajax({
 					url: "../conn-db/conn_user_conf.php",
 					method: "POST",
@@ -90,7 +91,8 @@
 						user: id
 					},
 					success: function(data) {
-						$('#result').html(data);
+						//$('#result').html(data);
+						location.reload();
 					}
 				});
 
@@ -98,26 +100,33 @@
 
 		}
 
-		function aprova(id, id_div, campo_Alterar) {
+		function aprova() {
 
 			$(document).ready(function() {
-				verifica_Campo = document.getElementById(id).value;
+				verifica_Campo_Nome = document.getElementById("input_Nome").value;
+				verifica_Campo_Sobrenome = document.getElementById("input_Sobrenome").value;
+				verifica_Campo_Email = document.getElementById("input_Email").value;
+				verifica_Campo_Usuario = document.getElementById("input_Usuario").value;
+				verifica_Campo_Senha = document.getElementById("input_Senha").value;
 				usuario = document.getElementById('name_user').innerHTML
 				//alert(campo_Alterar);
 				//alert(verifica_Campo);
-				document.getElementById(id).value = '';
-				document.getElementById(id_div).classList.add("hide_Buttons");
+				cancela();
 				$.ajax({
 					url: "../conn-db/conn_user_conf.php",
 					method: "POST",
 					data: {
 						verifica: 'editar_user',
-						novo_Valor: verifica_Campo,
-						nome_Campo: campo_Alterar,
+						novo_Nome: verifica_Campo_Nome,
+						novo_Sobrenome: verifica_Campo_Sobrenome,
+						novo_Email: verifica_Campo_Email,
+						novo_Usuario: verifica_Campo_Usuario,
+						novo_Senha: verifica_Campo_Senha,
 						nome_user: usuario
 					},
 
 					success: function(data) {
+						//document.getElementById('result1').innerHTML = data;
 						//$('#result1').html(data);
 						location.reload();
 					}
@@ -126,11 +135,15 @@
 
 		}
 
-		function cancela(id, id_div) {
+		function cancela() {
 
 			$(document).ready(function() {
-				document.getElementById(id).value = '';
-				document.getElementById(id_div).classList.add("hide_Buttons");
+				document.getElementById('input_Nome').value = '';
+				document.getElementById('input_Sobrenome').value = '';
+				document.getElementById('input_Email').value = '';
+				document.getElementById('input_Usuario').value = '';
+				document.getElementById('input_Senha').value = '';
+				$("#hide_Buttons_Div").addClass("hide_Buttons");
 			})
 
 		}
@@ -145,32 +158,13 @@
 				verifica_Campo_Email = document.getElementById("input_Email").value;
 				verifica_Campo_Usuario = document.getElementById("input_Usuario").value;
 				verifica_Campo_Senha = document.getElementById("input_Senha").value;
-				//alert(verifica_Campo);
-				if (verifica_Campo_Nome != '') {
-					$("#hide_Buttons_Nome").removeClass("hide_Buttons");
-				} else if (verifica_Campo_Nome == '') {
-					$("#hide_Buttons_Nome").addClass("hide_Buttons");
+				//console.log(verifica_Campo_Nome,verifica_Campo_Sobrenome,verifica_Campo_Email,verifica_Campo_Usuario,verifica_Campo_Senha);
+				if ((verifica_Campo_Nome != '') || (verifica_Campo_Sobrenome != '') || (verifica_Campo_Email != '') || (verifica_Campo_Usuario != '') || (verifica_Campo_Senha != '')) {
+					$("#hide_Buttons_Div").removeClass("hide_Buttons");
+				} else if ((verifica_Campo_Nome == '') || (verifica_Campo_Sobrenome == '') || (verifica_Campo_Email == '') || (verifica_Campo_Usuario == '') || (verifica_Campo_Senha == '')) {
+					$("#hide_Buttons_Div").addClass("hide_Buttons");
 				}
-				if (verifica_Campo_Sobrenome != '') {
-					$("#hide_Buttons_Sobrenome").removeClass("hide_Buttons");
-				} else if (verifica_Campo_Sobrenome == '') {
-					$("#hide_Buttons_Sobrenome").addClass("hide_Buttons");
-				}
-				if (verifica_Campo_Email != '') {
-					$("#hide_Buttons_Email").removeClass("hide_Buttons");
-				} else if (verifica_Campo_Email == '') {
-					$("#hide_Buttons_Email").addClass("hide_Buttons");
-				}
-				if (verifica_Campo_Usuario != '') {
-					$("#hide_Buttons_Usuario").removeClass("hide_Buttons");
-				} else if (verifica_Campo_Usuario == '') {
-					$("#hide_Buttons_Usuario").addClass("hide_Buttons");
-				}
-				if (verifica_Campo_Senha != '') {
-					$("#hide_Buttons_Senha").removeClass("hide_Buttons");
-				} else if (verifica_Campo_Senha == '') {
-					$("#hide_Buttons_Senha").addClass("hide_Buttons");
-				}
+
 				//tecla = String.fromCharCode(event.keyCode);
 				//alert('passou');
 			}
@@ -198,95 +192,20 @@
 	<section>
 		<div class="container">
 			<div class="row">
-				<!-- Mensagem de alteracao usuario erro -->
-				<?php
-				if (isset($_SESSION['erro_alteracao'])) :
-				?>
-					<div id="msg_alert" class="animated bg-danger">
-						<span style="font-weight: bold">Erro na alteração.</br>Email/Usuario pertence a outra conta</span>
-					</div>
-				<?php
-				endif;
-				unset($_SESSION['erro_alteracao']);
-				?>
-				<!-- Fim Mensagem de alteracao usuario erro -->
-				<!-- Mensagem de alteracao usuario -->
-				<?php
-				if (isset($_SESSION['sucesso_alteracao'])) :
-				?>
-					<div id="msg_alert" class="animated bg-success">
-						<span style="font-weight: bold">Usuario alterado.</span>
-					</div>
-				<?php
-				endif;
-				unset($_SESSION['sucesso_alteracao']);
-				?>
-				<!-- Fim Mensagem de alteracao usuario -->
-				<!-- Mensagem de Master Unico -->
-				<?php
-				if (isset($_SESSION['master_Unico'])) :
-				?>
-					<div id="msg_alert" class="animated bg-danger">
-						<span style="font-weight: bold">Alteração Negada.</br>É necessário no minimo</br>um usuario MASTER.</span>
-					</div>
-				<?php
-				endif;
-				unset($_SESSION['master_Unico']);
-				?>
-				<!-- Fim Mensagem de Master Unico -->
-				<!-- Mensagem de nivel usuario -->
-				<?php
-				if (isset($_SESSION['nivel_usr'])) :
-				?>
-					<div id="msg_alert" class="animated bg-success">
-						<span style="font-weight: bold">Nivel de usuario alterado.</span>
-					</div>
-				<?php
-				endif;
-				unset($_SESSION['nivel_usr']);
-				?>
-				<!-- Fim Mensagem de nivel usuario -->
-				<!-- Mensagem de usuario existente -->
-				<?php
-				if (isset($_SESSION['add_user'])) :
-				?>
-					<div id="msg_alert" class="bg-success" style="text-align: center; padding:15px 0px; position: absolute; width: 100%; z-index: 100;">
-						<span style="font-weight: bold">Usuario cadastrado com Sucesso.</span>
-					</div>
-				<?php
-				endif;
-				unset($_SESSION['add_user']);
-				?>
-				<!-- Fim Mensagem de usuario existente -->
 
-				<!-- Mensagem de usuario existente -->
-				<?php
-				if (isset($_SESSION['err_add_user'])) :
-				?>
-					<div id="msg_alert" class="bg-danger" style="text-align: center; padding:15px 0px; position: absolute; width: 100%; z-index: 100;">
-						<span style="font-weight: bold">Ocorreu um erro ao criar usuario.</br>Favor entre em contato com o desenvolvedor</span>
-					</div>
-				<?php
-				endif;
-				unset($_SESSION['err_add_user']);
-				?>
-				<!-- Fim Mensagem de usuario existente -->
-
-				<!-- Mensagem de usuario existente -->
-				<?php
-				if (isset($_SESSION['have_user'])) :
-				?>
-					<div id="msg_alert" class="bg-danger" style="text-align: center; padding:15px 0px; position: absolute; width: 100%; z-index: 100;">
-						<span style="font-weight: bold">Usuario e/ou E-mail ja possui cadastro.</br>Verifique os dados inseridos e tente novamente</span>
-					</div>
-				<?php
-				endif;
-				unset($_SESSION['have_user']);
-				?>
-				<!-- Fim Mensagem de usuario existente -->
+				<?php include 'alert.php'; ?>
 
 				<div class="col-md-5" style="align-self: center;">
+					<div style="text-align: center;">
+						<p class="display-4" style="margin-top: 20px">Lista de Usuarios</p>
 
+						<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable1" style="margin-bottom: 20px" value="Abrir Lista">
+						</input>
+						<input type="button" class="btn btn-danger" style="margin-bottom: 20px" value="Deletar conta Principal">
+						</input>
+						<input type="button" class="btn btn-danger" style="margin-bottom: 20px" value="Lixeira">
+						</input>
+					</div>
 					<!-- Modal Principal -->
 					<section>
 						<div class="modal fade" id="exampleModalScrollable1" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -332,12 +251,9 @@
 													</div>
 
 													<div>
-														<?php global $teste;
-														$teste = $line[4];
-														?>
 														<img class="usr_btn" src="../img/key.png" alt="chave" onclick="nivel('<?php echo $line[4] ?>')">
 														<img class="usr_btn" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" onclick="editar('<?php echo $line[4] ?>')">
-														<img class="usr_btn" src="../img/trash.png" alt="lixeira" onclick="excluir('<?php echo $line[4] ?>')">
+														<img class="usr_btn" src="../img/trash.png" alt="lixeira" data-toggle="modal" data-target="#exampleModalCenter" onclick="confirma('<?php echo $line[4] ?>')">
 													</div>
 												</div>
 											<?php } ?>
@@ -350,15 +266,6 @@
 								</div>
 							</div>
 						</div>
-
-						<div style="text-align: center;">
-							<p class="display-4" style="margin-top: 20px">Lista de Usuarios</p>
-
-							<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable1" style="margin-bottom: 20px" value="Abrir Lista">
-							</input>
-							<input type="button" class="btn btn-danger" style="margin-bottom: 20px" value="Deletar conta Principal">
-							</input>
-						</div>
 					</section>
 					<!-- Fim Modal Principal -->
 					<!-- Modal Editar -->
@@ -369,6 +276,10 @@
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalScrollableTitle">Editar Usuario<div id="name_user" style="text-align: center;"></div>
 										</h5>
+										<div id="hide_Buttons_Div" class="hide_Buttons" style="    margin-left: auto; position: absolute; right: 18px; align-self: center;">
+											<img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova()">
+											<img class="usr_btn" src="../img/delete.png" alt="cancela" onclick="cancela()">
+										</div>
 									</div>
 									<div class="modal-body">
 										<div id="result1"></div>
@@ -383,6 +294,25 @@
 						</div>
 					</section>
 					<!-- Fim Modal Editar -->
+					<!-- Modal Confirmar -->
+					<section>
+						<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalCenterTitle">Deseja remover usuario <div id="name_user_cancela" style="text-align: center;"></div>
+										</h5>
+									</div>
+									<div class="modal-footer" style="align-self: center;">
+										<button type="button" class="btn btn-success" onclick="excluir('<?php echo $line[4] ?>')">SIM</button>
+										<button type="button" class="btn btn-danger" data-dismiss="modal">NÃO</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- Fim Modal Confirmar -->
+
 				</div>
 				<div class="col-md-7 ">
 					<div>
@@ -429,7 +359,7 @@
 								<label for="inputSenha">Senha</label>
 								<!-- Fim label-->
 								<!-- Input-->
-								<input class="form-control" name="senha" type="text" id="inputSenha" placeholder="Senha" required autofocus="">
+								<input class="form-control" name="senha" type="text" id="inputSenha" placeholder="Senha" style=" -webkit-text-security: disc;" required autofocus="">
 								<!-- Fim input-->
 							</div>
 							<input type="hidden" name="new_user" value="adicao">

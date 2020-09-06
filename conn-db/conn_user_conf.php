@@ -14,7 +14,43 @@ if (isset($_POST['verifica']) && $_POST['verifica'] == 'excluir') {
 }
 
 if (isset($_SESSION['conn_excluir_user'])) {
-    echo 'excluir';
+    //echo 'excluir';
+
+    $usuario = $_POST['user'];
+    // echo $usuario;
+    include_once 'conexao.php';
+    try {
+        $conexao = new PDO(
+            "mysql:host=$host; dbname=$dbname",
+            "$user",
+            "$pass"
+        );
+        $query_tb_usr_nivel = "SELECT * FROM `tb_user` WHERE `nivel_User` = '1' AND `emp_Principal` = '$emp_principal'";
+
+        $statement = $conexao->prepare($query_tb_usr_nivel);
+
+        $statement->execute();
+
+        $result_tb_usr_nivel = $statement->fetchall(PDO::FETCH_NUM);
+        $usr_nivel_cont = $statement->rowCount();
+
+        if ($usr_nivel_cont > 1 || $result_tb_usr_nivel[0][4] != $usuario) {
+
+            $query_tb_user = "DELETE FROM `tb_user` WHERE `usuario`= '$usuario'";
+
+            $statement = $conexao->prepare($query_tb_user);
+
+            $statement->execute();
+
+            $result_tb_user = $statement->fetchall(PDO::FETCH_NUM);
+            $_SESSION['exclusao_user'] = true;
+        } else if ($usr_nivel_cont == 1) {
+            $_SESSION['master_Unico'] = true;
+        }
+    } catch (PDOException $e) {
+        echo '<p>' . $e->getMessage() . '</p>';
+    }
+
     unset($_SESSION['conn_excluir_user']);
     unset($_SESSION['conn_editar_user']);
     unset($_SESSION['conn_nivel_user']);
@@ -41,7 +77,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
         /* echo "<pre>";
      print_r($result_tb_empresa[0]);
      echo "</pre>";*/
-?>
+    ?>
         <div class="modal-body container">
             <div class="row" id="userscroll" style="overflow: auto; text-align: center; justify-content: center;">
 
@@ -59,61 +95,37 @@ if (isset($_SESSION['conn_excluir_user'])) {
                             <div class="input-group" style="display: block!important;">
                                 <!-- Nome -->
                                 <div>
-                                    <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Nome
-                                        <div id="hide_Buttons_Nome" class="hide_Buttons" style="margin-left: auto;">
-                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Nome', 'hide_Buttons_Nome', 'nome')">
-                                            <img class="usr_btn" src="../img/delete.png" alt="cancela" onclick="cancela('input_Nome', 'hide_Buttons_Nome')">
-                                        </div>
-                                    </span>
+                                    <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Nome</span>
                                     <input id="input_Nome" class="form-control" style="color: black!important;" placeholder="<?php echo $line[1] ?>"></input>
                                 </div>
                                 <!-- FIM Nome -->
                                 <!-- Sobrenome -->
                                 <div>
-                                    <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Sobrenome
-                                        <div id="hide_Buttons_Sobrenome" class="hide_Buttons" style="margin-left: auto;">
-                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Sobrenome', 'hide_Buttons_Sobrenome', 'sobrenome')">
-                                            <img class="usr_btn" src="../img/delete.png" alt="cancela" onclick="cancela('input_Sobrenome', 'hide_Buttons_Sobrenome')">
-                                        </div>
-                                    </span>
+                                    <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Sobrenome</span>
 
                                     <input id="input_Sobrenome" class="form-control" style="color: black!important;" placeholder="<?php echo $line[2] ?>"></input>
                                 </div>
                                 <!-- FIM Sobrenome -->
                                 <!-- Email -->
                                 <div>
-                                    <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Email
-                                        <div id="hide_Buttons_Email" class="hide_Buttons" style="margin-left: auto;">
-                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Email', 'hide_Buttons_Email', 'email')">
-                                            <img class="usr_btn" src="../img/delete.png" alt="cancela" onclick="cancela('input_Email', 'hide_Buttons_Email')">
-                                        </div>
-                                    </span>
+                                    <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Email</span>
 
                                     <input id="input_Email" class="form-control" style="color: black!important;" placeholder="<?php echo $line[3] ?>"></input>
                                 </div>
                                 <!-- FIM Email -->
                                 <!-- Usuario -->
                                 <div>
-                                    <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Usuario
-                                        <div id="hide_Buttons_Usuario" class="hide_Buttons" style="margin-left: auto;">
-                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Usuario', 'hide_Buttons_Usuario', 'usuario')">
-                                            <img class="usr_btn" src="../img/delete.png" alt="cancela" onclick="cancela('input_Usuario', 'hide_Buttons_Usuario')">
-                                        </div>
-                                    </span>
+                                    <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Usuario</span>
 
                                     <input id="input_Usuario" class="form-control" style="color: black!important;" placeholder="<?php echo $line[4] ?>"></input>
                                 </div>
                                 <!-- FIM Usuario -->
                                 <!-- Senha -->
                                 <div>
-                                    <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Senha
-                                        <div id="hide_Buttons_Senha" class="hide_Buttons" style="margin-left: auto;">
-                                            <img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova('input_Senha', 'hide_Buttons_Senha', 'senha')">
-                                            <img class="usr_btn" src="../img/delete.png" alt="cancela" onclick="cancela('input_Senha', 'hide_Buttons_Senha')">
-                                        </div>
-                                    </span>
+                                    <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Senha</span>
 
-                                    <input id="input_Senha" class="form-control" style="color: black!important;" placeholder="Senha"></input>
+                                    <input id="input_Senha" 
+                                    class="form-control" style="color: black!important; -webkit-text-security: disc;" placeholder="Senha"></input>
                                 </div>
                                 <!-- FIM Senha -->
                             </div>
@@ -123,7 +135,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
 
             </div>
         </div>
-<?php
+    <?php
     } catch (PDOException $e) {
         echo '<p>' . $e->getMessage() . '</p>';
     }
@@ -188,59 +200,91 @@ if (isset($_SESSION['conn_excluir_user'])) {
     unset($_SESSION['conn_nivel_user']);
     unset($_SESSION['conn_edit_value']);
 } elseif (isset($_SESSION['conn_edit_value'])) {
-    $novo_valor = $_POST['novo_Valor'];
-    $nome_Campo = $_POST['nome_Campo'];
+
+    $novo_Nome = $_POST['novo_Nome'];
+    $novo_Sobrenome = $_POST['novo_Sobrenome'];
+    $email = $_POST['novo_Email'];
+    $novo_Usuario = $_POST['novo_Usuario'];
+    $novo_Senha = $_POST['novo_Senha'];
     $nome_user = $_POST['nome_user'];
-    include_once 'conexao.php';
-    try {
-        $conexao = new PDO(
-            "mysql:host=$host; dbname=$dbname",
-            "$user",
-            "$pass"
-        );
+    // Remove os caracteres ilegais, caso tenha
+    $novo_Email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
-        if ($nome_Campo == 'senha') {
-            $query_tb_local = "UPDATE `tb_user` SET `senha` = md5('$novo_valor') WHERE `usuario`= '$nome_user'";
+    // Valida o e-mail
+    if (filter_var($novo_Email, FILTER_VALIDATE_EMAIL) || $novo_Email=='') {
+        include_once 'conexao.php';
+        try {
+            $conexao = new PDO(
+                "mysql:host=$host; dbname=$dbname",
+                "$user",
+                "$pass"
+            );
 
-            $statement = $conexao->prepare($query_tb_local);
-    
-            $statement->execute();
-            $_SESSION['sucesso_alteracao'] = true;
-        } elseif ($nome_Campo == 'email') {
-            $query_tb_usr_nivel = "SELECT * FROM `tb_user` WHERE `email`= '$novo_valor'";
+            if ($novo_Email != '' || $novo_Usuario != '') {
+                
+                $query_tb_usr_nivel = "SELECT * FROM `tb_user` WHERE `usuario`= '$novo_Usuario' OR `email`= '$novo_Email'";
 
-            $statement = $conexao->prepare($query_tb_usr_nivel);
+                $statement = $conexao->prepare($query_tb_usr_nivel);
 
-            $statement->execute();
+                $statement->execute();
 
-            $result_tb_usr_nivel = $statement->fetchall(PDO::FETCH_NUM);
-            $usr_nivel_cont = $statement->rowCount();
-        } elseif ($nome_Campo == 'usuario') {
-            $query_tb_usr_nivel = "SELECT * FROM `tb_user` WHERE `usuario`= '$novo_valor'";
+                $result_tb_usr_nivel = $statement->fetchall(PDO::FETCH_NUM);
+                $usr_nivel_cont = $statement->rowCount();
+            } elseif ($novo_Email == '' || $novo_Usuario == '') {
+                $usr_nivel_cont = 0;
+            }
+            if ($usr_nivel_cont > 0) {
+                $_SESSION['erro_alteracao'] = true;
+            } elseif ($usr_nivel_cont == 0) {
+                if ($novo_Nome != '') {
+                    $query_tb_local = "UPDATE `tb_user` SET `nome` = '$novo_Nome' WHERE `usuario`= '$nome_user'";
 
-            $statement = $conexao->prepare($query_tb_usr_nivel);
+                    $statement = $conexao->prepare($query_tb_local);
 
-            $statement->execute();
+                    $statement->execute();
+                    $_SESSION['sucesso_alteracao'] = true;
+                }
+                if ($novo_Sobrenome != '') {
+                    $query_tb_local = "UPDATE `tb_user` SET `sobrenome` = '$novo_Sobrenome' WHERE `usuario`= '$nome_user'";
 
-            $result_tb_usr_nivel = $statement->fetchall(PDO::FETCH_NUM);
-            $usr_nivel_cont = $statement->rowCount();
+                    $statement = $conexao->prepare($query_tb_local);
+
+                    $statement->execute();
+                    $_SESSION['sucesso_alteracao'] = true;
+                }
+                if ($novo_Email != '') {
+                    $query_tb_local = "UPDATE `tb_user` SET `email` = '$novo_Email' WHERE `usuario`= '$nome_user'";
+
+                    $statement = $conexao->prepare($query_tb_local);
+
+                    $statement->execute();
+                    $_SESSION['sucesso_alteracao'] = true;
+                }
+                if ($novo_Usuario != '') {
+                    $query_tb_local = "UPDATE `tb_user` SET `usuario` = '$novo_Usuario' WHERE `usuario`= '$nome_user'";
+
+                    $statement = $conexao->prepare($query_tb_local);
+
+                    $statement->execute();
+                    $_SESSION['sucesso_alteracao'] = true;
+                }
+                if ($novo_Senha != '') {
+                    $query_tb_local = "UPDATE `tb_user` SET `senha` = md5('$novo_Senha') WHERE `usuario`= '$nome_user'";
+
+                    $statement = $conexao->prepare($query_tb_local);
+
+                    $statement->execute();
+                    $_SESSION['sucesso_alteracao'] = true;
+                }
+            }
+        } catch (PDOException $e) {
+            echo '<p>' . $e->getMessage() . '</p>';
         }
-        if($usr_nivel_cont > 0){
-            $_SESSION['erro_alteracao'] = true;
-        }elseif($usr_nivel_cont == 0 && $nome_Campo != 'senha'){
-            $query_tb_local = "UPDATE `tb_user` SET `$nome_Campo` = '$novo_valor' WHERE `usuario`= '$nome_user'";
-
-            $statement = $conexao->prepare($query_tb_local);
-    
-            $statement->execute();
-            $_SESSION['sucesso_alteracao'] = true;
-        }
-echo $usr_nivel_cont;
-    } catch (PDOException $e) {
-        echo '<p>' . $e->getMessage() . '</p>';
+        unset($_SESSION['conn_excluir_user']);
+        unset($_SESSION['conn_editar_user']);
+        unset($_SESSION['conn_nivel_user']);
+        unset($_SESSION['conn_edit_value']);
+    } else {
+        $_SESSION['err_email'] = true;
     }
-    unset($_SESSION['conn_excluir_user']);
-    unset($_SESSION['conn_editar_user']);
-    unset($_SESSION['conn_nivel_user']);
-    unset($_SESSION['conn_edit_value']);
 }

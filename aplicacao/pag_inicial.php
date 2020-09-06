@@ -53,34 +53,37 @@ if (isset($_SESSION["sessiontime"])) {
 
 		<!-- Sidebar -->
 		<div class="bg-opacidade " id="sidebar-wrapper">
-			<div class="sidebar-heading color-text">Seja Bem Vindo, <?php echo $_SESSION['usuario']; ?></div>
-			<div class="sidebar-heading color-text">Menu</div>
-			<div class="list-group list-group-flush color-text-list">
-				<?php
+			<div>
+				<div class="sidebar-heading color-text">Seja Bem Vindo, <?php echo $_SESSION['usuario']; ?></div>
+				<div class="sidebar-heading color-text">Menu</div>
+				<div class="list-group list-group-flush color-text-list">
+					<?php
 
-				for ($i = 0; $i <= 5; $i++) {
-					if ($i == 0) {
-						$nome = 'Instruções';
-					} elseif ($i == 1) {
-						$nome = 'Listar Aparelhos';
-					} elseif ($i == 2) {
-						$nome = 'Gestao de Periférico';
-					} elseif ($i == 3) {
-						$nome = 'Cadastro de Itens';
-					} elseif ($i == 4) {
-						$nome = 'Cadastro de Equipamento';
-					} elseif ($i == 5) {
-						$nome = 'Gestao de Usuario';
-					}
-					$menu = $_GET['menu'];
-					$menuselect = "";
-					if ($i == $menu)
-						$menuselect = "active";
-				?>
-					<a href="pag_inicial.php?menu=<?php echo ($i); ?>&pagina=0" class="<?php echo $menuselect; ?> list-group-item list-group-item-action"><?php echo ($nome); ?></a>
-				<?php  } ?>
-				<a href="logout.php" class="list-group-item list-group-item-action">Sair</a>
+					for ($i = 0; $i <= 5; $i++) {
+						if ($i == 0) {
+							$nome = 'Instruções';
+						} elseif ($i == 1) {
+							$nome = 'Listar Aparelhos';
+						} elseif ($i == 2) {
+							$nome = 'Gestao de Periférico';
+						} elseif ($i == 3) {
+							$nome = 'Cadastro de Itens';
+						} elseif ($i == 4) {
+							$nome = 'Cadastro de Equipamento';
+						} elseif ($i == 5) {
+							$nome = 'Gestao de Usuario';
+						}
+						$menu = $_GET['menu'];
+						$menuselect = "";
+						if ($i == $menu)
+							$menuselect = "active";
+					?>
+						<input type="hidden" id="nivel_Valor" value="<?php echo $_SESSION['nivel_Permissao']?>">
+						<input id="<?php echo ($i); ?>" type="submit" class="<?php echo $menuselect; ?> btn list-group-item list-group-item-action" value="<?php echo ($nome); ?>" style="color:honeydew; border-bottom: 1px solid rgba(255, 255, 255, .5); background-color: #fff0;" onclick="navegar('<?php echo ($i); ?>')"></input>
 
+					<?php  } ?>
+					<a href="logout.php" class="list-group-item list-group-item-action">Sair</a>
+				</div>
 			</div>
 		</div>
 
@@ -122,12 +125,23 @@ if (isset($_SESSION["sessiontime"])) {
 				<div>
 					<?php include '../obj/add-equip.php'; ?>
 				</div>
-			<?php
-			} elseif (isset($_GET['menu']) && $_GET['menu'] == 5) { ?>
-				<div>
-					<?php include '../obj/gestao_users.php'; ?>
-				</div>
-			<?php
+				<?php
+			} elseif (isset($_GET['menu']) && $_GET['menu'] == 5) {
+
+				if (isset($_SESSION['nivel_Permissao'])) {
+					$nivel_Permissao = $_SESSION["nivel_Permissao"];
+				}
+				if ($nivel_Permissao == 1) {
+				?>
+					<div>
+						<?php include '../obj/gestao_users.php'; ?>
+					</div>
+				<?php } elseif ($nivel_Permissao == 0) { ?>
+					<div style="margin: 10% 5%;">
+						<p class="display-1">Voce não possui acesso</p>
+						<p class="h1">Verifique com o administrador da ferramenta</p>
+					</div>
+			<?php }
 			} ?>
 
 			<!-- FIM HTML -->
@@ -140,6 +154,16 @@ if (isset($_SESSION["sessiontime"])) {
 	<!-- Menu Toggle Script -->
 	<script type="text/javascript" src="../js/toggle.js"></script>
 	<!-- Fim Menu Toggle Script -->
+	<script>
+verifica_Valor = document.getElementById("nivel_Valor").value;
+if(verifica_Valor == 0){
+document.getElementById('5').disabled = true;
+}		
+		function navegar(local) {
+			location.href = ('pag_inicial.php?menu=' + local + '&pagina=0');
+			//alert (local);
+		}
+	</script>
 </body>
 
 </html>
