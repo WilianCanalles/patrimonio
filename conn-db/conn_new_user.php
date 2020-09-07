@@ -81,7 +81,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 print_r($result_tb_empresa1[0][0]);
                 $emp_main = $result_tb_empresa1[0][0];
 
-                $query_tb_empresa = "INSERT INTO `tb_user`VALUES ('','$nome','$sobrenome','$email','$usuario',md5('$senha'),'$emp_main')";
+                $query_tb_empresa = "INSERT INTO `tb_user`VALUES ('','$nome','$sobrenome','$email','$usuario',md5('$senha'),1,'$emp_main')";
 
                 $statement = $conexao->prepare($query_tb_empresa);
 

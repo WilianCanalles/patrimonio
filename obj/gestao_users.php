@@ -77,11 +77,23 @@
 
 		}
 
-		function confirma(name) {
-			document.getElementById('name_user_cancela').innerHTML = name.charAt(0).toUpperCase() + name.slice(1);
+		function confirma(verifica, name, empresa) {
+			if (verifica == 'admin') {
+				$("#btn_excluir").attr('onclick', 'delete_adm()');
+				//alert('adm');
+				document.getElementById('name_user_cancela').innerHTML = 'Empresa ' + empresa.charAt(0).toUpperCase() + empresa.slice(1);
+			} else if (verifica == 'usuario') {
+				$("#btn_excluir").attr('onclick', 'excluir()');
+				//alert('user');
+				document.getElementById('name_user_cancela').innerHTML = 'Usuario ' + name.charAt(0).toUpperCase() + name.slice(1);
+			}
+
 		}
 
-		function excluir(id) {
+		function excluir() {
+			id = document.getElementById('name_user_cancela').innerHTML;
+			id = id.slice(8);
+			//alert(id);
 			$(document).ready(function() {
 				$.ajax({
 					url: "../conn-db/conn_user_conf.php",
@@ -147,6 +159,25 @@
 			})
 
 		}
+
+		function delete_adm() {
+			$(document).ready(function() {
+				$.ajax({
+					url: "../conn-db/conn_user_conf.php",
+					method: "POST",
+					data: {
+						verifica: 'delete_adm',
+
+					},
+					success: function(data) {
+						//console.log(data);
+						location.reload();
+						location.href = ('../aplicacao/logout.php');
+					}
+				});
+
+			});
+		}
 		$(document).ready(function() {
 
 			document.addEventListener('keyup', pegaClick);
@@ -201,7 +232,7 @@
 
 						<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable1" style="margin-bottom: 20px" value="Abrir Lista">
 						</input>
-						<input type="button" class="btn btn-danger" style="margin-bottom: 20px" value="Deletar conta Principal">
+						<input type="button" class="btn btn-danger" style="margin-bottom: 20px" value="Deletar Empresa" data-toggle="modal" data-target="#exampleModalCenter" onclick="confirma('admin','<?php echo $_SESSION['usuario'] ?>','<?php echo $_SESSION['empresa'] ?>')">
 						</input>
 						<input type="button" class="btn btn-danger" style="margin-bottom: 20px" value="Lixeira">
 						</input>
@@ -253,7 +284,7 @@
 													<div>
 														<img class="usr_btn" src="../img/key.png" alt="chave" onclick="nivel('<?php echo $line[4] ?>')">
 														<img class="usr_btn" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" onclick="editar('<?php echo $line[4] ?>')">
-														<img class="usr_btn" src="../img/trash.png" alt="lixeira" data-toggle="modal" data-target="#exampleModalCenter" onclick="confirma('<?php echo $line[4] ?>')">
+														<img class="usr_btn" src="../img/trash.png" alt="lixeira" data-toggle="modal" data-target="#exampleModalCenter" onclick="confirma('usuario','<?php echo $line[4] ?>','<?php echo $_SESSION['empresa'] ?>')">
 													</div>
 												</div>
 											<?php } ?>
@@ -282,7 +313,6 @@
 										</div>
 									</div>
 									<div class="modal-body">
-										<div id="result1"></div>
 										<div id="result"></div>
 									</div>
 									<div class="modal-footer">
@@ -299,12 +329,12 @@
 						<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-centered" role="document">
 								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalCenterTitle">Deseja remover usuario <div id="name_user_cancela" style="text-align: center;"></div>
+									<div class="modal-header" style="text-align: center;">
+										<h5 class="modal-title" id="exampleModalCenterTitle">Deseja remover <div id="name_user_cancela" style="text-align: center;"></div>
 										</h5>
 									</div>
 									<div class="modal-footer" style="align-self: center;">
-										<button type="button" class="btn btn-success" onclick="excluir('<?php echo $line[4] ?>')">SIM</button>
+										<button id="btn_excluir" type="button" class="btn btn-success">SIM</button>
 										<button type="button" class="btn btn-danger" data-dismiss="modal">NÃO</button>
 									</div>
 								</div>

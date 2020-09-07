@@ -11,6 +11,8 @@ if (isset($_POST['verifica']) && $_POST['verifica'] == 'excluir') {
     $_SESSION['conn_nivel_user'] = true;
 } elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'editar_user') {
     $_SESSION['conn_edit_value'] = true;
+} elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'delete_adm') {
+    $_SESSION['conn_delete_adm'] = true;
 }
 
 if (isset($_SESSION['conn_excluir_user'])) {
@@ -34,7 +36,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
         $result_tb_usr_nivel = $statement->fetchall(PDO::FETCH_NUM);
         $usr_nivel_cont = $statement->rowCount();
 
-        if ($usr_nivel_cont > 1 || $result_tb_usr_nivel[0][4] != $usuario) {
+        if ($usr_nivel_cont > 1 || mb_strtolower($result_tb_usr_nivel[0][4]) != mb_strtolower($usuario)) {
 
             $query_tb_user = "DELETE FROM `tb_user` WHERE `usuario`= '$usuario'";
 
@@ -55,6 +57,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
     unset($_SESSION['conn_editar_user']);
     unset($_SESSION['conn_nivel_user']);
     unset($_SESSION['conn_edit_value']);
+    unset($_SESSION['conn_delete_adm']);
 } elseif (isset($_SESSION['conn_editar_user'])) {
     $usuario = $_POST['user'];
     // echo $usuario;
@@ -124,8 +127,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
                                 <div>
                                     <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Senha</span>
 
-                                    <input id="input_Senha" 
-                                    class="form-control" style="color: black!important; -webkit-text-security: disc;" placeholder="Senha"></input>
+                                    <input id="input_Senha" class="form-control" style="color: black!important; -webkit-text-security: disc;" placeholder="Senha"></input>
                                 </div>
                                 <!-- FIM Senha -->
                             </div>
@@ -144,6 +146,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
     unset($_SESSION['conn_editar_user']);
     unset($_SESSION['conn_nivel_user']);
     unset($_SESSION['conn_edit_value']);
+    unset($_SESSION['conn_delete_adm']);
 } elseif (isset($_SESSION['conn_nivel_user'])) {
     $usuario = $_POST['user'];
     // echo $usuario;
@@ -199,6 +202,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
     unset($_SESSION['conn_editar_user']);
     unset($_SESSION['conn_nivel_user']);
     unset($_SESSION['conn_edit_value']);
+    unset($_SESSION['conn_delete_adm']);
 } elseif (isset($_SESSION['conn_edit_value'])) {
 
     $novo_Nome = $_POST['novo_Nome'];
@@ -211,7 +215,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
     $novo_Email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
     // Valida o e-mail
-    if (filter_var($novo_Email, FILTER_VALIDATE_EMAIL) || $novo_Email=='') {
+    if (filter_var($novo_Email, FILTER_VALIDATE_EMAIL) || $novo_Email == '') {
         include_once 'conexao.php';
         try {
             $conexao = new PDO(
@@ -221,7 +225,7 @@ if (isset($_SESSION['conn_excluir_user'])) {
             );
 
             if ($novo_Email != '' || $novo_Usuario != '') {
-                
+
                 $query_tb_usr_nivel = "SELECT * FROM `tb_user` WHERE `usuario`= '$novo_Usuario' OR `email`= '$novo_Email'";
 
                 $statement = $conexao->prepare($query_tb_usr_nivel);
@@ -280,11 +284,126 @@ if (isset($_SESSION['conn_excluir_user'])) {
         } catch (PDOException $e) {
             echo '<p>' . $e->getMessage() . '</p>';
         }
-        unset($_SESSION['conn_excluir_user']);
-        unset($_SESSION['conn_editar_user']);
-        unset($_SESSION['conn_nivel_user']);
-        unset($_SESSION['conn_edit_value']);
     } else {
         $_SESSION['err_email'] = true;
     }
+    unset($_SESSION['conn_excluir_user']);
+    unset($_SESSION['conn_editar_user']);
+    unset($_SESSION['conn_nivel_user']);
+    unset($_SESSION['conn_edit_value']);
+    unset($_SESSION['conn_delete_adm']);
+} elseif (isset($_SESSION['conn_delete_adm'])) {
+    // echo $usuario;
+    include_once 'conexao.php';
+    try {
+        $conexao = new PDO(
+            "mysql:host=$host; dbname=$dbname",
+            "$user",
+            "$pass"
+        );
+        $query_tb_user = "DELETE FROM `tb_equipamento`WHERE `emp_Principal` = '$emp_principal'";
+
+        $statement = $conexao->prepare($query_tb_user);
+
+        $statement->execute();
+
+        $result_tb_user = $statement->fetchall(PDO::FETCH_NUM);
+        print_r($result_tb_user);
+        //=====================================================================================
+        
+        $query_tb_user = "DELETE FROM `tb_fabricante` WHERE `emp_Principal` = '$emp_principal'";
+
+        $statement = $conexao->prepare($query_tb_user);
+
+        $statement->execute();
+
+        $result_tb_user = $statement->fetchall(PDO::FETCH_NUM);
+        print_r($result_tb_user);
+        //=====================================================================================
+        
+        
+        $query_tb_user = "DELETE FROM `tb_fornecedor` WHERE `emp_Principal` = '$emp_principal'";
+
+        $statement = $conexao->prepare($query_tb_user);
+
+        $statement->execute();
+
+        $result_tb_user = $statement->fetchall(PDO::FETCH_NUM);
+        print_r($result_tb_user);
+        //=====================================================================================
+        
+        
+        $query_tb_user = "DELETE FROM `tb_local` WHERE `emp_Principal` = '$emp_principal'";
+
+        $statement = $conexao->prepare($query_tb_user);
+
+        $statement->execute();
+
+        $result_tb_user = $statement->fetchall(PDO::FETCH_NUM);
+        print_r($result_tb_user);
+        //=====================================================================================
+        
+        
+        $query_tb_user = "DELETE FROM `tb_modelo_equipamento` WHERE `emp_Principal` = '$emp_principal'";
+
+        $statement = $conexao->prepare($query_tb_user);
+
+        $statement->execute();
+
+        $result_tb_user = $statement->fetchall(PDO::FETCH_NUM);
+        print_r($result_tb_user);
+        //=====================================================================================
+        
+        
+        $query_tb_user = "DELETE FROM `tb_subempresa` WHERE `emp_Principal` = '$emp_principal'";
+
+        $statement = $conexao->prepare($query_tb_user);
+
+        $statement->execute();
+
+        $result_tb_user = $statement->fetchall(PDO::FETCH_NUM);
+        print_r($result_tb_user);
+        //=====================================================================================
+        
+        
+        $query_tb_user = "DELETE FROM `tb_tipo_equipamento` WHERE `emp_Principal` = '$emp_principal'";
+
+        $statement = $conexao->prepare($query_tb_user);
+
+        $statement->execute();
+
+        $result_tb_user = $statement->fetchall(PDO::FETCH_NUM);
+        print_r($result_tb_user);
+        //=====================================================================================
+        
+        
+        $query_tb_user = "DELETE FROM `tb_user` WHERE `emp_Principal` = '$emp_principal'";
+
+        $statement = $conexao->prepare($query_tb_user);
+
+        $statement->execute();
+
+        $result_tb_user = $statement->fetchall(PDO::FETCH_NUM);
+        print_r($result_tb_user);
+        //=====================================================================================
+        
+        
+        $query_tb_user = "DELETE FROM `tb_empresa` WHERE `codigo` = '$emp_principal'";
+
+        $statement = $conexao->prepare($query_tb_user);
+
+        $statement->execute();
+
+        $result_tb_user = $statement->fetchall(PDO::FETCH_NUM);
+        print_r($result_tb_user);
+        $_SESSION['exclusao_user'] = true;
+    } catch (PDOException $e) {
+        echo '<p>' . $e->getMessage() . '</p>';
+    }
+
+    unset($_SESSION['conn_excluir_user']);
+    unset($_SESSION['conn_editar_user']);
+    unset($_SESSION['conn_nivel_user']);
+    unset($_SESSION['conn_edit_value']);
+    unset($_SESSION['conn_delete_adm']);
 }
