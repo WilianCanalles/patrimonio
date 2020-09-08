@@ -59,7 +59,7 @@
                                     <option>----</option>
                                 <?php } else { ?>
                                     <?php foreach ($result_tb_tipo_equipamento as $line) { ?>
-                                        <option value="<?php echo $line[0] ?>"><?php echo $line[1] ?></option>
+                                        <option value="<?php echo $line[1] ?>"><?php echo $line[2] ?></option>
                                 <?php }
                                 } ?>
                             </select>
@@ -73,7 +73,7 @@
                                     <option>----</option>
                                 <?php } else { ?>
                                     <?php foreach ($result_tb_modelo_equipamento as $line) { ?>
-                                        <option value="<?php echo $line[0] ?>"><?php echo $line[1] ?></option>
+                                        <option value="<?php echo $line[1] ?>"><?php echo $line[2] ?></option>
                                 <?php }
                                 } ?>
                             </select>
@@ -87,7 +87,7 @@
                                     <option>----</option>
                                 <?php } else { ?>
                                     <?php foreach ($result_tb_fabricante as $line) { ?>
-                                        <option value="<?php echo $line[0] ?>"><?php echo $line[1] ?></option>
+                                        <option value="<?php echo $line[1] ?>"><?php echo $line[2] ?></option>
                                 <?php }
                                 } ?>
                             </select>
@@ -107,7 +107,7 @@
                                     <option>----</option>
                                 <?php } else { ?>
                                     <?php foreach ($result_tb_subEmp as $line) { ?>
-                                        <option value="<?php echo $line[0] ?>"><?php echo $line[1] ?></option>
+                                        <option value="<?php echo $line[1] ?>"><?php echo $line[2] ?></option>
                                 <?php }
                                 } ?>
                             </select>
@@ -121,7 +121,7 @@
                                     <option>----</option>
                                 <?php } else { ?>
                                     <?php foreach ($result_tb_local as $line) { ?>
-                                        <option value="<?php echo $line[0] ?>"><?php echo $line[1] ?></option>
+                                        <option value="<?php echo $line[1] ?>"><?php echo $line[2] ?></option>
                                 <?php }
                                 } ?>
                             </select>
@@ -135,7 +135,7 @@
                                     <option>----</option>
                                 <?php } else { ?>
                                     <?php foreach ($result_tb_fornecedor as $line) { ?>
-                                        <option value="<?php echo $line[0] ?>"><?php echo $line[1] ?></option>
+                                        <option value="<?php echo $line[1] ?>"><?php echo $line[2] ?></option>
                                 <?php }
                                 } ?>
                             </select>

@@ -24,7 +24,7 @@ if (count($recebe_lista_itens) > 0) {
         <?php
         foreach ($recebe_lista_itens as $lista_itens) {
         ?>
-            <p><?php echo $lista_itens[0] . '&nbsp&nbsp&nbsp&nbsp' . $lista_itens[1] ?></p>
+            <p><?php echo $lista_itens[1] . '&nbsp&nbsp&nbsp&nbsp' . $lista_itens[2] ?></p>
             <p><?php echo "-------------------------------------------------" ?> </p>
 
         <?php }

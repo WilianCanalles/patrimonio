@@ -9,7 +9,7 @@ $pagina = intval($_GET['pagina']);
 
 //==========================================================
 // Equipamento2 LIMIT
-$query_tb_equipamento2 = "SELECT `tb_equipamento`.`codigo`,
+$query_tb_equipamento2 = "SELECT `tb_equipamento`.`extra_cod`,
 `tb_tipo_equipamento`.`tipo_equipamento`, 
 `tb_modelo_equipamento`.`modelo_equipamento`, 
 `tb_fabricante`.`fabricante`,
@@ -24,14 +24,14 @@ a.`empresa`,
 `situacao`
 FROM `tb_equipamento`
 INNER JOIN `tb_subempresa` AS a ON `tb_equipamento`.`empresa` = a.`codigo`
-INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`codigo`
-INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`codigo`
-INNER JOIN `tb_local` ON `tb_equipamento`.`local` = `tb_local`.`codigo`
-INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`codigo`
-INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`codigo`
+INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`extra_cod`
+INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`extra_cod`
+INNER JOIN `tb_local` ON `tb_equipamento`.`local` = `tb_local`.`extra_cod`
+INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`extra_cod`
+INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`extra_cod`
 
     WHERE `tb_equipamento`.`emp_Principal` = $emp_principal
-    ORDER BY `codigo` ASC
+    ORDER BY `extra_cod` ASC
     LIMIT $pagina, $itens_por_pagina";
 
 $statement2 = $conexao->prepare($query_tb_equipamento2);

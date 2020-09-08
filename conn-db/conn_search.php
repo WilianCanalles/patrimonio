@@ -18,10 +18,10 @@ try {
         "$pass"
     );
     if (isset($_SESSION['conn_pesq'])) {
- 
+
         if (isset($_POST["query"])) {
             $query_pesquisa = $_POST["query"];
-            $query_tb_empresa = "SELECT `tb_equipamento`.`codigo`,
+            $query_tb_empresa = "SELECT `tb_equipamento`.`extra_cod`,
             `tb_tipo_equipamento`.`tipo_equipamento`, 
             `tb_modelo_equipamento`.`modelo_equipamento`, 
             `tb_fabricante`.`fabricante`,
@@ -34,14 +34,14 @@ try {
             `situacao`,
             `informacoes`
             FROM `tb_equipamento`
-            INNER JOIN `tb_subempresa` AS a ON `tb_equipamento`.`empresa` = a.`codigo`
-            INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`codigo`
-            INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`codigo`
-            INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`codigo`
-            INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`codigo`
-            INNER JOIN `tb_local` ON `tb_equipamento`.`local` = `tb_local`.`codigo`
+            INNER JOIN `tb_subempresa` AS a ON `tb_equipamento`.`empresa` = a.`extra_cod`
+            INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`extra_cod`
+            INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`extra_cod`
+            INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`extra_cod`
+            INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`extra_cod`
+            INNER JOIN `tb_local` ON `tb_equipamento`.`local` = `tb_local`.`extra_cod`
             INNER JOIN `tb_empresa` AS b ON `tb_equipamento`.`emp_Principal` = b.`codigo`
-            WHERE (`tb_equipamento`.`codigo` LIKE '%" . $query_pesquisa . "%' OR 
+            WHERE (`tb_equipamento`.`extra_cod` LIKE '%" . $query_pesquisa . "%' OR 
             `tb_tipo_equipamento`.`tipo_equipamento` LIKE '%" . $query_pesquisa . "%' OR  
             `tb_modelo_equipamento`.`modelo_equipamento` LIKE '%" . $query_pesquisa . "%' OR  
             `tb_fabricante`.`fabricante` LIKE '%" . $query_pesquisa . "%' OR 
@@ -52,10 +52,17 @@ try {
             `nota_fiscal` LIKE '%" . $query_pesquisa . "%' OR 
             `data_compra` LIKE '%" . $query_pesquisa . "%' OR
             `situacao` LIKE '%" . $query_pesquisa . "%' OR
-            `informacoes` LIKE '%" . $query_pesquisa . "%') AND (`tb_equipamento`.`emp_Principal` = $emp_principal)";
-    
+            `informacoes` LIKE '%" . $query_pesquisa . "%') AND 
+            (`tb_equipamento`.`emp_Principal` = $emp_principal AND 
+             a.`extra_cod` = $emp_principal AND
+              `tb_tipo_equipamento`.`extra_cod` = $emp_principal AND
+               `tb_modelo_equipamento`.`extra_cod` = $emp_principal AND 
+               `tb_fabricante`.`extra_cod` = $emp_principal AND 
+               `tb_fornecedor`.`extra_cod` = $emp_principal AND 
+               `tb_local`.`extra_cod` = $emp_principal )";
+
             $statement = $conexao->prepare($query_tb_empresa);
-    
+
             $statement->execute();
             $result_tb_empresa = $statement->fetchall();
             $num_total = $statement->rowCount();
@@ -63,12 +70,11 @@ try {
 
         unset($_SESSION['conn_pesq']);
         unset($_SESSION['conn_scan']);
-
     } elseif (isset($_SESSION['conn_scan'])) {
 
         if (isset($_POST["query"])) {
             $query_pesquisa = $_POST["query"];
-            $query_tb_empresa = "SELECT `tb_equipamento`.`codigo`,
+            $query_tb_empresa = "SELECT `tb_equipamento`.`extra_cod`,
             `tb_tipo_equipamento`.`tipo_equipamento`, 
             `tb_modelo_equipamento`.`modelo_equipamento`, 
             `tb_fabricante`.`fabricante`,
@@ -81,17 +87,17 @@ try {
             `situacao`,
             `informacoes`
             FROM `tb_equipamento`
-            INNER JOIN `tb_subempresa` AS a ON `tb_equipamento`.`empresa` = a.`codigo`
-            INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`codigo`
-            INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`codigo`
-            INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`codigo`
-            INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`codigo`
-            INNER JOIN `tb_local` ON `tb_equipamento`.`local` = `tb_local`.`codigo`
+            INNER JOIN `tb_subempresa` AS a ON `tb_equipamento`.`empresa` = a.`extra_cod`
+            INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`extra_cod`
+            INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`extra_cod`
+            INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`extra_cod`
+            INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`extra_cod`
+            INNER JOIN `tb_local` ON `tb_equipamento`.`local` = `tb_local`.`extra_cod`
             INNER JOIN `tb_empresa` AS b ON `tb_equipamento`.`emp_Principal` = b.`codigo`
-            WHERE (`tb_equipamento`.`codigo` = '$query_pesquisa') AND (`tb_equipamento`.`emp_Principal` = $emp_principal)";
-    
+            WHERE (`tb_equipamento`.`extra_cod` = '$query_pesquisa') AND (`tb_equipamento`.`emp_Principal` = $emp_principal)";
+
             $statement = $conexao->prepare($query_tb_empresa);
-    
+
             $statement->execute();
             $result_tb_empresa = $statement->fetchall();
             $num_total = $statement->rowCount();
@@ -100,8 +106,8 @@ try {
         unset($_SESSION['conn_pesq']);
         unset($_SESSION['conn_scan']);
     }
-   
-/*     echo "<pre>";
+/*
+    echo "<pre>";
     print_r($result_tb_empresa);
     echo "</pre>";*/
     if ($num_total > 0) {

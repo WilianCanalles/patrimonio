@@ -29,6 +29,7 @@
 </head>
 
 <body>
+<?php include 'alert.php'; ?>
 	<section>
 		<form method="post" action="../conn-db/conn_gravar_db.php" class="">
 			<div class="container">

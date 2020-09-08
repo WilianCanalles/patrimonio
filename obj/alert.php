@@ -161,8 +161,30 @@ endif;
 unset($_SESSION['no_sessiontime']);
 ?>
 <!-- Fim Mensagem de Fim de sessao -->
-
-
+<!-- Mensagem de Master Unico -->
+<?php
+if (isset($_SESSION['err_add_item'])) :
+?>
+    <div id="msg_alert" class="animated bg-danger">
+        <span style="font-weight: bold">Ja possui cadastro desse item</br>Se necessário entre em contato</br>com o desenvolvedor.</span>
+    </div>
+<?php
+endif;
+unset($_SESSION['err_add_item']);
+?>
+<!-- Fim Mensagem de Master Unico -->
+<!-- Mensagem de Master Unico -->
+<?php
+if (isset($_SESSION['add_item'])) :
+?>
+    <div id="msg_alert" class="animated bg-success">
+        <span style="font-weight: bold">Cadastro realizado.</span>
+    </div>
+<?php
+endif;
+unset($_SESSION['add_item']);
+?>
+<!-- Fim Mensagem de Master Unico -->
 <!-- Mensagem de erro -->
 <?php
 if (isset($_SESSION['login_wrong'])) :
