@@ -2,6 +2,37 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+$emp_principal = $_SESSION['emp_principal'];
+include_once 'conexao.php';
+
+/*
+try {
+    $conexao = new PDO(
+        "mysql:host=$host; dbname=$dbname",
+        "$user",
+        "$pass"
+    );
+    $query_tb_empresa1 = "SELECT EE.`extra_cod`, T.`tipo_equipamento`, M.`modelo_equipamento`, F.`fabricante`, `num_serie`, S.`empresa`, L.`local`, FO.`fornecedor`, `nota_fiscal`, `data_compra`, `situacao`, `informacoes`, `perifericos`
+    FROM `tb_equipamento` AS EE 
+    LEFT JOIN (SELECT * FROM `tb_fabricante` WHERE `tb_fabricante`.`emp_Principal` = $emp_principal) AS F ON F.`extra_cod` = EE.`fabricante` 
+    LEFT JOIN (SELECT * FROM `tb_fornecedor` WHERE `tb_fornecedor`.`emp_Principal` = $emp_principal) AS FO ON FO.`extra_cod` = EE.`fornecedor` 
+    LEFT JOIN (SELECT * FROM `tb_local` WHERE `tb_local`.`emp_Principal` = $emp_principal) AS L ON L.`extra_cod` = EE.`local` 
+    LEFT JOIN (SELECT * FROM `tb_modelo_equipamento` WHERE `tb_modelo_equipamento`.`emp_Principal` = $emp_principal) AS M ON M.`extra_cod` = EE.`modelo_equipamento` 
+    LEFT JOIN (SELECT * FROM `tb_subempresa` WHERE `tb_subempresa`.`emp_Principal` = $emp_principal) AS S ON S.`extra_cod` = EE.`empresa` 
+    LEFT JOIN (SELECT * FROM `tb_tipo_equipamento` WHERE `tb_tipo_equipamento`.`emp_Principal` = $emp_principal) AS T ON T.`extra_cod` = EE.`tipo_equipamento` 
+    WHERE EE.`emp_Principal` = $emp_principal";
+
+    $statement = $conexao->prepare($query_tb_empresa1);
+
+    $statement->execute();
+    $result_tb_empresa = $statement->fetchall(PDO::FETCH_ASSOC);
+   
+} catch (PDOException $e) {
+    echo '<p>' . $e->getMessage() . '</p>';
+}
+echo "<pre>";
+print_r($result_tb_empresa);
+echo "</pre>";*/
 //print_r($_SESSION);
 if (isset($_POST['valor']) && $_POST['valor'] == 'pesq') {
     $_SESSION['conn_pesq'] = true;
@@ -21,45 +52,17 @@ try {
 
         if (isset($_POST["query"])) {
             $query_pesquisa = $_POST["query"];
-            $query_tb_empresa = "SELECT `tb_equipamento`.`extra_cod`,
-            `tb_tipo_equipamento`.`tipo_equipamento`, 
-            `tb_modelo_equipamento`.`modelo_equipamento`, 
-            `tb_fabricante`.`fabricante`,
-            `num_serie`,
-            a.`empresa`,
-            `tb_fornecedor`.`fornecedor`,
-            `tb_local`.`local`,
-            `nota_fiscal`,
-            `data_compra`,
-            `situacao`,
-            `informacoes`
-            FROM `tb_equipamento`
-            INNER JOIN `tb_subempresa` AS a ON `tb_equipamento`.`empresa` = a.`extra_cod`
-            INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`extra_cod`
-            INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`extra_cod`
-            INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`extra_cod`
-            INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`extra_cod`
-            INNER JOIN `tb_local` ON `tb_equipamento`.`local` = `tb_local`.`extra_cod`
-            INNER JOIN `tb_empresa` AS b ON `tb_equipamento`.`emp_Principal` = b.`codigo`
-            WHERE (`tb_equipamento`.`extra_cod` LIKE '%" . $query_pesquisa . "%' OR 
-            `tb_tipo_equipamento`.`tipo_equipamento` LIKE '%" . $query_pesquisa . "%' OR  
-            `tb_modelo_equipamento`.`modelo_equipamento` LIKE '%" . $query_pesquisa . "%' OR  
-            `tb_fabricante`.`fabricante` LIKE '%" . $query_pesquisa . "%' OR 
-            a.`empresa` LIKE '%" . $query_pesquisa . "%' OR
-            `num_serie` LIKE '%" . $query_pesquisa . "%' OR 
-            `tb_fornecedor`.`fornecedor` LIKE '%" . $query_pesquisa . "%' OR 
-            `tb_local`.`local` LIKE '%" . $query_pesquisa . "%' OR 
-            `nota_fiscal` LIKE '%" . $query_pesquisa . "%' OR 
-            `data_compra` LIKE '%" . $query_pesquisa . "%' OR
-            `situacao` LIKE '%" . $query_pesquisa . "%' OR
-            `informacoes` LIKE '%" . $query_pesquisa . "%') AND 
-            (`tb_equipamento`.`emp_Principal` = $emp_principal AND 
-             a.`extra_cod` = $emp_principal AND
-              `tb_tipo_equipamento`.`extra_cod` = $emp_principal AND
-               `tb_modelo_equipamento`.`extra_cod` = $emp_principal AND 
-               `tb_fabricante`.`extra_cod` = $emp_principal AND 
-               `tb_fornecedor`.`extra_cod` = $emp_principal AND 
-               `tb_local`.`extra_cod` = $emp_principal )";
+
+            $query_tb_empresa = "SELECT EE.`extra_cod`, T.`tipo_equipamento`, M.`modelo_equipamento`, F.`fabricante`, `num_serie`, S.`empresa`, L.`local`, FO.`fornecedor`, `nota_fiscal`, `data_compra`, `situacao`, `informacoes`, `perifericos`
+            FROM `tb_equipamento` AS EE 
+            LEFT JOIN (SELECT * FROM `tb_fabricante` WHERE `tb_fabricante`.`emp_Principal` = $emp_principal) AS F ON F.`extra_cod` = EE.`fabricante` 
+            LEFT JOIN (SELECT * FROM `tb_fornecedor` WHERE `tb_fornecedor`.`emp_Principal` = $emp_principal) AS FO ON FO.`extra_cod` = EE.`fornecedor` 
+            LEFT JOIN (SELECT * FROM `tb_local` WHERE `tb_local`.`emp_Principal` = $emp_principal) AS L ON L.`extra_cod` = EE.`local` 
+            LEFT JOIN (SELECT * FROM `tb_modelo_equipamento` WHERE `tb_modelo_equipamento`.`emp_Principal` = $emp_principal) AS M ON M.`extra_cod` = EE.`modelo_equipamento` 
+            LEFT JOIN (SELECT * FROM `tb_subempresa` WHERE `tb_subempresa`.`emp_Principal` = $emp_principal) AS S ON S.`extra_cod` = EE.`empresa` 
+            LEFT JOIN (SELECT * FROM `tb_tipo_equipamento` WHERE `tb_tipo_equipamento`.`emp_Principal` = $emp_principal) AS T ON T.`extra_cod` = EE.`tipo_equipamento` 
+            WHERE (EE.`extra_cod` LIKE '%" . $query_pesquisa . "%' OR T.`tipo_equipamento` LIKE '%" . $query_pesquisa . "%' OR M.`modelo_equipamento` LIKE '%" . $query_pesquisa . "%' OR F.`fabricante` LIKE '%" . $query_pesquisa . "%' OR `num_serie` LIKE '%" . $query_pesquisa . "%' OR S.`empresa` LIKE '%" . $query_pesquisa . "%' OR L.`local` LIKE '%" . $query_pesquisa . "%' OR FO.`fornecedor` LIKE '%" . $query_pesquisa . "%' OR `nota_fiscal` LIKE '%" . $query_pesquisa . "%' OR `data_compra` LIKE '%" . $query_pesquisa . "%' OR `situacao` LIKE '%" . $query_pesquisa . "%' OR `informacoes` LIKE '%" . $query_pesquisa . "%') AND (EE.`emp_Principal` = $emp_principal)";
+
 
             $statement = $conexao->prepare($query_tb_empresa);
 
@@ -74,28 +77,16 @@ try {
 
         if (isset($_POST["query"])) {
             $query_pesquisa = $_POST["query"];
-            $query_tb_empresa = "SELECT `tb_equipamento`.`extra_cod`,
-            `tb_tipo_equipamento`.`tipo_equipamento`, 
-            `tb_modelo_equipamento`.`modelo_equipamento`, 
-            `tb_fabricante`.`fabricante`,
-            `num_serie`,
-            a.`empresa`,
-            `tb_fornecedor`.`fornecedor`,
-            `tb_local`.`local`,
-            `nota_fiscal`,
-            `data_compra`,
-            `situacao`,
-            `informacoes`
-            FROM `tb_equipamento`
-            INNER JOIN `tb_subempresa` AS a ON `tb_equipamento`.`empresa` = a.`extra_cod`
-            INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`extra_cod`
-            INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`extra_cod`
-            INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`extra_cod`
-            INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`extra_cod`
-            INNER JOIN `tb_local` ON `tb_equipamento`.`local` = `tb_local`.`extra_cod`
-            INNER JOIN `tb_empresa` AS b ON `tb_equipamento`.`emp_Principal` = b.`codigo`
-            WHERE (`tb_equipamento`.`extra_cod` = '$query_pesquisa') AND (`tb_equipamento`.`emp_Principal` = $emp_principal)";
-
+            $query_tb_empresa = "SELECT EE.`extra_cod`, T.`tipo_equipamento`, M.`modelo_equipamento`, F.`fabricante`, `num_serie`, S.`empresa`, L.`local`, FO.`fornecedor`, `nota_fiscal`, `data_compra`, `situacao`, `informacoes`
+            FROM `tb_equipamento` AS EE 
+            LEFT JOIN (SELECT * FROM `tb_fabricante` WHERE `tb_fabricante`.`emp_Principal` = $emp_principal) AS F ON F.`extra_cod` = EE.`fabricante` 
+            LEFT JOIN (SELECT * FROM `tb_fornecedor` WHERE `tb_fornecedor`.`emp_Principal` = $emp_principal) AS FO ON FO.`extra_cod` = EE.`fornecedor` 
+            LEFT JOIN (SELECT * FROM `tb_local` WHERE `tb_local`.`emp_Principal` = $emp_principal) AS L ON L.`extra_cod` = EE.`local` 
+            LEFT JOIN (SELECT * FROM `tb_modelo_equipamento` WHERE `tb_modelo_equipamento`.`emp_Principal` = $emp_principal) AS M ON M.`extra_cod` = EE.`modelo_equipamento` 
+            LEFT JOIN (SELECT * FROM `tb_subempresa` WHERE `tb_subempresa`.`emp_Principal` = $emp_principal) AS S ON S.`extra_cod` = EE.`empresa` 
+            LEFT JOIN (SELECT * FROM `tb_tipo_equipamento` WHERE `tb_tipo_equipamento`.`emp_Principal` = $emp_principal) AS T ON T.`extra_cod` = EE.`tipo_equipamento` 
+            WHERE (EE.`extra_cod` = '$query_pesquisa') AND (EE.`emp_Principal` = $emp_principal)";
+            
             $statement = $conexao->prepare($query_tb_empresa);
 
             $statement->execute();
@@ -106,7 +97,7 @@ try {
         unset($_SESSION['conn_pesq']);
         unset($_SESSION['conn_scan']);
     }
-/*
+    /*
     echo "<pre>";
     print_r($result_tb_empresa);
     echo "</pre>";*/

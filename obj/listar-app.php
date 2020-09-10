@@ -9,28 +9,15 @@ $pagina = intval($_GET['pagina']);
 
 //==========================================================
 // Equipamento2 LIMIT
-$query_tb_equipamento2 = "SELECT `tb_equipamento`.`extra_cod`,
-`tb_tipo_equipamento`.`tipo_equipamento`, 
-`tb_modelo_equipamento`.`modelo_equipamento`, 
-`tb_fabricante`.`fabricante`,
-`num_serie`,
-a.`empresa`,
-`tb_fornecedor`.`fornecedor`,
-`nota_fiscal`,
-`data_compra`,
-`informacoes`,
-`perifericos`,
-`tb_local`.`local`,
-`situacao`
-FROM `tb_equipamento`
-INNER JOIN `tb_subempresa` AS a ON `tb_equipamento`.`empresa` = a.`codigo`
-INNER JOIN `tb_tipo_equipamento` ON `tb_equipamento`.`tipo_equipamento` = `tb_tipo_equipamento`.`extra_cod`
-INNER JOIN `tb_modelo_equipamento` ON `tb_equipamento`.`modelo_equipamento` = `tb_modelo_equipamento`.`extra_cod`
-INNER JOIN `tb_local` ON `tb_equipamento`.`local` = `tb_local`.`extra_cod`
-INNER JOIN `tb_fabricante` ON `tb_equipamento`.`fabricante` = `tb_fabricante`.`extra_cod`
-INNER JOIN `tb_fornecedor` ON `tb_equipamento`.`fornecedor` = `tb_fornecedor`.`extra_cod`
-
-    WHERE `tb_equipamento`.`emp_Principal` = $emp_principal
+$query_tb_equipamento2 = "SELECT EE.`extra_cod`, T.`tipo_equipamento`, M.`modelo_equipamento`, F.`fabricante`, `num_serie`, S.`empresa`, L.`local`, FO.`fornecedor`, `nota_fiscal`, `data_compra`, `situacao`, `informacoes`, `perifericos`
+FROM `tb_equipamento` AS EE 
+LEFT JOIN (SELECT * FROM `tb_fabricante` WHERE `tb_fabricante`.`emp_Principal` = $emp_principal) AS F ON F.`extra_cod` = EE.`fabricante` 
+LEFT JOIN (SELECT * FROM `tb_fornecedor` WHERE `tb_fornecedor`.`emp_Principal` = $emp_principal) AS FO ON FO.`extra_cod` = EE.`fornecedor` 
+LEFT JOIN (SELECT * FROM `tb_local` WHERE `tb_local`.`emp_Principal` = $emp_principal) AS L ON L.`extra_cod` = EE.`local` 
+LEFT JOIN (SELECT * FROM `tb_modelo_equipamento` WHERE `tb_modelo_equipamento`.`emp_Principal` = $emp_principal) AS M ON M.`extra_cod` = EE.`modelo_equipamento` 
+LEFT JOIN (SELECT * FROM `tb_subempresa` WHERE `tb_subempresa`.`emp_Principal` = $emp_principal) AS S ON S.`extra_cod` = EE.`empresa` 
+LEFT JOIN (SELECT * FROM `tb_tipo_equipamento` WHERE `tb_tipo_equipamento`.`emp_Principal` = $emp_principal) AS T ON T.`extra_cod` = EE.`tipo_equipamento` 
+WHERE EE.`emp_Principal` = $emp_principal
     ORDER BY `extra_cod` ASC
     LIMIT $pagina, $itens_por_pagina";
 
@@ -38,7 +25,7 @@ $statement2 = $conexao->prepare($query_tb_equipamento2);
 
 $statement2->execute();
 
-$result_tb_equipamento2 = $statement2->fetchall(PDO::FETCH_NUM);
+$result_tb_equipamento2 = $statement2->fetchall(PDO::FETCH_ASSOC);
 $num = $statement2->rowCount();
 
 $num_paginas = ceil($num_total / $itens_por_pagina);
@@ -130,35 +117,35 @@ $num_paginas = ceil($num_total / $itens_por_pagina);
                             ?>
                                     <div class="form-group col-lg-4">
                                         <label class="input-group-text" for="codigo">Código</label>
-                                        <a id="codinput" class="input-group-text inputgroup-bg"><?php echo $lista_itens['0']; ?></a>
+                                        <a id="codinput" class="input-group-text inputgroup-bg"><?php echo $lista_itens['extra_cod']; ?></a>
                                         <label class="input-group-text" for="tipo">Tipo</label>
-                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['1']; ?></a>
+                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['tipo_equipamento']; ?></a>
                                         <label class="input-group-text" for="modelo">Modelo</label>
-                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['2']; ?></a>
+                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['modelo_equipamento']; ?></a>
                                         <label class="input-group-text" for="fabricante">Fabricante</label>
-                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['3']; ?></a>
+                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['fabricante']; ?></a>
                                         <label class="input-group-text" for="serie">N° Serie</label>
-                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['4']; ?></a>
+                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['num_serie']; ?></a>
                                     </div>
                                     <div class="form-group col-lg-4">
                                         <label class="input-group-text" for="empresa">Empresa</label>
-                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['5']; ?></a>
+                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['empresa']; ?></a>
                                         <label class="input-group-text" for="fornecedor">Fornecedor</label>
-                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['6']; ?></a>
+                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['fornecedor']; ?></a>
                                         <label class="input-group-text" for="nf">Nota Fiscal</label>
-                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['7']; ?></a>
+                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['nota_fiscal']; ?></a>
                                         <label class="input-group-text" for="local">Local</label>
-                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['11']; ?></a>
+                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['local']; ?></a>
                                         <label class="input-group-text" for="situacao">Situação</label>
-                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['12']; ?></a>
+                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['situacao']; ?></a>
                                     </div>
                                     <div class="form-group col-lg-4">
                                         <label class="input-group-text" for="data">Data Compra</label>
-                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['8']; ?></a>
+                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['data_compra']; ?></a>
                                         <label class="input-group-text" for="info">Informações</label>
-                                        <a class="input-group-text inputgroup-bg" style="white-space: normal;"><?php echo $lista_itens['9']; ?></a>
+                                        <a class="input-group-text inputgroup-bg" style="white-space: normal;"><?php echo $lista_itens['informacoes']; ?></a>
                                         <label class="input-group-text" for="periferico">Periferico</label>
-                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['10']; ?></a>
+                                        <a class="input-group-text inputgroup-bg"><?php echo $lista_itens['perifericos']; ?></a>
                                     </div>
                                 <?php }
                                 ?>
