@@ -62,6 +62,7 @@ if (isset($_SESSION['conn_envio_equip'])) {
             $statement = $conexao->prepare($query_tb_equipamento);
 
             $statement->execute();
+            $_SESSION['add_item'] = true;
         } catch (PDOException $e) {
             echo '<p>' . $e->getMessage() . '</p>';
         }

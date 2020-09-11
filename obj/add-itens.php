@@ -118,7 +118,7 @@
 								<!-- Fim Label -->
 								<!-- Input -->
 								<input type="hidden" name="tabela" value="compra">
-								<input name="cad_fornecedor" class="form-control" name="cad_fornecedor" type="text" id="inputFornecedor" placeholder="Local de Fornecedor" required>
+								<input name="cad_fornecedor" class="form-control" name="cad_fornecedor" type="text" id="inputFornecedor" placeholder="Fornecedor" required>
 								<!-- Fim Input -->
 							</div>
 							<div class="col-md-4 form-group align-self-end">
@@ -155,7 +155,7 @@
 								<!-- Fim Label -->
 								<!-- Input -->
 								<input type="hidden" name="tabela" value="local">
-								<input name="cad_local" class="form-control" name="cad_local" type="text" id="inputLocal" placeholder="Cadastro de Local" required>
+								<input name="cad_local" class="form-control" name="cad_local" type="text" id="inputLocal" placeholder="Local" required>
 								<!-- Fim Input -->
 							</div>
 							<div class="col-md-4 form-group align-self-end">

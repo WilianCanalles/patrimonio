@@ -15,20 +15,21 @@
 
 
     <!-- Bootstrap core JavaScript -->
+
+    <script type="text/javascript" src="../js/jquery-3.5.0.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../js/jquery.mask.min.js"></script>
 
-    <script type="text/javascript" src="../js/jquery-3.5.0.js"></script>
     <!-- Custom styles for this template -->
     <link href="../css/style.css" rel="stylesheet">
-    <script type="text/javascript" src="../js/js_cadastro.js"></script>
 
 
 </head>
 
 <body>
+    <?php include 'alert.php'; ?>
     <section>
         <form method="post" action="../conn-db/conn_gravar_db.php" name="form12" class="">
             <div class="container">
@@ -153,9 +154,17 @@
                             <input class="form-control" name="data" type="text" id="inputData" inputmode="numeric" placeholder="<?php echo date("d/m/Y") ?>">
                             <!-- Fim Input -->
                             <!-- Msg Erro -->
-                            <div class="bg-danger " id="div-erro" style="text-align: center;display: none; margin: 10px 0px; padding:15px 0px">
-                                <span id="msg_data" style="font-weight: bold"></span>
+
+
+                            <!-- Mensagem de Master Unico -->
+
+                            <div id="msg_data" class="animated bg-danger" style="color:honeydew; text-align: center;display: none; margin: 10px 0px; padding:15px 0px">
+                                <span style="font-weight: bold"></span>
                             </div>
+
+                            <!-- Fim Mensagem de Master Unico -->
+
+
                             <!-- Fim Msg Erro -->
                             <!-- Label -->
                             <label for="inputEmail">Situação</label>
@@ -187,8 +196,39 @@
 
         </form>
 
-
     </section>
+
 </body>
+<script>
+    $(document).ready(function() {
+        $("#inputData").mask("00/00/0000");
+    })
+
+    display = document.getElementById("msg_data").style.display;
+
+    function validar() {
+
+        var nome = form12.data.value;
+        var n = nome.length;
+        var today = new Date();
+        var date = String(today.getDate()).padStart(2, '0') + '/' + String(today.getMonth() + 1).padStart(2, '0') + '/' + today.getFullYear(); //Retorna data do servidor
+
+        if (n == 0) { //valida se o campo data esta vazio caso esteja o campo é preenchido com a data atual do servidor
+
+            document.getElementById('inputData').value = date;
+            return true;
+        }
+        if (n > 0 && n <= 8) { //valida se o campo data esta preenchido conforme a mascara 00/00/0000
+            document.getElementById("msg_data").innerHTML = "Digite ano completo";
+
+            form12.data.focus();
+
+            document.getElementById("msg_data").style.display = "Block"; //faz aparecer a mensagem de erro.
+
+            return false;
+        }
+
+    }
+</script>
 
 </html>
