@@ -63,7 +63,7 @@ if (isset($_SESSION["sessiontime"])) {
 						if ($i == 0) {
 							$nome = 'Instruções';
 						} elseif ($i == 1) {
-							$nome = 'Listar Aparelhos';
+							$nome = 'Listar Equipamentos';
 						} elseif ($i == 2) {
 							$nome = 'Gestao de Periférico';
 						} elseif ($i == 3) {
@@ -79,7 +79,7 @@ if (isset($_SESSION["sessiontime"])) {
 							$menuselect = "active";
 					?>
 						<input type="hidden" id="nivel_Valor" value="<?php echo $_SESSION['nivel_Permissao']?>">
-						<input id="<?php echo ($i); ?>" type="submit" class="<?php echo $menuselect; ?> btn list-group-item list-group-item-action" value="<?php echo ($nome); ?>" style="color:honeydew; border-bottom: 1px solid rgba(255, 255, 255, .5); background-color: #fff0;" onclick="navegar('<?php echo ($i); ?>')"></input>
+						<input id="<?php echo ('list'.$i); ?>" type="submit" class="hover_btn <?php echo $menuselect; ?> btn list-group-item list-group-item-action" value="<?php echo ($nome); ?>" style="color:honeydew; border-bottom: 1px solid rgba(255, 255, 255, .5); background-color: #fff0;" onclick="navegar('<?php echo ($i); ?>')"></input>
 
 					<?php  } ?>
 					<a href="logout.php" class="list-group-item list-group-item-action">Sair</a>

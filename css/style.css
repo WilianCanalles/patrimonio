@@ -464,6 +464,10 @@ div.row.align-sign,
     overflow: scroll
 }
 
+#list0:hover, #list1:hover, #list2:hover, #list3:hover, #list4:hover, #list5:hover{
+    background-color: #f8f9fa!important;
+    color: #000000!important;
+}
 
 /*Gestao usuario*/
 
@@ -597,6 +601,9 @@ div.animated {
 /*Extra small devices (portrait phones, less than 576px)*/
 
 @media (max-width: 575.98px) {
+    .border_smaler{
+        border: 8px double black; 
+    }
     .alinhamento {
         align-self: center;
         text-align: center;
@@ -617,6 +624,9 @@ div.animated {
 /*Small devices (landscape phones, 576px and up)*/
 
 @media (min-width: 576px) and (max-width: 767.90px) {
+    .border_smaler{
+        border: 8px double black; 
+    }
     .alinhamento {
         align-self: center;
         text-align: center;
