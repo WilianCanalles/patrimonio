@@ -1,0 +1,54 @@
+{
+    "name": "PATRIMONIX",
+    "short_name": "PATRIMONIX",
+    "description": "Patrimonix - Controle seus ativos",
+    "icons": [
+        {
+            "src": "img/Phoenix-Patrimonial-144.png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "img/Phoenix-Patrimonial-50.png",
+            "sizes": "50x50"
+        },
+        {
+            "src": "img/Phoenix-Patrimonial-88.png",
+            "sizes": "88x88"
+        },
+        {
+            "src": "img/Phoenix-Patrimonial-150.png",
+            "sizes": "150x150"
+        },
+        {
+            "src": "img/Phoenix-Patrimonial-192.png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "img/Phoenix-Patrimonial-256.png",
+            "sizes": "256x256"
+        },
+        {
+            "src": "img/Phoenix-Patrimonial-300.png",
+            "sizes": "300x300"
+        },
+        {
+            "src": "img/Phoenix-Patrimonial-620.png",
+            "sizes": "620x620"
+        },
+        {
+            "src": "img/Phoenix-Patrimonial-1024.png",
+            "sizes": "1024x1024"
+        },
+        {
+            "src": "img/Phoenix-Patrimonial-1240.png",
+            "sizes": "1240x1240"
+        }
+    ],
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "orientation": "any",
+    "theme_color": "#ff5900",
+    "background_color": "#ff3100",
+    "lang": "Portuguese"
+}

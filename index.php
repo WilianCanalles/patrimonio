@@ -5,8 +5,14 @@
   <!-- Meta tags Obrigatórias -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css" href="obj/footer.css" />
 
+  <link rel="manifest" href="./manifest.json" />
+  <script src="./pwa.dev.min.js"></script>
+  <script>
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.register('./sw.js')
+    }
+  </script>
 
 
   <!-- Estilo customizado -->
