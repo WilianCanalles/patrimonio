@@ -42,7 +42,11 @@
 <body>
   <!-- Cabecalho -->
   <section id="section10" class="demo">
-    <img src="img/patrimonix-logo.gif" alt="Logo" style=" width: 100%">
+    <!--<img src="img/patrimonix-logo.gif" alt="Logo" style=" width: 100%">-->
+    <video width="100%" autoplay>
+      <source src="img/Untitled.mp4" type="video/mp4">
+    </video>
+
     <a href="#" id="section11"><span id="section1"></span></a>
   </section>
 
