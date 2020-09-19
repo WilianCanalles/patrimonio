@@ -40,14 +40,17 @@
 </head>
 
 <body>
+
+
   <!-- Cabecalho -->
   <section id="section10" class="demo">
-    <!--<img src="img/patrimonix-logo.gif" alt="Logo" style=" width: 100%">-->
-    <video width="100%" autoplay>
-      <source src="img/Untitled.mp4" type="video/mp4">
+    <video width="100%" autoplay loop playsinline muted disablePictureInPicture>
+      <source src="img/logo.mp4" type="video/mp4" />
+      <source src="img/logo.ogg" type="video/ogg" />
+      Não Suportado
     </video>
-
-    <a href="#" id="section11"><span id="section1"></span></a>
+    <!--<img src="img/patrimonix-logo.gif" alt="Logo" style=" width: 100%">-->
+    <a href="#" id="section11" style="z-index: 10000;"><span id="section1" style="z-index: 10000;"></span></a>
   </section>
 
   <!-- Fim Cabecalho -->
