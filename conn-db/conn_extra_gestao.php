@@ -208,7 +208,8 @@ if (isset($_SESSION['conn_extra'])) {
                         <div>
                             <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Série</span>
 
-                            <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['num_serie'] ?></span>
+                            <input class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['num_serie'] ?>">
+
                         </div>
 
                     </section>
@@ -247,12 +248,15 @@ if (isset($_SESSION['conn_extra'])) {
                         <div>
                             <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Nota Fiscal</span>
 
-                            <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['nota_fiscal'] ?></span>
+                            <input class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['nota_fiscal'] ?>">
+                            
+                    
                         </div>
                         <div>
                             <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Data da Compra</span>
 
-                            <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['data_compra'] ?></span>
+                            <input id="inputData" type="text" inputmode="numeric" class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['data_compra'] ?>">
+                                                
                         </div>
                     </section>
                     <section class="col-lg-4 ">
@@ -268,11 +272,13 @@ if (isset($_SESSION['conn_extra'])) {
                         <div>
                             <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Informacões</span>
 
-                            <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['informacoes'] ?></span>
+                            <textarea class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['informacoes'] ?>" rows="5"></textarea>
+                            
                         </div>
                         <div>
                             <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Periférico</span>
 
+                            
                             <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['perifericos'] ?></span>
                         </div>
                     </section>
