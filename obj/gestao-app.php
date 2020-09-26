@@ -160,7 +160,15 @@
 		}
 	});
 </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
 
+        ::-webkit-scrollbar-thumb {
+            background: #25252538;
+        }
+    </style>
 <body>
 	<?php include '../conn-db/conn_pages.php'; ?>
 	<?php if ($num_paginas == 0) { ?>
