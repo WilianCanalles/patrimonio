@@ -113,8 +113,8 @@ try {
                 Fabricante&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[3] . '</br>
                 Nº Serie&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[4] . '</br>
                 Empresa&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[5] . '</br>
-                Fornecedor&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[6] . '</br>
-                Local&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[7] . '</br>
+                Fornecedor&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[7] . '</br>
+                Local&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[6] . '</br>
                 Nota Fiscal&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[8] . '</br>
                 Data&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[9] . '</br>
                 Situação&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[10] . '</br>

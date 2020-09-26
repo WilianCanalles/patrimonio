@@ -474,7 +474,10 @@ div.row.align-sign,
 .usr_btn {
     width: 30px;
 }
-
+.usr_btn_gestao {
+    width: 30px;
+    margin-left: auto;
+}
 
 /*Modal usuarios*/
 

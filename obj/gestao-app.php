@@ -52,9 +52,9 @@
 
 	}
 
-	function altera() {
+	function altera(campo_edit) {
 		id = document.getElementById('codigo').innerHTML;
-		//alert(id);
+		//alert(campo_edit);
 		$(document).ready(function() {
 
 			$.ajax({
@@ -62,16 +62,103 @@
 				method: "POST",
 				data: {
 					verifica: 'altera',
-					cod: id
+					cod: id,
+					campo: campo_edit
 				},
 				success: function(data) {
-					document.getElementById("result").innerHTML = data;
+					document.getElementById("result1").innerHTML = data;
 
 				}
 			});
 
 		});
 	}
+
+	function aprova() {
+
+		$(document).ready(function() {
+			verifica_Campo_Codigo = document.getElementById("codigo").value;
+			verifica_Campo_Tipo = document.getElementById("equipamento").value;
+			verifica_Campo_Modelo = document.getElementById("modelo").value;
+			verifica_Campo_Fabricante = document.getElementById("fabricante").value;
+			verifica_Campo_Serie = document.getElementById("serie").value;
+			verifica_Campo_Empresa = document.getElementById("empresa").value;
+			verifica_Campo_Local = document.getElementById("local").value;
+			verifica_Campo_Fornecedor = document.getElementById("fornecedor").value;
+			verifica_Campo_Nota = document.getElementById("nota").value;
+			verifica_Campo_Data = document.getElementById("inputData").value;
+			verifica_Campo_Situacao = document.getElementById("situacao").value;
+			verifica_Campo_Informacao = document.getElementById("informacoes").value;
+
+			//alert(campo_Alterar);
+			//alert(verifica_Campo);
+			cancela();
+			$.ajax({
+				url: "../conn-db/conn_user_conf.php",
+				method: "POST",
+				data: {
+					verifica: 'editar_user',
+					novo_Nome: verifica_Campo_Nome,
+					novo_Sobrenome: verifica_Campo_Sobrenome,
+					novo_Email: verifica_Campo_Email,
+					novo_Usuario: verifica_Campo_Usuario,
+					novo_Senha: verifica_Campo_Senha,
+					nome_user: usuario
+				},
+
+				success: function(data) {
+					//document.getElementById('result1').innerHTML = data;
+					//$('#result1').html(data);
+					location.reload();
+				}
+			});
+		})
+
+	}
+
+	function cancela() {
+
+		$(document).ready(function() {
+			document.getElementById('input_Nome').value = '';
+			document.getElementById('input_Sobrenome').value = '';
+			document.getElementById('input_Email').value = '';
+			document.getElementById('input_Usuario').value = '';
+			document.getElementById('input_Senha').value = '';
+			$("#hide_Buttons_Div").addClass("hide_Buttons");
+		})
+
+	}
+	$(document).ready(function() {
+
+		document.addEventListener('keyup', pegaClick);
+
+
+		function pegaClick() {
+			campo_Codigo = document.getElementById("empresa1").value;
+			verifica_Campo_Codigo = document.getElementById("extra_cod").value;
+			verifica_Campo_Tipo = document.getElementById("equipamento").value;
+			verifica_Campo_Modelo = document.getElementById("modelo").value;
+			verifica_Campo_Fabricante = document.getElementById("fabricante").value;
+			verifica_Campo_Serie = document.getElementById("serie").value;
+			verifica_Campo_Empresa = document.getElementById("empresa").value;
+			verifica_Campo_Local = document.getElementById("local").value;
+			verifica_Campo_Fornecedor = document.getElementById("fornecedor").value;
+			verifica_Campo_Nota = document.getElementById("nota").value;
+			verifica_Campo_Data = document.getElementById("inputData").value;
+			verifica_Campo_Situacao = document.getElementById("situacao").value;
+			verifica_Campo_Informacao = document.getElementById("informacoes").value;
+			console.log(verifica_Campo_Codigo, verifica_Campo_Tipo, verifica_Campo_Modelo, verifica_Campo_Fabricante, verifica_Campo_Serie, verifica_Campo_Empresa, verifica_Campo_Local, verifica_Campo_Fornecedor, verifica_Campo_Nota, verifica_Campo_Data, verifica_Campo_Situacao, verifica_Campo_Informacao);
+			alert(campo_Codigo);
+			if ((verifica_Campo_Codigo != '') || (verifica_Campo_Tipo != '') || (verifica_Campo_Modelo != '') || (verifica_Campo_Fabricante != '') || (verifica_Campo_Serie != '')(verifica_Campo_Empresa != '') || (verifica_Campo_Local != '') || (verifica_Campo_Fornecedor != '') || (verifica_Campo_Nota != '') || (verifica_Campo_Data != '')(verifica_Campo_Situacao != '') || (verifica_Campo_Informacao != '')) {
+				$("#hide_Buttons_Div").removeClass("hide_Buttons");
+			} else if ((verifica_Campo_Codigo == '') || (verifica_Campo_Tipo == '') || (verifica_Campo_Modelo == '') || (verifica_Campo_Fabricante == '') || (verifica_Campo_Serie == '')(verifica_Campo_Empresa == '') || (verifica_Campo_Local == '') || (verifica_Campo_Fornecedor == '') || (verifica_Campo_Nota == '') || (verifica_Campo_Data == '')(verifica_Campo_Situacao == '') || (verifica_Campo_Informacao == '')) {
+				$("#hide_Buttons_Div").addClass("hide_Buttons");
+			}
+
+			//tecla = String.fromCharCode(event.keyCode);
+			//alert('passou');
+		}
+	});
 </script>
 
 <body>
@@ -165,13 +252,12 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<h5 class="modal-title" id="exampleModalScrollableTitle">Equipamento</h5>
-											
+
 										</div>
 										<div class="modal-body">
 											<div id="result"></div>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" onclick="altera()">Alterar</button>
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
 										</div>
 									</div>
@@ -179,6 +265,30 @@
 							</div>
 						</section>
 						<!-- Fim Modal Principal -->
+						<!-- Modal Edicao -->
+						<section>
+
+							<div class="modal fade" id="ModalScrollableEditavel" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalScrollableTitle">Equipamento</h5>
+											<div id="hide_Buttons_Div" class="hide_Buttons" style="    margin-left: auto; position: absolute; right: 18px; align-self: center;">
+												<img class="usr_btn" src="../img/check.png" alt="ok" onclick="aprova()">
+												<img class="usr_btn" src="../img/delete.png" alt="cancela" onclick="cancela()">
+											</div>
+										</div>
+										<div class="modal-body">
+											<div id="result1"></div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<!-- Fim Modal Edicao -->
 					</div>
 				</div>
 			</div>
