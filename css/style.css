@@ -468,7 +468,16 @@ div.row.align-sign,
     background-color: #f8f9fa!important;
     color: #000000!important;
 }
+/* Gestao PEriferico */
 
+.btn_gestao{
+    background: rgba(0, 0, 0, 0.5);
+    color: #ececec;  
+}
+.btn_gestao:hover{
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;  
+}
 /*Gestao usuario*/
 
 .usr_btn {

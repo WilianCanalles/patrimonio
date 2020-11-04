@@ -18,7 +18,7 @@ try {
 
     $statement->execute();
 
-    $result_tb_empresa = $statement->fetchall(PDO::FETCH_NUM);
+    $result_tb_empresa = $statement->fetchall(PDO::FETCH_BOTH);
     //==========================================================
     $query_tb_subEmp = "SELECT * FROM tb_subempresa WHERE `emp_Principal` = $emp_principal";
 
@@ -26,7 +26,7 @@ try {
 
     $statement->execute();
 
-    $result_tb_subEmp = $statement->fetchall(PDO::FETCH_NUM);
+    $result_tb_subEmp = $statement->fetchall(PDO::FETCH_BOTH);
     //==========================================================
     // Equipamento
     $query_tb_equipamento = "SELECT EE.`extra_cod`, T.`tipo_equipamento`, M.`modelo_equipamento`, F.`fabricante`, `num_serie`, S.`empresa`, L.`local`, FO.`fornecedor`, `nota_fiscal`, `data_compra`, `situacao`, `informacoes`, `perifericos`
@@ -56,7 +56,7 @@ try {
 
     $statement->execute();
 
-    $result_tb_fabricante = $statement->fetchall(PDO::FETCH_NUM);
+    $result_tb_fabricante = $statement->fetchall(PDO::FETCH_BOTH);
     //==========================================================
     $query_tb_fornecedor = "SELECT * FROM tb_fornecedor WHERE `emp_Principal` = $emp_principal";
 
@@ -64,7 +64,7 @@ try {
 
     $statement->execute();
 
-    $result_tb_fornecedor = $statement->fetchall(PDO::FETCH_NUM);
+    $result_tb_fornecedor = $statement->fetchall(PDO::FETCH_BOTH);
     //==========================================================
     $query_tb_local = "SELECT * FROM tb_local WHERE `emp_Principal` = $emp_principal";
 
@@ -72,7 +72,7 @@ try {
 
     $statement->execute();
 
-    $result_tb_local = $statement->fetchall(PDO::FETCH_NUM);
+    $result_tb_local = $statement->fetchall(PDO::FETCH_BOTH);
     //==========================================================
     $query_tb_modelo_equipamento = "SELECT * FROM tb_modelo_equipamento WHERE `emp_Principal` = $emp_principal";
 
@@ -80,7 +80,7 @@ try {
 
     $statement->execute();
 
-    $result_tb_modelo_equipamento = $statement->fetchall(PDO::FETCH_NUM);
+    $result_tb_modelo_equipamento = $statement->fetchall(PDO::FETCH_BOTH);
     //==========================================================
     $query_tb_tipo_equipamento = "SELECT * FROM tb_tipo_equipamento WHERE `emp_Principal` = $emp_principal";
 
@@ -88,7 +88,7 @@ try {
 
     $statement->execute();
 
-    $result_tb_tipo_equipamento = $statement->fetchall(PDO::FETCH_NUM);
+    $result_tb_tipo_equipamento = $statement->fetchall(PDO::FETCH_BOTH);
     //==========================================================
     $query_tb_user_equipamento = "SELECT * FROM tb_user WHERE `emp_Principal` = $emp_principal";
 
@@ -96,7 +96,7 @@ try {
 
     $statement->execute();
 
-    $result_tb_user_equipamento = $statement->fetchall(PDO::FETCH_NUM);
+    $result_tb_user_equipamento = $statement->fetchall(PDO::FETCH_BOTH);
     //==========================================================
 } catch (PDOException $e) {
     echo '<p>' . $e->getMessage() . '</p>';

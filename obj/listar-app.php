@@ -13,21 +13,21 @@
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-
     <!-- Bootstrap core JavaScript -->
+    <script src="../js/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../js/jquery.mask.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <script type="text/javascript" src="../js/jquery-3.5.0.js"></script>
+    <!-- Modal features -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     <!-- Custom styles for this template -->
     <link href="../css/style.css" rel="stylesheet">
-    <script type="text/javascript" src="../js/js_cadastro.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src='../js/quagga.min.js'></script>
-
     <style>
         ::-webkit-scrollbar {
             width: 2px;
@@ -41,18 +41,19 @@
 </head>
 
 <body>
-<?php include '../conn-db/conn_pages.php' ?>
+    <?php include '../conn-db/conn_pages.php' ?>
     <?php if ($num_paginas == 0) { ?>
 
         <div class="container">
-        <div style="margin: 10% 5%;">
-						<p class="display-1">Inventário Vazio</p>
-						<p class="h1">Volte após realizar o primeiro cadastro</p>
-					</div>
+            <div style="margin: 10% 5%;">
+                <p class="display-1">Inventário Vazio</p>
+                <p class="h1">Volte após realizar o primeiro cadastro</p>
+            </div>
         </div>
     <?php  } else if ($num_paginas > 0) { ?>
 
         <div class="container">
+        <?php include 'alert.php'; ?>
             <div style="justify-content: center">
                 <nav>
                     <ul class="pagination">
@@ -83,13 +84,13 @@
                         <div class="row">
                             <?php if ($num > 0) {
                                 foreach ($result_tb_equipamento2 as $lista_itens) {
-                                    if($lista_itens['nota_fiscal']==''){
+                                    if ($lista_itens['nota_fiscal'] == '') {
                                         $lista_itens['nota_fiscal'] = 'Não Informado';
                                     }
-                                    if($lista_itens['informacoes']==''){
+                                    if ($lista_itens['informacoes'] == '') {
                                         $lista_itens['informacoes'] = 'Não Informado';
                                     }
-                                    if($lista_itens['perifericos']==''){
+                                    if ($lista_itens['perifericos'] == '') {
                                         $lista_itens['perifericos'] = 'Nenhum vinculo';
                                     }
                             ?>
@@ -138,7 +139,7 @@
         </div>-->
             <div>
                 <section>
-                    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalScrollablepesq" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                         <div style="margin:auto;" class="modal-dialog modal-dialog-scrollable" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -183,7 +184,7 @@
 
 
                     <div style="text-align: center;">
-                        <input type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable" style="margin-bottom: 15px" value="Avançada &#x1f50d;"></input>
+                        <input type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollablepesq" style="margin-bottom: 15px" value="Avançada &#x1f50d;"></input>
                     </div>
                     <div style="text-align: center;">
 
@@ -197,7 +198,9 @@
                             <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
                         </svg>
                     </button>
-
+                    <?php
+						include 'modal_gestao.php';
+						?>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModalScrollable-barcode" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -272,7 +275,6 @@
         });
     </script>
 
-    <script src="JsBarcode.all.min.js"></script>
     <script>
         var teste = document.getElementById('codinput').innerText;
         // alert (teste.innerText);
@@ -289,7 +291,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </body>
 
 </html>

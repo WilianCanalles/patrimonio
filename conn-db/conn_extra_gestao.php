@@ -7,6 +7,18 @@ if (isset($_POST['verifica']) && $_POST['verifica'] == 'extra') {
     $_SESSION['conn_extra'] = true;
 } elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'altera') {
     $_SESSION['conn_extra1'] = true;
+}elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'empresa') {
+    $_SESSION['conn_extra_empresa'] = true;
+}elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'fabricante') {
+    $_SESSION['conn_extra_fabricante'] = true;
+}elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'fornecedor') {
+    $_SESSION['conn_extra_fornecedor'] = true;
+}elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'local') {
+    $_SESSION['conn_extra_local'] = true;
+}elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'modelo') {
+    $_SESSION['conn_extra_modelo'] = true;
+}elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'tipo') {
+    $_SESSION['conn_extra_tipo'] = true;
 }
 
 if (isset($_SESSION['conn_extra'])) {
@@ -34,7 +46,7 @@ if (isset($_SESSION['conn_extra'])) {
         $statement->execute();
 
         $result_tb_equipamento = $statement->fetchall();
-?>
+    ?>
         <div class="container">
             <div class="row">
                 <?php foreach ($result_tb_equipamento as $line) {
@@ -52,19 +64,19 @@ if (isset($_SESSION['conn_extra'])) {
                         <div>
                             <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('codigo')"></span>
 
-                            <input type="hidden" id="extra_cod1" value="<?php echo $line['extra_cod'] ?>">
+                            <input type="hidden" id="codigo1" value="<?php echo $line['extra_cod'] ?>">
                             <span id="codigo" class="form-control" style="color: black!important; height: auto;"><?php echo $line['extra_cod'] ?></span>
                         </div>
                         <div>
-                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Tipo<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('tipo')"></span>
+                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Tipo<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('equipamento')"></span>
 
-                            <input type="hidden" id="tipo_equipamento1" value="<?php echo $line['tipo_equipamento'] ?>">
+                            <input type="hidden" id="equipamento1" value="<?php echo $line['tipo_equipamento'] ?>">
                             <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['tipo_equipamento'] ?></span>
                         </div>
                         <div>
                             <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Modelo<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('modelo')"></span>
 
-                            <input type="hidden" id="modelo_equipamento1" value="<?php echo $line['modelo_equipamento'] ?>">
+                            <input type="hidden" id="modelo1" value="<?php echo $line['modelo_equipamento'] ?>">
                             <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['modelo_equipamento'] ?></span>
                         </div>
                         <div>
@@ -76,7 +88,7 @@ if (isset($_SESSION['conn_extra'])) {
                         <div>
                             <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Série<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('serie')"></span>
 
-                            <input type="hidden" id="num_serie1" value="<?php echo $line['num_serie'] ?>">
+                            <input type="hidden" id="serie1" value="<?php echo $line['num_serie'] ?>">
                             <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['num_serie'] ?></span>
                         </div>
 
@@ -104,13 +116,13 @@ if (isset($_SESSION['conn_extra'])) {
                         <div>
                             <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Nota Fiscal<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('nota')"></span>
 
-                            <input type="hidden" id="nota_fiscal1" value="<?php echo $line['nota_fiscal'] ?>">
+                            <input type="hidden" id="nota1" value="<?php echo $line['nota_fiscal'] ?>">
                             <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['nota_fiscal'] ?></span>
                         </div>
                         <div>
                             <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Data da Compra<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('data')"></span>
 
-                            <input type="hidden" id="data_compra1" value="<?php echo $line['data_compra'] ?>">
+                            <input type="hidden" id="data1" value="<?php echo $line['data_compra'] ?>">
                             <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['data_compra'] ?></span>
                         </div>
                     </section>
@@ -124,7 +136,7 @@ if (isset($_SESSION['conn_extra'])) {
                         <div>
                             <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Informacões<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('informacao')"></span>
 
-                            <input type="hidden" id="informacoes1" value="<?php echo $line['informacoes'] ?>">
+                            <input type="hidden" id="informacao1" value="<?php echo $line['informacoes'] ?>">
                             <span class="form-control" style="color: black!important; overflow: auto;height: 200px;"><?php echo $line['informacoes'] ?></span>
                         </div>
                         <div>
@@ -141,6 +153,13 @@ if (isset($_SESSION['conn_extra'])) {
         echo '<p>' . $e->getMessage() . '</p>';
     }
     unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_extra1']);
+    unset($_SESSION['conn_extra_empresa']);
+    unset($_SESSION['conn_extra_fabricante']);
+    unset($_SESSION['conn_extra_fornecedor']);
+    unset($_SESSION['conn_extra_local']);
+    unset($_SESSION['conn_extra_modelo']);
+    unset($_SESSION['conn_extra_tipo']);
 } elseif (isset($_SESSION['conn_extra1'])) {
     $codigo = $_POST['cod'];
     $campo = $_POST['campo'];
@@ -168,7 +187,6 @@ if (isset($_SESSION['conn_extra'])) {
 
         $result_tb_equipamento = $statement->fetchall();
     ?>
-
         <div class="container">
             <div class="row" style="justify-content: center;">
                 <?php foreach ($result_tb_equipamento as $line) {
@@ -190,13 +208,13 @@ if (isset($_SESSION['conn_extra'])) {
                             <div>
                                 <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código</span>
 
-                                <input id="extra_cod" class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['extra_cod'] ?>">
+                                <input id="extra_cod" type="number" min="1" class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['extra_cod'] ?>">
                             </div>
 
                         </section>
 
                     <?php
-                    } elseif ($campo == 'tipo') {
+                    } elseif ($campo == 'equipamento') {
                     ?>
                         <section class="col-lg-8 ">
                             <div>
@@ -261,7 +279,7 @@ if (isset($_SESSION['conn_extra'])) {
 
                                     <?php foreach ($result_tb_subEmp as $line1) { ?>
                                         <option value="<?php echo $line1[1] ?>"><?php echo $line1[2] ?></option>
-                                    <?php                                 } ?>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </section>
@@ -315,7 +333,7 @@ if (isset($_SESSION['conn_extra'])) {
                             <div>
                                 <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Data da Compra</span>
 
-                                <input id="inputData" type="text" inputmode="numeric" class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['data_compra'] ?>">
+                                <input class="form-control" onclick="ajaxdata()" name="data" type="text" id="inputData" inputmode="numeric" placeholder="<?php echo $line['data_compra'] ?>">
 
                             </div>
                         </section>
@@ -328,7 +346,7 @@ if (isset($_SESSION['conn_extra'])) {
 
                                 <select name="situacao" class="form-control" id="situacao">
                                     <option value="Operacional">Operacional</option>
-                                    <option value="Sem_Uso">Sem Uso</option>
+                                    <option value="Sem Uso">Sem Uso</option>
                                     <option value="Sucateado">Sucateado</option>
                                 </select>
                             </div>
@@ -350,10 +368,255 @@ if (isset($_SESSION['conn_extra'])) {
 
                 <?php } ?>
             </div>
+
         </div>
+
+
     <?php
     } catch (PDOException $e) {
         echo '<p>' . $e->getMessage() . '</p>';
     }
     unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_extra1']);
+    unset($_SESSION['conn_extra_empresa']);
+    unset($_SESSION['conn_extra_fabricante']);
+    unset($_SESSION['conn_extra_fornecedor']);
+    unset($_SESSION['conn_extra_local']);
+    unset($_SESSION['conn_extra_modelo']);
+    unset($_SESSION['conn_extra_tipo']);
+} elseif (isset($_SESSION['conn_extra_empresa'])) {
+    //$codigo = $_POST['cod'];
+    //$campo = $_POST['campo'];
+    include_once 'conn_db.php';
+   //print_r($result_tb_modelo_equipamento);
+    ?>
+    <div class="container">
+            <div class="row">
+                <?php foreach ($result_tb_subEmp as $line) { ?>
+                    <section class="col-lg-4 " style="padding-bottom: 15px; border-bottom:black 1px solid">
+                    <div style="text-align: center;">
+                        <img style="height: 70px;" src="../img/itens.png">
+                    </div>
+                    
+                        <div>
+                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('codigo')"></span>
+
+                            <input type="hidden" id="codigo1" value="<?php echo $line['extra_cod'] ?>">
+                            <span id="codigo" class="form-control" style="color: black!important; height: auto;"><?php echo $line['extra_cod'] ?></span>
+                        </div>
+                        <div>
+                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Empresa<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('empresa')"></span>
+
+                            <input type="hidden" id="empresa1" value="<?php echo $line['empresa'] ?>">
+                            <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['empresa'] ?></span>
+                        </div>
+                        
+                    </section>
+                <?php } ?>
+            </div>
+        </div>
+    <?php
+    unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_extra1']);
+    unset($_SESSION['conn_extra_empresa']);
+    unset($_SESSION['conn_extra_fabricante']);
+    unset($_SESSION['conn_extra_fornecedor']);
+    unset($_SESSION['conn_extra_local']);
+    unset($_SESSION['conn_extra_modelo']);
+    unset($_SESSION['conn_extra_tipo']);
+} elseif (isset($_SESSION['conn_extra_fabricante'])) {
+    //$codigo = $_POST['cod'];
+    //$campo = $_POST['campo'];
+    include_once 'conn_db.php';
+   //print_r($result_tb_modelo_equipamento);
+    ?>
+    <div class="container">
+            <div class="row">
+                <?php foreach ($result_tb_fabricante as $line) { ?>
+                    <section class="col-lg-4 " style="padding-bottom: 15px; border-bottom:black 1px solid">
+                    <div style="text-align: center;">
+                        <img style="height: 70px;" src="../img/itens.png">
+                    </div>
+                        <div>
+                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('codigo')"></span>
+
+                            <input type="hidden" id="codigo1" value="<?php echo $line['extra_cod'] ?>">
+                            <span id="codigo" class="form-control" style="color: black!important; height: auto;"><?php echo $line['extra_cod'] ?></span>
+                        </div>
+                        <div>
+                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Fabricante<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('fabricante')"></span>
+
+                            <input type="hidden" id="fabricante1" value="<?php echo $line['fabricante'] ?>">
+                            <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['fabricante'] ?></span>
+                        </div>
+                        
+                    </section>
+                <?php } ?>
+            </div>
+        </div>
+    <?php
+    unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_extra1']);
+    unset($_SESSION['conn_extra_empresa']);
+    unset($_SESSION['conn_extra_fabricante']);
+    unset($_SESSION['conn_extra_fornecedor']);
+    unset($_SESSION['conn_extra_local']);
+    unset($_SESSION['conn_extra_modelo']);
+    unset($_SESSION['conn_extra_tipo']);
+} elseif (isset($_SESSION['conn_extra_fornecedor'])) {
+    //$codigo = $_POST['cod'];
+    //$campo = $_POST['campo'];
+    include_once 'conn_db.php';
+   //print_r($result_tb_modelo_equipamento);
+    ?>
+    <div class="container">
+            <div class="row">
+                <?php foreach ($result_tb_fornecedor as $line) { ?>
+                    <section class="col-lg-4 " style="padding-bottom: 15px; border-bottom:black 1px solid">
+                    <div style="text-align: center;">
+                        <img style="height: 70px;" src="../img/itens.png">
+                    </div>
+                        <div>
+                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('codigo')"></span>
+
+                            <input type="hidden" id="codigo1" value="<?php echo $line['extra_cod'] ?>">
+                            <span id="codigo" class="form-control" style="color: black!important; height: auto;"><?php echo $line['extra_cod'] ?></span>
+                        </div>
+                        <div>
+                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Fornecedor<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('fornecedor')"></span>
+
+                            <input type="hidden" id="fornecedor1" value="<?php echo $line['fornecedor'] ?>">
+                            <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['fornecedor'] ?></span>
+                        </div>
+                        
+                    </section>
+                <?php } ?>
+            </div>
+        </div>
+    <?php
+    unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_extra1']);
+    unset($_SESSION['conn_extra_empresa']);
+    unset($_SESSION['conn_extra_fabricante']);
+    unset($_SESSION['conn_extra_fornecedor']);
+    unset($_SESSION['conn_extra_local']);
+    unset($_SESSION['conn_extra_modelo']);
+    unset($_SESSION['conn_extra_tipo']);
+} elseif (isset($_SESSION['conn_extra_local'])) {
+    //$codigo = $_POST['cod'];
+    //$campo = $_POST['campo'];
+    include_once 'conn_db.php';
+   //print_r($result_tb_modelo_equipamento);
+    ?>
+    <div class="container">
+            <div class="row">
+                <?php foreach ($result_tb_local as $line) { ?>
+                    <section class="col-lg-4 " style="padding-bottom: 15px; border-bottom:black 1px solid">
+                    <div style="text-align: center;">
+                        <img style="height: 70px;" src="../img/itens.png">
+                    </div>
+                        <div>
+                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('codigo')"></span>
+
+                            <input type="hidden" id="codigo1" value="<?php echo $line['extra_cod'] ?>">
+                            <span id="codigo" class="form-control" style="color: black!important; height: auto;"><?php echo $line['extra_cod'] ?></span>
+                        </div>
+                        <div>
+                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Local<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('local')"></span>
+
+                            <input type="hidden" id="local1" value="<?php echo $line['local'] ?>">
+                            <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['local'] ?></span>
+                        </div>
+                        
+                    </section>
+                <?php } ?>
+            </div>
+        </div>
+    <?php
+    unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_extra1']);
+    unset($_SESSION['conn_extra_empresa']);
+    unset($_SESSION['conn_extra_fabricante']);
+    unset($_SESSION['conn_extra_fornecedor']);
+    unset($_SESSION['conn_extra_local']);
+    unset($_SESSION['conn_extra_modelo']);
+    unset($_SESSION['conn_extra_tipo']);
+} elseif (isset($_SESSION['conn_extra_modelo'])) {
+    //$codigo = $_POST['cod'];
+    //$campo = $_POST['campo'];
+    include_once 'conn_db.php';
+   //print_r($result_tb_modelo_equipamento);
+    ?>
+    <div class="container">
+            <div class="row">
+                <?php foreach ($result_tb_modelo_equipamento as $line) { ?>
+                    <section class="col-lg-4 " style="padding-bottom: 15px; border-bottom:black 1px solid">
+                    <div style="text-align: center;">
+                        <img style="height: 70px;" src="../img/itens.png">
+                    </div>
+                        <div>
+                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('codigo')"></span>
+
+                            <input type="hidden" id="codigo1" value="<?php echo $line['extra_cod'] ?>">
+                            <span id="codigo" class="form-control" style="color: black!important; height: auto;"><?php echo $line['extra_cod'] ?></span>
+                        </div>
+                        <div>
+                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Modelo<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('modelo')"></span>
+
+                            <input type="hidden" id="modelo1" value="<?php echo $line['modelo_equipamento'] ?>">
+                            <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['modelo_equipamento'] ?></span>
+                        </div>
+                        
+                    </section>
+                <?php } ?>
+            </div>
+        </div>
+    <?php
+    unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_extra1']);
+    unset($_SESSION['conn_extra_empresa']);
+    unset($_SESSION['conn_extra_fabricante']);
+    unset($_SESSION['conn_extra_fornecedor']);
+    unset($_SESSION['conn_extra_local']);
+    unset($_SESSION['conn_extra_modelo']);
+    unset($_SESSION['conn_extra_tipo']);
+} elseif (isset($_SESSION['conn_extra_tipo'])) {
+    //$codigo = $_POST['cod'];
+    //$campo = $_POST['campo'];
+    include_once 'conn_db.php';
+   //print_r($result_tb_modelo_equipamento);
+    ?>
+    <div class="container">
+            <div class="row">
+                <?php foreach ($result_tb_tipo_equipamento as $line) { ?>
+                    <section class="col-lg-4 " style="padding-bottom: 15px; border-bottom:black 1px solid">
+                    <div style="text-align: center;">
+                        <img style="height: 70px;" src="../img/itens.png">
+                    </div>
+                        <div>
+                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('codigo')"></span>
+
+                            <input type="hidden" id="codigo1" value="<?php echo $line['extra_cod'] ?>">
+                            <span id="codigo" class="form-control" style="color: black!important; height: auto;"><?php echo $line['extra_cod'] ?></span>
+                        </div>
+                        <div>
+                            <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Tipo<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableEditavel" onclick="altera('equipamento')"></span>
+
+                            <input type="hidden" id="equipamento1" value="<?php echo $line['tipo_equipamento'] ?>">
+                            <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['tipo_equipamento'] ?></span>
+                        </div>
+                        
+                    </section>
+                <?php } ?>
+            </div>
+        </div>
+    <?php
+    unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_extra1']);
+    unset($_SESSION['conn_extra_empresa']);
+    unset($_SESSION['conn_extra_fabricante']);
+    unset($_SESSION['conn_extra_fornecedor']);
+    unset($_SESSION['conn_extra_local']);
+    unset($_SESSION['conn_extra_modelo']);
+    unset($_SESSION['conn_extra_tipo']);
 }

@@ -197,3 +197,39 @@ endif;
 unset($_SESSION['login_wrong']);
 ?>
 <!-- Fim Mensagem erro -->
+<!-- Mensagem de Cadastro existente -->
+<?php
+if (isset($_SESSION['err_altera_cod'])) :
+?>
+    <div id="msg_alert" class="animated bg-danger">
+        <span style="font-weight: bold">Ja possui cadastro com esse codigo.</span>
+    </div>
+<?php
+endif;
+unset($_SESSION['err_altera_cod']);
+?>
+<!-- Fim Mensagem de Cadastro existente -->
+<!-- Mensagem de alteracao Equipamento -->
+<?php
+if (isset($_SESSION['sucesso_alteracao_eqp'])) :
+?>
+    <div id="msg_alert" class="animated bg-success">
+        <span style="font-weight: bold">Alteração realizada.</span>
+    </div>
+<?php
+endif;
+unset($_SESSION['sucesso_alteracao_eqp']);
+?>
+<!-- Fim Mensagem de alteracao Equipamento -->
+<!-- Mensagem de alteracao nao permitida -->
+<?php
+if (isset($_SESSION['alteracao_eqp_codigo_zero'])) :
+?>
+    <div id="msg_alert" class="animated bg-danger">
+        <span style="font-weight: bold">Alteração não permitida.</span>
+    </div>
+<?php
+endif;
+unset($_SESSION['alteracao_eqp_codigo_zero']);
+?>
+<!-- Fim Mensagem de alteracao alteracao nao permitida -->

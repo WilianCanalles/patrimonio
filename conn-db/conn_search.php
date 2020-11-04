@@ -120,6 +120,7 @@ try {
                 Situação&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[10] . '</br>
                 Informações&nbsp&nbsp:&nbsp&nbsp' . $lista_itens[11] ?>
                 </p>
+                <img class="usr_btn" src="../img/plus.png" alt="Sinal_Mais" data-toggle="modal" data-target="#exampleModalScrollable" onclick="extras('<?php echo $lista_itens[0] ?>')">
                 <p><?php echo "-------------------------------------------------" ?> </p>
 
             <?php }
