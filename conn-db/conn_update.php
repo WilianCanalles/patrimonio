@@ -5,6 +5,8 @@ if (!isset($_SESSION)) {
 
 if (isset($_POST['tabela']) && $_POST['tabela'] == 'update_eqp') {
     $_SESSION['conn_update_equipamento'] = true;
+}else if (isset($_POST['tabela']) && $_POST['tabela'] == 'update_etp') {
+    $_SESSION['conn_update_tipo'] = true;
 }
 $campo = $_POST['campo'];
 $new_value = $_POST['value'];
@@ -83,4 +85,39 @@ if (isset($_SESSION['conn_update_equipamento'])) {
     }
 
     unset($_SESSION['conn_update_equipamento']);
+    unset($_SESSION['conn_update_tipo']);
+}else if(isset($_SESSION['conn_update_tipo'])) {
+    include_once 'conexao.php';
+    try {
+        $conexao = new PDO(
+            "mysql:host=$host; dbname=$dbname",
+            "$user",
+            "$pass"
+        );
+
+        if ($campo == 'codigo') {
+            $query_tb = "SELECT * FROM `tb_equipamento` WHERE `emp_principal` = '$emp_principal' AND `extra_cod` = $new_value";
+
+        $statement2 = $conexao->prepare($query_tb);
+
+        $statement2->execute();
+
+            $num_row1 = $statement2->rowCount();
+            if ($num_row1 == 0) {
+                if($new_value == 0){
+                    $_SESSION['alteracao_eqp_codigo_zero'] = true;
+                }else{
+                    $query_tb_equipamento = "UPDATE `tb_equipamento` SET `extra_cod`= $new_value WHERE `emp_principal` = '$emp_principal' AND `extra_cod` = $codigo ";
+            $_SESSION['sucesso_alteracao_eqp'] = true;
+                }
+            
+            } else if($num_row1 > 0){
+                $_SESSION['err_altera_cod'] = true;
+            }
+        }
+    } catch (PDOException $e) {
+        echo '<p>' . $e->getMessage() . '</p>';
+    }
+    unset($_SESSION['conn_update_equipamento']);
+    unset($_SESSION['conn_update_tipo']);
 }
