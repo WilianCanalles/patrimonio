@@ -26,6 +26,7 @@ $emp_principal = $_SESSION['emp_principal'];
 
 if (isset($_SESSION['conn_envio_equip'])) {
     if (!(($equipamento == '----') || ($modelo == '----') || ($fabricante == '----') || ($empresa == '----') || ($fornecedor == '----'))) {
+        echo 'passou';
         include_once 'conexao.php';
         try {
             $conexao = new PDO(
@@ -56,8 +57,8 @@ if (isset($_SESSION['conn_envio_equip'])) {
             print_r('normal ' . $position);
             echo '</pre>';
             echo ('++ ' . $insert_in);
-
-            $query_tb_equipamento = "INSERT INTO `tb_equipamento` (`codigo`, `extra_cod`, `tipo_equipamento`, `modelo_equipamento`, `local`, `fabricante`, `num_serie`, `empresa`, `fornecedor`, `nota_fiscal`, `data_compra`, `situacao`, `informacoes`, `emp_Principal`) VALUES ('','$insert_in','$equipamento','$modelo','$local','$fabricante','$serie', '$empresa','$fornecedor','$nota_fiscal','$data','$situacao','$info','$emp_principal')";
+            echo $fornecedor;
+            $query_tb_equipamento = "INSERT INTO `tb_equipamento` (`extra_cod`, `tipo_equipamento`, `modelo_equipamento`, `local`, `fabricante`, `num_serie`, `empresa`, `fornecedor`, `nota_fiscal`, `data_compra`, `situacao`, `informacoes`, `emp_Principal`) VALUES ('$insert_in','$equipamento','$modelo','$local','$fabricante','$serie', '$empresa','$fornecedor','$nota_fiscal','$data','$situacao','$info','$emp_principal')";
 
             $statement = $conexao->prepare($query_tb_equipamento);
 
@@ -76,7 +77,7 @@ if (isset($_SESSION['conn_envio_equip'])) {
     unset($_SESSION['conn_envio_compra']);
     unset($_SESSION['conn_envio_empresa']);
     unset($_SESSION['conn_envio_local']);
-    header("location: ../aplicacao/pag_inicial.php?menu=4");
+    //header("location: ../aplicacao/pag_inicial.php?menu=4");
 } elseif (isset($_SESSION['conn_envio_empresa'])) {
     echo '<pre>';
     print_r($_POST);

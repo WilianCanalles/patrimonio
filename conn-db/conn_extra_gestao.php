@@ -7,6 +7,8 @@ if (isset($_POST['verifica']) && $_POST['verifica'] == 'extra') {
     $_SESSION['conn_extra'] = true;
 } elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'altera') {
     $_SESSION['conn_extra1'] = true;
+} elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'periferico') {
+    $_SESSION['conn_periferico'] = true;
 } elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'altera_itens') {
     $_SESSION['conn_extra2'] = true;
 } elseif (isset($_POST['verifica']) && $_POST['verifica'] == 'empresa') {
@@ -155,6 +157,77 @@ if (isset($_SESSION['conn_extra'])) {
         echo '<p>' . $e->getMessage() . '</p>';
     }
     unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_periferico']);
+    unset($_SESSION['conn_extra1']);
+    unset($_SESSION['conn_extra2']);
+    unset($_SESSION['conn_extra_empresa']);
+    unset($_SESSION['conn_extra_fabricante']);
+    unset($_SESSION['conn_extra_fornecedor']);
+    unset($_SESSION['conn_extra_local']);
+    unset($_SESSION['conn_extra_modelo']);
+    unset($_SESSION['conn_extra_tipo']);
+} else if (isset($_SESSION['conn_periferico'])) {
+    $codigo = $_POST['cod'];
+    //  echo ($codigo);
+  include_once 'conexao.php';
+    try {
+        $conexao = new PDO(
+            "mysql:host=$host; dbname=$dbname",
+            "$user",
+            "$pass"
+        );
+/* 
+        $query_tb_equipamento1 = "SELECT EE.`extra_cod`, T.`tipo_equipamento`, M.`modelo_equipamento`, F.`fabricante`, `num_serie`, S.`empresa`, L.`local`, FO.`fornecedor`, `nota_fiscal`, `data_compra`, `situacao`, `informacoes`, `perifericos`
+        FROM `tb_equipamento` AS EE 
+        LEFT JOIN (SELECT * FROM `tb_fabricante` WHERE `tb_fabricante`.`emp_Principal` = $emp_principal) AS F ON F.`extra_cod` = EE.`fabricante` 
+        LEFT JOIN (SELECT * FROM `tb_fornecedor` WHERE `tb_fornecedor`.`emp_Principal` = $emp_principal) AS FO ON FO.`extra_cod` = EE.`fornecedor` 
+        LEFT JOIN (SELECT * FROM `tb_local` WHERE `tb_local`.`emp_Principal` = $emp_principal) AS L ON L.`extra_cod` = EE.`local` 
+        LEFT JOIN (SELECT * FROM `tb_modelo_equipamento` WHERE `tb_modelo_equipamento`.`emp_Principal` = $emp_principal) AS M ON M.`extra_cod` = EE.`modelo_equipamento` 
+        LEFT JOIN (SELECT * FROM `tb_subempresa` WHERE `tb_subempresa`.`emp_Principal` = $emp_principal) AS S ON S.`extra_cod` = EE.`empresa` 
+        LEFT JOIN (SELECT * FROM `tb_tipo_equipamento` WHERE `tb_tipo_equipamento`.`emp_Principal` = $emp_principal) AS T ON T.`extra_cod` = EE.`tipo_equipamento` 
+        WHERE EE.`emp_Principal` = $emp_principal";
+
+$statement = $conexao->prepare($query_tb_equipamento1);
+
+$statement->execute();
+
+$result_tb_equipamento1 = $statement->fetchall();
+
+foreach ($result_tb_equipamento1 as $line1) {
+    $teste1 = $line1['perifericos']." ";
+
+    echo ($teste1);
+}
+*/
+        $query_tb_equipamento = "SELECT EE.`extra_cod`, T.`tipo_equipamento`, M.`modelo_equipamento`, F.`fabricante`, `num_serie`, S.`empresa`, L.`local`, FO.`fornecedor`, `nota_fiscal`, `data_compra`, `situacao`, `informacoes`, `perifericos`
+                FROM `tb_equipamento` AS EE 
+                LEFT JOIN (SELECT * FROM `tb_fabricante` WHERE `tb_fabricante`.`emp_Principal` = $emp_principal) AS F ON F.`extra_cod` = EE.`fabricante` 
+                LEFT JOIN (SELECT * FROM `tb_fornecedor` WHERE `tb_fornecedor`.`emp_Principal` = $emp_principal) AS FO ON FO.`extra_cod` = EE.`fornecedor` 
+                LEFT JOIN (SELECT * FROM `tb_local` WHERE `tb_local`.`emp_Principal` = $emp_principal) AS L ON L.`extra_cod` = EE.`local` 
+                LEFT JOIN (SELECT * FROM `tb_modelo_equipamento` WHERE `tb_modelo_equipamento`.`emp_Principal` = $emp_principal) AS M ON M.`extra_cod` = EE.`modelo_equipamento` 
+                LEFT JOIN (SELECT * FROM `tb_subempresa` WHERE `tb_subempresa`.`emp_Principal` = $emp_principal) AS S ON S.`extra_cod` = EE.`empresa` 
+                LEFT JOIN (SELECT * FROM `tb_tipo_equipamento` WHERE `tb_tipo_equipamento`.`emp_Principal` = $emp_principal) AS T ON T.`extra_cod` = EE.`tipo_equipamento` 
+                WHERE EE.`emp_Principal` = $emp_principal AND EE.`extra_cod` = $codigo";
+
+        $statement = $conexao->prepare($query_tb_equipamento);
+
+        $statement->execute();
+
+        $result_tb_equipamento = $statement->fetchall();
+       
+        foreach ($result_tb_equipamento as $line) {
+            $teste = $line['perifericos'];
+
+            //echo (';'.$teste);
+            echo ($teste);
+        }
+    } catch (PDOException $e) {
+        echo '<p>' . $e->getMessage() . '</p>';
+    }
+
+    unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_periferico']);
+    unset($_SESSION['conn_periferico']);
     unset($_SESSION['conn_extra1']);
     unset($_SESSION['conn_extra2']);
     unset($_SESSION['conn_extra_empresa']);
@@ -388,6 +461,7 @@ if (isset($_SESSION['conn_extra'])) {
         echo '<p>' . $e->getMessage() . '</p>';
     }
     unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_periferico']);
     unset($_SESSION['conn_extra1']);
     unset($_SESSION['conn_extra2']);
     unset($_SESSION['conn_extra_empresa']);
@@ -444,7 +518,7 @@ if (isset($_SESSION['conn_extra'])) {
                             <div>
                                 <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código</span>
 
-                                <input id="extra_cod" type="number" min="1" class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['extra_cod'] ?>">
+                                <input id="extra_cod" type="number" min="1" class="form-control" style="color: black!important; height: auto;" placeholder="Código">
                             </div>
 
                         </section>
@@ -457,7 +531,7 @@ if (isset($_SESSION['conn_extra'])) {
                                 <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Tipo</span>
 
                                 <input type="hidden" id="equipamento1" value="<?php echo $line['extra_cod'] ?>">
-                                <input id="equipamento" class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['tipo_equipamento'] ?>">
+                                <input id="equipamento" class="form-control" style="color: black!important; height: auto;" placeholder="Tipo">
                             </div>
                         </section>
 
@@ -467,7 +541,7 @@ if (isset($_SESSION['conn_extra'])) {
                             <div>
                                 <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Modelo</span>
 
-                                <input id="modelo" class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['modelo_equipamento'] ?>">
+                                <input id="modelo" class="form-control" style="color: black!important; height: auto;" placeholder="Modelo">
                             </div>
                         </section>
 
@@ -476,7 +550,7 @@ if (isset($_SESSION['conn_extra'])) {
                         <section class="col-lg-8 ">
                             <div>
                                 <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Fabricante</span>
-                                <input id="fabricante" class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['fabricante'] ?>">
+                                <input id="fabricante" class="form-control" style="color: black!important; height: auto;" placeholder="Fabricante">
                             </div>
                         </section>
 
@@ -486,7 +560,7 @@ if (isset($_SESSION['conn_extra'])) {
                         <section class="col-lg-8 ">
                             <div>
                                 <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Empresa</span>
-                                <input id="empresa" class="form-control" style="color: black!important; height: auto;" class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['empresa'] ?>">
+                                <input id="empresa" class="form-control" style="color: black!important; height: auto;" class="form-control" style="color: black!important; height: auto;" placeholder="Empresa">
 
                             </div>
                         </section>
@@ -497,7 +571,7 @@ if (isset($_SESSION['conn_extra'])) {
                             <div>
                                 <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Local</span>
 
-                                <input id="local" class="form-control" style="color: black!important; height: auto;" class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['local'] ?>">
+                                <input id="local" class="form-control" style="color: black!important; height: auto;" class="form-control" style="color: black!important; height: auto;" placeholder="Local">
 
                             </div>
                         </section>
@@ -508,15 +582,15 @@ if (isset($_SESSION['conn_extra'])) {
                             <div>
                                 <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Fornecedor</span>
 
-                                <input id="fornecedor" class="form-control" style="color: black!important; height: auto;" class="form-control" style="color: black!important; height: auto;" placeholder="<?php echo $line['fornecedor'] ?>">
+                                <input id="fornecedor" class="form-control" style="color: black!important; height: auto;" class="form-control" style="color: black!important; height: auto;" placeholder="Fornecedor">
 
                             </div>
                         </section>
 
-         
-                    <?php }  
+
+                    <?php }
                     ?>
-         
+
 
                 <?php } ?>
             </div>
@@ -529,6 +603,7 @@ if (isset($_SESSION['conn_extra'])) {
         echo '<p>' . $e->getMessage() . '</p>';
     }
     unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_periferico']);
     unset($_SESSION['conn_extra1']);
     unset($_SESSION['conn_extra2']);
     unset($_SESSION['conn_extra_empresa']);
@@ -552,13 +627,13 @@ if (isset($_SESSION['conn_extra'])) {
                     </div>
 
                     <div>
-                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('empresa','codigo')"></span>
+                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('empresa','codigo','<?php echo $line['extra_cod'] ?>')"></span>
 
                         <input type="hidden" id="codigo1" value="<?php echo $line['extra_cod'] ?>">
                         <span id="codigo" class="form-control" style="color: black!important; height: auto;"><?php echo $line['extra_cod'] ?></span>
                     </div>
                     <div>
-                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Empresa<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('empresa','empresa')"></span>
+                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Empresa<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('empresa','empresa','<?php echo $line['extra_cod'] ?>')"></span>
 
                         <input type="hidden" id="empresa1" value="<?php echo $line['empresa'] ?>">
                         <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['empresa'] ?></span>
@@ -568,8 +643,9 @@ if (isset($_SESSION['conn_extra'])) {
             <?php } ?>
         </div>
     </div>
-    <?php
+<?php
     unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_periferico']);
     unset($_SESSION['conn_extra1']);
     unset($_SESSION['conn_extra2']);
     unset($_SESSION['conn_extra_empresa']);
@@ -592,13 +668,13 @@ if (isset($_SESSION['conn_extra'])) {
                         <img style="height: 70px;" src="../img/itens.png">
                     </div>
                     <div>
-                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('fabricante','codigo')"></span>
+                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('fabricante','codigo','<?php echo $line['extra_cod'] ?>')"></span>
 
                         <input type="hidden" id="codigo1" value="<?php echo $line['extra_cod'] ?>">
                         <span id="codigo" class="form-control" style="color: black!important; height: auto;"><?php echo $line['extra_cod'] ?></span>
                     </div>
                     <div>
-                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Fabricante<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('fabricante','fabricante')"></span>
+                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Fabricante<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('fabricante','fabricante','<?php echo $line['extra_cod'] ?>')"></span>
 
                         <input type="hidden" id="fabricante1" value="<?php echo $line['fabricante'] ?>">
                         <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['fabricante'] ?></span>
@@ -610,6 +686,7 @@ if (isset($_SESSION['conn_extra'])) {
     </div>
 <?php
     unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_periferico']);
     unset($_SESSION['conn_extra1']);
     unset($_SESSION['conn_extra2']);
     unset($_SESSION['conn_extra_empresa']);
@@ -632,13 +709,13 @@ if (isset($_SESSION['conn_extra'])) {
                         <img style="height: 70px;" src="../img/itens.png">
                     </div>
                     <div>
-                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('fornecedor','codigo')"></span>
+                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('fornecedor','codigo','<?php echo $line['extra_cod'] ?>')"></span>
 
                         <input type="hidden" id="codigo1" value="<?php echo $line['extra_cod'] ?>">
                         <span id="codigo" class="form-control" style="color: black!important; height: auto;"><?php echo $line['extra_cod'] ?></span>
                     </div>
                     <div>
-                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Fornecedor<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('fornecedor','fornecedor')"></span>
+                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Fornecedor<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('fornecedor','fornecedor','<?php echo $line['extra_cod'] ?>')"></span>
 
                         <input type="hidden" id="fornecedor1" value="<?php echo $line['fornecedor'] ?>">
                         <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['fornecedor'] ?></span>
@@ -650,6 +727,7 @@ if (isset($_SESSION['conn_extra'])) {
     </div>
 <?php
     unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_periferico']);
     unset($_SESSION['conn_extra1']);
     unset($_SESSION['conn_extra2']);
     unset($_SESSION['conn_extra_empresa']);
@@ -672,13 +750,13 @@ if (isset($_SESSION['conn_extra'])) {
                         <img style="height: 70px;" src="../img/itens.png">
                     </div>
                     <div>
-                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('local','codigo')"></span>
+                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('local','codigo','<?php echo $line['extra_cod'] ?>')"></span>
 
                         <input type="hidden" id="codigo1" value="<?php echo $line['extra_cod'] ?>">
                         <span id="codigo" class="form-control" style="color: black!important; height: auto;"><?php echo $line['extra_cod'] ?></span>
                     </div>
                     <div>
-                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Local<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('local','local')"></span>
+                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Local<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('local','local','<?php echo $line['extra_cod'] ?>')"></span>
 
                         <input type="hidden" id="local1" value="<?php echo $line['local'] ?>">
                         <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['local'] ?></span>
@@ -690,6 +768,7 @@ if (isset($_SESSION['conn_extra'])) {
     </div>
 <?php
     unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_periferico']);
     unset($_SESSION['conn_extra1']);
     unset($_SESSION['conn_extra2']);
     unset($_SESSION['conn_extra_empresa']);
@@ -712,13 +791,13 @@ if (isset($_SESSION['conn_extra'])) {
                         <img style="height: 70px;" src="../img/itens.png">
                     </div>
                     <div>
-                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('modelo','codigo')"></span>
+                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('modelo','codigo','<?php echo $line['extra_cod'] ?>')"></span>
 
                         <input type="hidden" id="codigo1" value="<?php echo $line['extra_cod'] ?>">
                         <span id="codigo" class="form-control" style="color: black!important; height: auto;"><?php echo $line['extra_cod'] ?></span>
                     </div>
                     <div>
-                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Modelo<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('modelo','modelo')"></span>
+                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Modelo<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('modelo','modelo','<?php echo $line['extra_cod'] ?>')"></span>
 
                         <input type="hidden" id="modelo1" value="<?php echo $line['modelo_equipamento'] ?>">
                         <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['modelo_equipamento'] ?></span>
@@ -730,6 +809,7 @@ if (isset($_SESSION['conn_extra'])) {
     </div>
 <?php
     unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_periferico']);
     unset($_SESSION['conn_extra1']);
     unset($_SESSION['conn_extra2']);
     unset($_SESSION['conn_extra_empresa']);
@@ -752,13 +832,13 @@ if (isset($_SESSION['conn_extra'])) {
                         <img style="height: 70px;" src="../img/itens.png">
                     </div>
                     <div>
-                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('equipamento','codigo')"></span>
+                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Código<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('equipamento','codigo','<?php echo $line['extra_cod'] ?>')"></span>
 
                         <input type="hidden" id="codigo1" value="<?php echo $line['extra_cod'] ?>">
                         <span id="codigo" class="form-control" style="color: black!important; height: auto;"><?php echo $line['extra_cod'] ?></span>
                     </div>
                     <div>
-                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Tipo<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('equipamento','equipamento')"></span>
+                        <span class="input-group-text" style="color: black!important; background-color: #e9ecef !important; border: 1px solid #d4dadf !important;">Tipo<img class="usr_btn_gestao" src="../img/pen.png" alt="lapis" data-toggle="modal" data-target="#ModalScrollableItens" data-dismiss="modal" onclick="altera_itens('equipamento','equipamento','<?php echo $line['extra_cod'] ?>')"></span>
 
                         <input type="hidden" id="equipamento1" value="<?php echo $line['tipo_equipamento'] ?>">
                         <span class="form-control" style="color: black!important; height: auto;"><?php echo $line['tipo_equipamento'] ?></span>
@@ -770,6 +850,7 @@ if (isset($_SESSION['conn_extra'])) {
     </div>
 <?php
     unset($_SESSION['conn_extra']);
+    unset($_SESSION['conn_periferico']);
     unset($_SESSION['conn_extra1']);
     unset($_SESSION['conn_extra2']);
     unset($_SESSION['conn_extra_empresa']);
