@@ -37,7 +37,17 @@
             background: #25252538;
         }
     </style>
+    <style type="text/css" media="print">
+        body {
+            visibility: hidden;
+            background: white;
 
+        }
+
+        .modal-body {
+            visibility: initial;
+        }
+    </style>
 </head>
 
 <body>
@@ -53,7 +63,7 @@
     <?php  } else if ($num_paginas > 0) { ?>
 
         <div class="container">
-        <?php include 'alert.php'; ?>
+            <?php include 'alert.php'; ?>
             <div style="justify-content: center">
                 <nav>
                     <ul class="pagination">
@@ -193,14 +203,17 @@
                 </section>
                 <section>
                     <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollableprint" style="white-space: normal; padding: 0;border-radius: 1.25rem; position: fixed; right: 0.5em; bottom:65px;"><img src="../img/print.png" style="width: 51px;" onclick="print_barcode()"></button>
+
+
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable-barcode" style="white-space: normal; padding: 0;border-radius: 1.25rem; position: fixed; right: 0.5em; bottom: 0.5em;">
                         <svg width="1em" style="width: auto; height: 50px; color: black;" height="1em" viewBox="0 0 16 16" class="bi bi-upc" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
                         </svg>
                     </button>
                     <?php
-						include 'modal_gestao.php';
-						?>
+                    include 'modal_gestao.php';
+                    ?>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModalScrollable-barcode" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -220,6 +233,28 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Fim Modal -->
+                    <!-- Modal Impressao -->
+                    <div class="modal fade" id="exampleModalScrollableprint" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalScrollableTitle">Selecione Barcode</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                 <?php include("../conn-db/conn_barcode.php");?>
+                                 <svg id="barcode_print"></svg>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fim Modal Impressao -->
                 </section>
             </div>
         </div>
@@ -286,6 +321,22 @@
             marginTop: 25,
             //text: " " codigo sem numero
         });
+
+        function print_barcode(barcode_select) {
+             
+            for(i = 0; i < 5; i++){
+JsBarcode("#barcode_print", barcode_select, {
+                background: "#ccffff00",
+                width: 4,
+
+                fontSize: 15,
+                marginTop: 25,
+                //text: " " codigo sem numero
+            });
+
+            }
+            
+        }
     </script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

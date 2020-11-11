@@ -18,7 +18,7 @@ echo '</pre>';*/ ?>
             $line['perifericos'] = 'Nenhum vinculo';
         };
     ?>
-        <div class="col-md-4 border_smaler" style="text-align: -webkit-center;">
+        <div class="col-md-4 " style="text-align: -webkit-center;">
             <div>
                 <img src="../img/icons_devices.png" alt="icone">
             </div>
@@ -42,7 +42,7 @@ echo '</pre>';*/ ?>
                 </div>
             </div>
 
-            <div style="padding: 10px 0;">
+            <div class="border_smaler" style="padding: 10px 0;">
                 <img class="usr_btn" src="../img/plus.png" alt="Sinal_Mais" data-toggle="modal" data-target="#exampleModalScrollable" onclick="extras('<?php echo $line['extra_cod'] ?>')">
                 <img class="usr_btn" src="../img/trash.png" alt="lixeira">
             </div>

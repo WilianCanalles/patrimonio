@@ -614,7 +614,7 @@ div.animated {
 
 @media (max-width: 575.98px) {
     .border_smaler{
-        border: 8px double black; 
+        border-bottom: 8px double black; 
     }
     .alinhamento {
         align-self: center;
@@ -637,7 +637,7 @@ div.animated {
 
 @media (min-width: 576px) and (max-width: 767.90px) {
     .border_smaler{
-        border: 8px double black; 
+        border-bottom: 8px double black; 
     }
     .alinhamento {
         align-self: center;
